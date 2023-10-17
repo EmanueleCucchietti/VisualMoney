@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="3d5757f1-ba79-4f32-9ec8-041eaf7f2bf5" ChangeDateTime="10/17/2023 19:19:47">
+    <Property Name="ElementName" Value="[dbo].[Budget].[Currency]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Budget]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CurrencyCode" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c8e78604-cc6e-4b8a-85c8-3da4bd709c94" ChangeDateTime="10/17/2023 19:20:37">
+    <Property Name="ElementName" Value="[dbo].[Budget].[RepeatInterval ]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Budget]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RepeatInterval" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c95f3de8-8fb0-4827-b5e5-cf7eabc9575c" ChangeDateTime="10/17/2023 20:36:42">
+    <Property Name="ElementName" Value="[dbo].[BudgetCategory].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BudgetCategory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdBudget" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fce13cc1-4c55-437f-8820-3a8253546dc5" ChangeDateTime="10/17/2023 20:37:25">
+    <Property Name="ElementName" Value="[dbo].[Wallet].[Currency]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Wallet]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CurrencyCode" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ce6effc3-51d7-45db-9201-6d116c9fc162" ChangeDateTime="10/17/2023 20:38:51">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="N" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4ab7ae52-302f-4f17-84a1-de42cc7d06b0" ChangeDateTime="10/17/2023 20:39:00">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[N]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="95f9f059-ff57-432e-b085-06b04087dbe4" ChangeDateTime="10/17/2023 20:43:12">
+    <Property Name="ElementName" Value="[dbo].[CategoryTransaction].[IdCounterParty]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CategoryTransaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdCategory" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="04b5ebc4-3863-43b1-908b-2d87c06fae4a" ChangeDateTime="10/17/2023 20:43:31">
+    <Property Name="ElementName" Value="[dbo].[CounterpartyTransaction].[IdCounterPart]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CounterpartyTransaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdCounterParty" />
+  </Operation>
+</Operations>
