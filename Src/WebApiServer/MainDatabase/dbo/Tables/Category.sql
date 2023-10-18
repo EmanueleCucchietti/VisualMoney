@@ -3,7 +3,9 @@
 	[Id] INT NOT NULL PRIMARY KEY, 
     [Name] NVARCHAR(50) NOT NULL, 
     [IdSuperCategory] INT NULL, 
-    [IdUser] INT NOT NULL
+    [IdUser] INT NOT NULL,
+    CONSTRAINT [FK_Category_User] FOREIGN KEY ([IdUser]) REFERENCES [dbo].[User]([Id]),
+    CONSTRAINT [FK_Category_SuperCategory] FOREIGN KEY ([IdSuperCategory]) REFERENCES [dbo].[SuperCategory]([Id])
 )
 
 GO

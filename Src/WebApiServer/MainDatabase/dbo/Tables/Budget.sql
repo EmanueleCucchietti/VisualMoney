@@ -8,7 +8,9 @@
     [StartDate] DATE NULL, 
     [EndDate] DATE NULL, 
     [Repeat] BIT NOT NULL,
-    [RepeatInterval] SMALLINT NULL
+    [RepeatInterval] SMALLINT NULL, 
+    [IdUser] INT NOT NULL,
+	CONSTRAINT [FK_Budget_User] FOREIGN KEY ([IdUser]) REFERENCES [dbo].[User]([Id])
 )
 
 GO

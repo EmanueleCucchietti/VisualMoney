@@ -65,10 +65,10 @@
     <Build Include="dbo\Tables\Budget.sql" />
     <Build Include="dbo\Tables\Category.sql" />
     <Build Include="dbo\Tables\SuperCategory.sql" />
-    <Build Include="dbo\Tables\BudgetCategory.sql" />
     <Build Include="dbo\Tables\Wallet.sql" />
     <Build Include="dbo\Tables\CounterParty.sql" />
     <Build Include="dbo\Tables\Transaction.sql" />
+    <Build Include="dbo\Tables\BudgetCategory.sql" />
     <Build Include="dbo\Tables\CategoryTransaction.sql" />
     <Build Include="dbo\Tables\CounterpartyTransaction.sql" />
   </ItemGroup>

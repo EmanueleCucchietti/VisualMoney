@@ -2,5 +2,6 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
     [Name] NVARCHAR(50) NOT NULL, 
-    [IdUser] INT NOT NULL
+    [IdUser] INT NOT NULL,
+	CONSTRAINT [FK_SuperCategory_User] FOREIGN KEY ([IdUser]) REFERENCES [dbo].[User] ([Id])
 )
