@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models.Entities;
+using WebApi.Controllers;
 using WebApi.Helpers;
 using WebApi.Models.Dto.User;
 
@@ -21,21 +22,49 @@ namespace WebApi.Services
             _authenticationHelper = authenticationHelper;
         }
 
-        public async Task Register(UserRegisterDto user)
+        public async Task Register(UserRegisterDto userDto)
         {
             try
             {
-                var userMapped = _mapper.Map<UserModel>(user);
+                var user = _mapper.Map<UserModel>(userDto);
 
-                userMapped.PasswordSalt = _authenticationHelper.GenerateSalt();
+                user.PasswordSalt = _authenticationHelper.GenerateSalt();
 
-                userMapped.PasswordHash = _authenticationHelper.GeneratePasswordHash(
-                    user.Password, userMapped.PasswordSalt);
+                user.PasswordHash = _authenticationHelper.GeneratePasswordHash(
+                    userDto.Password, user.PasswordSalt);
 
-                await _userData.CreateUserIfNotExists(userMapped);
+                await _userData.CreateUserIfNotExists(user);
 
             }
-            catch (Exception e)
+            catch (Exception ex)
+            {
+                // TODO: Log exception
+
+                throw;
+            }
+        }
+
+        public async Task<UserLoginResponseDto> Login(UserLoginDto userDto)
+        {
+            try
+            {
+                var user = await _userData.GetUserByEmailOrUsername(userDto.EmailOrUsername);
+
+                if (user is null || 
+                    _authenticationHelper.GeneratePasswordHash(userDto.Password, user.PasswordSalt)
+                        != user.PasswordHash)
+                    throw new Exception("User not found or wrong password");
+
+                var responseDto = new UserLoginResponseDto();
+
+                responseDto.AccessToken = _authenticationHelper.GenerateAccessToken(user);
+
+                responseDto.RefreshToken = _authenticationHelper.GenerateRefreshToken(user);
+
+                return responseDto;
+
+
+            } catch(Exception ex)
             {
                 // TODO: Log exception
 

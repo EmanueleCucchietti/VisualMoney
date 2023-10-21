@@ -74,6 +74,7 @@
     <Build Include="dbo\Tables\CounterpartyTransaction.sql" />
     <Build Include="dbo\StoredProcedures\spCheckUserExistence.sql" />
     <Build Include="dbo\StoredProcedures\spCreateUser.sql" />
+    <Build Include="dbo\StoredProcedures\spGetUserByEmailOrUsername.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />

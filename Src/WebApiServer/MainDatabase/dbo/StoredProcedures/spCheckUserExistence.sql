@@ -6,8 +6,6 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	IF EXISTS (SELECT * FROM [dbo].[User] WHERE Email = @Email OR Username = @Username)
-		RETURN 1
-	ELSE
-		RETURN 0
+	SELECT * FROM [dbo].[User] WHERE Email = @Email OR Username = @Username
+
 END

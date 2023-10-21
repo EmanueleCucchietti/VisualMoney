@@ -39,5 +39,13 @@ namespace DataAccessLayer.Data
                 Role = user.Role ?? "Default"
             }, useStoredProcedure: true);
         }
+
+        public async Task<UserModel?> GetUserByEmailOrUsername(string emailOrUsername)
+        {
+            string sql = @"spGetUserByEmailOrUsername";
+
+            return (await _sqlDataAccess.LoadData<UserModel, dynamic>
+                (sql, new { emailOrUsername }, useStoredProcedure: true)).FirstOrDefault();
+        }
     }
 }
