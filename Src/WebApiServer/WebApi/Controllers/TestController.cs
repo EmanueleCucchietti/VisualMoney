@@ -1,14 +1,17 @@
 ﻿using Dapper;
 using DataAccessLayer.DbAccess;
 using DataAccessLayer.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Security.Claims;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TestController : Controller
@@ -71,5 +74,25 @@ namespace WebApi.Controllers
             
             return Ok();
         }
+
+        [Authorize(Roles = "Default")]
+        [HttpGet("AuthTest")]
+        public async Task<IActionResult> AuthTest()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if(identity is null)
+                return Unauthorized();
+
+            var userId = identity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var user = await _sqlDataAccess.LoadData<UserModel, dynamic>(
+                "select * from [User] where Id = @Id",
+                new { Id = userId }
+            );
+
+            return Ok(user.FirstOrDefault());
+        }
+
     }
 }
