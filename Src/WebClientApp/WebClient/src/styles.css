@@ -1,0 +1,98 @@
+/* Color Constants for the app */
+
+
+:root {
+    --bg-color-dark-theme: #1F1616;
+    --bg-color-dark-theme-rgb: 31, 22, 22;
+    --primary-color-dark-theme: #BA3CDE;
+    --primary-color-dark-theme-rgb: 186, 60, 222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Make the body and HTML element take up the entire viewport */
+body,
+html {
+    height: 100%;
+    /* margin: 0;
+  padding: 0; */
+    /* overflow: hidden; Prevent scrollbars */
+}
+
+/* Style the app-root to take up the entire viewport
+app-root {
+  width: 100%;
+  height: 100%;
+  display: block;
+} */
+
+.default-input {
+    width: 100%;
+    height: 40px;
+
+    border-radius: 20px;
+    padding: 25px;
+
+    border: 2px solid var(--primary-color-dark-theme);
+    background-color: transparent;
+    color: rgba(var(--primary-color-dark-theme-rgb), 1);
+
+    font-size: 16px;
+
+    transition: border 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out,
+        font-size 0.2s ease-in-out;
+}
+
+.default-input:focus {
+    outline: none;
+}
+
+.default-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 40px;
+
+    border-radius: 20px;
+    padding: 25px;
+
+    border: 1px solid var(--primary-color-dark-theme) !important;
+    background-color: var(--primary-color-dark-theme) !important;
+    color: var(--bg-color-dark-theme) !important;
+
+    cursor: pointer;
+    font-size: 1.75em;
+
+    transition: border 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out,
+        font-size 0.2s ease-in-out;
+}
+
+.default-input:focus,
+.default-input:hover{
+    outline: none;
+    /* border: 3px solid var(--primary-color-dark-theme); */
+    box-shadow:
+        0 0 0 3px var(--bg-color-dark-theme),
+        0 0 0 6px var(--primary-color-dark-theme);
+}
+
+.default-button:focus,
+.default-button:hover {
+    outline: none;
+    box-shadow:
+    0 0 0 3px var(--bg-color-dark-theme),
+    0 0 0 6px var(--primary-color-dark-theme);
+
+    font-size: 1.80em;
+}
+
+.default-button:active {
+    font-size: 1.75em;
+}
