@@ -8,5 +8,6 @@ namespace WebApi.Helpers
         string GeneratePasswordHash(string password, string salt);
         string GenerateRefreshToken(UserModel user);
         string GenerateSalt();
+        int ValidateRefreshTokenAndGetUserId(string? refreshToken);
     }
 }

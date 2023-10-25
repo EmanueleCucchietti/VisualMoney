@@ -71,5 +71,32 @@ namespace WebApi.Services
                 throw;
             }
         }
+
+        public async Task<UserLoginResponseDto> RefreshToken(string? refreshToken)
+        {
+            try
+            {
+                var userId = _authenticationHelper.ValidateRefreshTokenAndGetUserId(refreshToken);
+
+                var user = await _userData.GetUserById(userId);
+
+                if (user is null)
+                    throw new Exception("Refresh token is invalid");
+
+                var responseDto = new UserLoginResponseDto();
+
+                responseDto.AccessToken = _authenticationHelper.GenerateAccessToken(user);
+
+                responseDto.RefreshToken = _authenticationHelper.GenerateRefreshToken(user);
+
+                return responseDto;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log exception
+
+                throw;
+            }
+        }
     }
 }

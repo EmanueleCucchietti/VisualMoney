@@ -42,7 +42,7 @@ namespace WebApi.Controllers
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.Strict,
+                    SameSite = SameSiteMode.Lax,
                     Expires = DateTime.UtcNow.AddDays(7)
                 });
 
@@ -50,6 +50,30 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            try
+            {
+                string? refreshToken = Request.Cookies["X-Refresh-Token"];
+                UserLoginResponseDto responseDto = await _userService.RefreshToken(refreshToken);
+
+                Response.Cookies.Append("X-Refresh-Token", responseDto.RefreshToken, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTime.UtcNow.AddDays(7)
+                });
+
+                return Ok(responseDto);
+            }
+            catch (Exception e)
+            {       
                 return BadRequest(e.Message);
             }
         }

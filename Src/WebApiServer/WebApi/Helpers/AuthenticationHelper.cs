@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Models.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -48,6 +49,7 @@ namespace WebApi.Helpers
         public string GenerateAccessToken(UserModel user)
         {
             return GenerateJwtTokenWithClaims(
+                DateTime.Now.AddMinutes(15),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Name),
@@ -59,12 +61,13 @@ namespace WebApi.Helpers
         public string GenerateRefreshToken(UserModel user)
         {
             return GenerateJwtTokenWithClaims(
+                DateTime.Now.AddDays(7),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim("Refresh-Token", true.ToString())
             );
         }
 
-        private string GenerateJwtTokenWithClaims(params Claim[] claims)
+        private string GenerateJwtTokenWithClaims(DateTime expires, params Claim[] claims)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -73,10 +76,48 @@ namespace WebApi.Helpers
               _jwtConfiguration.Issuer,
               _jwtConfiguration.Audience,
               claims,
-              expires: DateTime.Now.AddMinutes(15),
+              expires: expires,
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public int ValidateRefreshTokenAndGetUserId(string? refreshToken)
+        {
+            if (string.IsNullOrEmpty(refreshToken))
+                throw new ArgumentNullException(nameof(refreshToken));
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            //var token = tokenHandler.ReadJwtToken(refreshToken);
+
+            tokenHandler.ValidateToken(refreshToken, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.Key)),
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidIssuer = _jwtConfiguration.Issuer,
+                ValidAudience = _jwtConfiguration.Audience,
+                ValidateLifetime = false
+            }, out SecurityToken validatedToken);
+
+            //expire 
+            if (validatedToken.ValidTo < DateTime.UtcNow)
+                throw new Exception("Token expired");
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+
+            if (jwtToken == null || !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            var userId = jwtToken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+                throw new SecurityTokenException("Invalid token");
+            
+            return int.Parse(userId);
+
         }
     }
 }

@@ -6,5 +6,6 @@ namespace DataAccessLayer.Data
     {
         Task CreateUserIfNotExists(UserModel user);
         Task<UserModel?> GetUserByEmailOrUsername(string emailOrUsername);
+        Task<UserModel?> GetUserById(int userId);
     }
 }

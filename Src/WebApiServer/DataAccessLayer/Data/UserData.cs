@@ -47,5 +47,15 @@ namespace DataAccessLayer.Data
             return (await _sqlDataAccess.LoadData<UserModel, dynamic>
                 (sql, new { emailOrUsername }, useStoredProcedure: true)).FirstOrDefault();
         }
+
+        public async Task<UserModel?> GetUserById(int userId)
+        {
+            string sql = @"spGetUserById";
+
+            return (await _sqlDataAccess.LoadData<UserModel, dynamic>(
+                sql,
+                new { Id = userId },
+                useStoredProcedure: true)).FirstOrDefault();
+        }
     }
 }
