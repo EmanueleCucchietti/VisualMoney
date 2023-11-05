@@ -35,7 +35,8 @@ namespace WebApi.Startup
 
             // Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
+                .AddJwtBearer(options =>
+                {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -48,6 +49,21 @@ namespace WebApi.Startup
                             jwtConfiguration.Key))
                     };
                 });
+
+            // Cors
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins(
+                        "http://localhost:3000",
+                        "http://localhost:8080",
+                        "https://localhost:8443")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
 
             return services;
         }
