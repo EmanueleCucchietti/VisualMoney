@@ -9,6 +9,7 @@ import { TestComponent } from './views/test/test.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 import { FormsModule } from '@angular/forms';
+import { Test2Component } from './views/test2/test2.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     CommonButtonComponent,
     TestComponent,
-    HeaderComponent
+    HeaderComponent,
+    Test2Component
   ],
   imports: [
     BrowserModule,

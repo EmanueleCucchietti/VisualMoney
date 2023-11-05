@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import axios from 'axios';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  selector: 'app-test2',
+  templateUrl: './test2.component.html',
+  styleUrls: ['./test2.component.css']
 })
-export class TestComponent {
+export class Test2Component {
+
 
   constructor(private authenticationService : AuthenticationService) {
   }
@@ -24,11 +25,5 @@ export class TestComponent {
     .catch((err) => {
       console.log(err);
     })
-  }
-
-  async refreshToken(){
-
-    await this.authenticationService.getAccessTokenFromRefreshToken();
-    alert(this.authenticationService.accessToken);
   }
 }

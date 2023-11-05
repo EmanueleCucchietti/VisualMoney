@@ -7,7 +7,7 @@
       "request": "launch",
       "type": "msedge",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:8080",
+      "url": "https://localhost:8443",
       "webRoot": "${workspaceFolder}"
     }
 
