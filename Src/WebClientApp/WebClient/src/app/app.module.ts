@@ -9,7 +9,8 @@ import { TestComponent } from './views/test/test.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 import { FormsModule } from '@angular/forms';
-import { Test2Component } from './views/test2/test2.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptor, JwtInterceptor } from './_helpers';
 
 @NgModule({
   declarations: [
@@ -17,15 +18,18 @@ import { Test2Component } from './views/test2/test2.component';
     LoginComponent,
     CommonButtonComponent,
     TestComponent,
-    HeaderComponent,
-    Test2Component
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,9 +13,9 @@
     <br><br>
     <img src="assets/img/logo.svg" alt="logo" class="logo">
     <br><br>
-    <input class="default-input" type="text" [(ngModel)]="username" placeholder="Username">
+    <input class="default-input" type="text" [(ngModel)]="loginRequestData.emailOrUsername" placeholder="Username Or Email">
     <br><br>
-    <input class="default-input" type="password" [(ngModel)]="password" placeholder="Password">
+    <input class="default-input" type="password" [(ngModel)]="loginRequestData.password" placeholder="Password">
     <br><br>
     <button class="default-button" (click)="login()">Login</button>
   </div>

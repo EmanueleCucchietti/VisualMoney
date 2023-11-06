@@ -1,36 +1,40 @@
 import { Component } from '@angular/core';
 import { CommonButtonComponent } from './components/shared/common-button/common-button.component';
 import { Router, NavigationStart } from '@angular/router';
-import { AuthenticationService } from './services/authentication/authentication.service';
+import { AuthenticationService } from './_services/authentication/authentication.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'WebClient';
+    title = 'WebClient';
 
-  showHeader : boolean = true;
+    showHeader: boolean = true;
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService) {
-
-    // Authentication
-    this.authenticationService.getAccessTokenFromRefreshToken();
-
-    router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        if (event['url'] == '/login') {
-          this.showHeader = false;
-        } else {
-          // console.log("NU")
-          this.showHeader = true;
-        }
-      }
-    });
+    constructor(
+        private router: Router,
+        private authenticationService: AuthenticationService) {
 
 
-  }
+
+        router.events.forEach(async (event) => {
+            if (event instanceof NavigationStart) {
+                if (event['url'] == '/login' ||
+                    event['url'] == '/register') {
+                    this.showHeader = false;
+                } else {
+                    this.showHeader = true;
+
+                    // Authentication check
+                    if (!this.authenticationService.isAccessTokenDefined()) {
+                        await this.authenticationService.getAccessTokenFromRefreshToken();
+                    }
+                }
+            }
+        });
+
+
+    }
 }

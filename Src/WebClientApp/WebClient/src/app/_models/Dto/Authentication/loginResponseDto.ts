@@ -1,11 +1,11 @@
-class LoginResponseDto
+export class LoginResponseDto
 {
-    public token: string;
+    public accessToken: string;
     public refreshToken: string;
 
     constructor(token: string, refreshToken: string)
     {
-        this.token = token;
+        this.accessToken = token;
         this.refreshToken = refreshToken;
     }
 }

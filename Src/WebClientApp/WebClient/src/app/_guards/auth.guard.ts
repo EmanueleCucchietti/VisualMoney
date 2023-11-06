@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication/authentication.service';
+import { AuthenticationService } from '../_services';
 
 @Injectable({
   providedIn: 'root', // This registers the guard as a provider in the root module
