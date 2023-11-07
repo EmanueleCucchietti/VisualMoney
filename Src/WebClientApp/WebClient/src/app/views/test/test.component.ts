@@ -29,7 +29,7 @@ export class TestComponent {
 
   async refreshToken(){
 
-    await this.authenticationService.getAccessTokenFromRefreshToken()
+    await this.authenticationService.refreshTokenPromise()
     alert(this.authenticationService.accessToken);
   }
 

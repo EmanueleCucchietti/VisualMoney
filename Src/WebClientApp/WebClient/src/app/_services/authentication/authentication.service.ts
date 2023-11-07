@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, lastValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,16 +26,9 @@ export class AuthenticationService {
 
     constructor(private httpClient: HttpClient) { }
 
-    async getAccessTokenFromRefreshToken() {
+    async refreshTokenPromise() {
         try {
-            let response: any = await lastValueFrom(
-                this.httpClient.post<any>('https://localhost:7232/user/refresh-token', null, {
-                    withCredentials: true,
-                })
-                    .pipe(map((response: LoginResponseDto) => {
-                        return response;
-                    }))
-            );
+            let response = await lastValueFrom(this.refreshTokenObservable());
 
             if (response.accessToken) {
                 this.accessToken = response.accessToken;
@@ -48,6 +41,21 @@ export class AuthenticationService {
             // so we need to clear the access token and redirect to login page
             this.logout();
         }
+    }
+
+    refreshTokenObservable(): Observable<LoginResponseDto> {
+        // return the observable that handles the request
+        // but also set the access token if the request is successful
+        return this.httpClient.post<any>('https://localhost:7232/user/refresh-token', null, {
+            withCredentials: true,
+        })
+            .pipe(map((response: LoginResponseDto) => {
+                if (response.accessToken) {
+                    this.accessToken = response.accessToken;
+                }
+
+                return response;
+            }));
     }
 
     login(loginRequestData: LoginRequestDto): Observable<LoginResponseDto> {
@@ -72,5 +80,13 @@ export class AuthenticationService {
     logout() {
         this._accessToken = undefined;
         window.location.href = '/login';
+    }
+
+    addAuthHeader(request: HttpRequest<any>) {
+        return request.clone({
+            setHeaders: {
+                "Authorization": `Bearer ${this.accessToken}`,
+            }
+        });
     }
 }

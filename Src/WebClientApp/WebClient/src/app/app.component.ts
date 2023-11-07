@@ -29,7 +29,7 @@ export class AppComponent {
 
                     // Authentication check
                     if (!this.authenticationService.isAccessTokenDefined()) {
-                        await this.authenticationService.getAccessTokenFromRefreshToken();
+                        await this.authenticationService.refreshTokenPromise();
                     }
                 }
             }
