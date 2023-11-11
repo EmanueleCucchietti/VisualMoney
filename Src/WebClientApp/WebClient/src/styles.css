@@ -37,8 +37,7 @@ html {
         font-size 0.2s ease-in-out;
 }
 
-.default-input:hover,
-.default-input:focus{
+.default-input:hover{
     outline: none;
     /* border: 3px solid var(--primary-color-dark-theme); */
     box-shadow:
@@ -70,8 +69,7 @@ html {
         font-size 0.2s ease-in-out;
 }
 
-.default-button:hover,
-.default-button:focus {
+.default-button:hover {
     outline: none;
     box-shadow:
     0 0 0 3px var(--bg-color-dark-theme),

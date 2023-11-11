@@ -22,7 +22,7 @@ export class AppComponent {
         router.events.forEach(async (event) => {
             if (event instanceof NavigationStart) {
                 if (event['url'] == '/login' ||
-                    event['url'] == '/register') {
+                    event['url'] == '/signup') {
                     this.showHeader = false;
                 } else {
                     this.showHeader = true;

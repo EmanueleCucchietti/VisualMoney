@@ -1,0 +1,47 @@
+.logo{
+  width: 200px;
+  height: 200px;
+}
+
+.container{
+  height: 100%;
+}
+
+@media (min-width: 500px){
+  .mainPage{
+    width: 500px;
+  }
+}
+
+@media (max-width: 500px){
+  .mainPage{
+    width: 90%;
+  }
+
+}
+
+input::placeholder{
+  color: var(--primary-color-dark-theme);
+  opacity: 0.8;
+}
+
+input::-ms-input-placeholder{
+  color: var(--primary-color-dark-theme);
+  opacity: 0.8;
+}
+
+.short-button{
+  width: 25%;
+}
+
+.invert-button{
+  background-color: var(--primary-color-light-theme) !important;
+  color: var(--primary-color-dark-theme) !important;
+  font-size: 1.2rem !important;
+  border: none !important;
+  opacity: 0.8;
+}
+
+.hide {
+  display: none;
+}

@@ -3,22 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './views/login/login.component';
 import { CommonButtonComponent } from './components/shared/common-button/common-button.component';
-import { TestComponent } from './views/test/test.component';
-import { HeaderComponent } from './shared/header/header.component';
 
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor, JwtInterceptor } from './_helpers';
 
+// views
+import { LoginComponent } from './views/login/login.component';
+import { TestComponent } from './views/test/test.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { SignupComponent } from './views/signup/signup.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    HeaderComponent,
     CommonButtonComponent,
+    LoginComponent,
+    SignupComponent,
     TestComponent,
-    HeaderComponent
   ],
   imports: [
     BrowserModule,
