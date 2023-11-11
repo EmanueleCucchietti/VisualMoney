@@ -14,6 +14,7 @@ import { LoginComponent } from './views/login/login.component';
 import { TestComponent } from './views/test/test.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SignupComponent } from './views/signup/signup.component';
+import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SignupComponent } from './views/signup/signup.component';
     LoginComponent,
     SignupComponent,
     TestComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
