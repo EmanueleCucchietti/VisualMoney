@@ -78,6 +78,32 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet("IsUsernameAvailable")]
+        public async Task<IActionResult> IsUsernameAvailable(string username)
+        {
+            try
+            {
+                bool isAvailable = await _userService.IsUsernameAvailable(username);
+                return Ok(isAvailable);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
+        [HttpGet("IsEmailAvailable")]
+        public async Task<IActionResult> IsEmailAvailable(string email)
+        {
+            try
+            {
+                bool isAvailable = await _userService.IsEmailAvailable(email);
+                return Ok(isAvailable);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

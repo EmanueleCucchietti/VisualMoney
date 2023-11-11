@@ -98,5 +98,33 @@ namespace WebApi.Services
                 throw;
             }
         }
+
+        public Task<bool> IsEmailAvailable(string email)
+        {
+            try
+            {
+                return _userData.IsEmailAvailable(email);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log exception
+
+                throw;
+            }
+        }
+
+        public Task<bool> IsUsernameAvailable(string username)
+        {
+            try
+            {
+                return _userData.IsUsernameAvailable(username);
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log exception
+
+                throw;
+            }
+        }
     }
 }
