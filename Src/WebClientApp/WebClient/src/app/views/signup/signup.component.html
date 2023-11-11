@@ -22,7 +22,9 @@
     <br><br>
     <div class="row justify-content-between w-100">
       <button *ngIf="step != 0" class="default-button short-button invert-button" (click)="back()">Back</button>
-      <button class="default-button" [ngClass]="{'short-button': step != 0}" (click)="next()">Next</button>
+      <button class="default-button" [ngClass]="{'short-button': step != 0}" (click)="next()">{{step == 0 ? 'Sign Up' : 'Next'}}</button>
     </div>
+    <br><br><br><br>
+    <a *ngIf="step == 0" class="default-link" routerLink="/login">Already a User? Login</a>
   </div>
 </div>

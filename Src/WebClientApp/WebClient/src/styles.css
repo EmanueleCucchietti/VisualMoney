@@ -11,6 +11,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body,
@@ -37,7 +38,7 @@ html {
         font-size 0.2s ease-in-out;
 }
 
-.default-input:hover{
+.default-input:hover {
     outline: none;
     /* border: 3px solid var(--primary-color-dark-theme); */
     box-shadow:
@@ -45,7 +46,8 @@ html {
         0 0 0 6px var(--primary-color-dark-theme);
 }
 
-.default-button, .default-button:active {
+.default-button,
+.default-button:active {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -72,12 +74,33 @@ html {
 .default-button:hover {
     outline: none;
     box-shadow:
-    0 0 0 3px var(--bg-color-dark-theme),
-    0 0 0 6px var(--primary-color-dark-theme);
+        0 0 0 3px var(--bg-color-dark-theme),
+        0 0 0 6px var(--primary-color-dark-theme);
 
     font-size: 1.80em;
 }
 
 .default-button:active {
     font-size: 1.75em;
+}
+
+.default-link {
+    text-decoration: none;
+    color: var(--primary-color-dark-theme);
+    font-size: 1em;
+    padding: 4px;
+    border-radius: 10px;
+
+    transition: border 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out,
+        font-size 0.2s ease-in-out;
+}
+
+.default-link:hover {
+    text-decoration: none;
+    color: var(--primary-color-dark-theme);
+    box-shadow:
+        0 0 0 2px var(--bg-color-dark-theme),
+        0 0 0 4px var(--primary-color-dark-theme);
+
 }
