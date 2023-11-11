@@ -28,6 +28,8 @@ namespace DataAccessLayer.Data
 
             string sqlCreateUser = @"spCreateUser";
 
+            user.Email = user.Email.ToLower();
+
             await _sqlDataAccess.SaveData(sqlCreateUser, new
             {
                 user.Username,
@@ -56,6 +58,28 @@ namespace DataAccessLayer.Data
                 sql,
                 new { Id = userId },
                 useStoredProcedure: true)).FirstOrDefault();
+        }
+
+        public async Task<bool> IsEmailAvailable(string email)
+        {
+            string sql = @"spIsEmailAvailable";
+
+            return (await _sqlDataAccess.LoadData<bool, dynamic>(
+                sql,
+                new { Email = email.ToLower() },
+                useStoredProcedure: true)
+            ).FirstOrDefault();
+        }
+
+        public async Task<bool> IsUsernameAvailable(string username)
+        {
+            string sql = @"spIsUsernameAvailable";
+
+            return (await _sqlDataAccess.LoadData<bool, dynamic>(
+                sql,
+                new { username },
+                useStoredProcedure: true)
+            ).FirstOrDefault();
         }
     }
 }
