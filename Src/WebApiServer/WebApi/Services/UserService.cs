@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Data;
 using DataAccessLayer.Models.Entities;
-using WebApi.Controllers;
 using WebApi.Helpers;
 using WebApi.Models.Dto.User;
 

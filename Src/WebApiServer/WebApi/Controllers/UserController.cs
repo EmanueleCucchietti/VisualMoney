@@ -78,7 +78,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("IsUsernameAvailable")]
+        [HttpGet("is-username-available")]
         public async Task<IActionResult> IsUsernameAvailable(string username)
         {
             try
@@ -92,7 +92,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("IsEmailAvailable")]
+        [HttpGet("is-email-available")]
         public async Task<IActionResult> IsEmailAvailable(string email)
         {
             try
