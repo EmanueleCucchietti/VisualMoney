@@ -1,5 +1,4 @@
-﻿using WebApi.Controllers;
-using WebApi.Models.Dto.User;
+﻿using WebApi.Models.Dto.User;
 
 namespace WebApi.Services
 {
