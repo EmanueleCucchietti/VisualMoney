@@ -7,16 +7,33 @@ import { SignupComponent } from './views/signup/signup.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent, data: { layout: 'login-layout' } },
-  { path: "signup", component: SignupComponent, data: { layout: 'login-layout' } },
-  { path: "test", component:  TestComponent, canActivate: [AuthGuard], data: { layout: 'default-layout' } },
+    {
+        path: 'login',
+        component: LoginComponent,
+        data: { layout: 'login-layout' }
+    },
+    {
+        path: 'signup',
+        component: SignupComponent,
+        data: { layout: 'login-layout' }
+    },
+    {
+        path: 'test',
+        component: TestComponent,
+        canActivate: [AuthGuard],
+        data: { layout: 'default-layout' }
+    },
 
-  // page not found
-  { path: '**', component: PageNotFoundComponent, data: { layout: 'default-layout' } },
+    // page not found
+    {
+        path: '**',
+        component: PageNotFoundComponent,
+        data: { layout: 'default-layout' }
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

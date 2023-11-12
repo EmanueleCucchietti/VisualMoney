@@ -6,7 +6,7 @@ import { LoginRequestDto, LoginResponseDto } from 'src/app/_models';
 import { environment } from 'src/app/environments/environment';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class AuthenticationService {
     private _accessToken: string | undefined;
@@ -21,10 +21,14 @@ export class AuthenticationService {
     }
 
     public isAccessTokenDefined(): boolean {
-        return typeof this._accessToken != 'undefined' && this._accessToken != null && this._accessToken.trim() != '';
+        return (
+            typeof this._accessToken != 'undefined' &&
+            this._accessToken != null &&
+            this._accessToken.trim() != ''
+        );
     }
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) {}
 
     async refreshTokenPromise() {
         try {
@@ -32,9 +36,10 @@ export class AuthenticationService {
 
             if (response.accessToken) {
                 this.accessToken = response.accessToken;
-            }
-            else {
-                throw new Error("Error while getting access token from refresh token");
+            } else {
+                throw new Error(
+                    'Error while getting access token from refresh token'
+                );
             }
         } catch (error) {
             // need to logout, because refresh token is invalid
@@ -46,36 +51,42 @@ export class AuthenticationService {
     refreshTokenObservable(): Observable<LoginResponseDto> {
         // return the observable that handles the request
         // but also set the access token if the request is successful
-        return this.httpClient.post<any>('https://localhost:7232/user/refresh-token', null, {
-            withCredentials: true,
-        })
-            .pipe(map((response: LoginResponseDto) => {
-                if (response.accessToken) {
-                    this.accessToken = response.accessToken;
-                }
+        return this.httpClient
+            .post<any>('https://localhost:7232/user/refresh-token', null, {
+                withCredentials: true
+            })
+            .pipe(
+                map((response: LoginResponseDto) => {
+                    if (response.accessToken) {
+                        this.accessToken = response.accessToken;
+                    }
 
-                return response;
-            }));
+                    return response;
+                })
+            );
     }
 
     login(loginRequestData: LoginRequestDto): Observable<LoginResponseDto> {
-        return this.httpClient.post<any>(`${environment.serverApiUrl}/user/login`,
-            loginRequestData,
-            { withCredentials: true })
-            .pipe((map((response: LoginResponseDto) => {
-                if (response.accessToken) {
-                    this.accessToken = response.accessToken;
-                }
+        return this.httpClient
+            .post<any>(
+                `${environment.serverApiUrl}/user/login`,
+                loginRequestData,
+                { withCredentials: true }
+            )
+            .pipe(
+                map((response: LoginResponseDto) => {
+                    if (response.accessToken) {
+                        this.accessToken = response.accessToken;
+                    }
 
-                return response;
-            }
-            )));
+                    return response;
+                })
+            );
     }
 
     public canAccessPage(): boolean {
         return this.isAccessTokenDefined();
     }
-
 
     logout() {
         this._accessToken = undefined;
@@ -85,7 +96,7 @@ export class AuthenticationService {
     addAuthHeader(request: HttpRequest<any>) {
         return request.clone({
             setHeaders: {
-                "Authorization": `Bearer ${this.accessToken}`,
+                Authorization: `Bearer ${this.accessToken}`
             }
         });
     }

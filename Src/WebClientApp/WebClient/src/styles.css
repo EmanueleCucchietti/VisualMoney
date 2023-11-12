@@ -1,10 +1,9 @@
 /* Color Constants for the app */
 
-
 :root {
-    --bg-color-dark-theme: #1F1616;
+    --bg-color-dark-theme: #1f1616;
     --bg-color-dark-theme-rgb: 31, 22, 22;
-    --primary-color-dark-theme: #BA3CDE;
+    --primary-color-dark-theme: #ba3cde;
     --primary-color-dark-theme-rgb: 186, 60, 222;
 }
 
@@ -33,7 +32,8 @@ html {
 
     font-size: 16px;
 
-    transition: border 0.2s ease-in-out,
+    transition:
+        border 0.2s ease-in-out,
         box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
 }
@@ -66,7 +66,8 @@ html {
     cursor: pointer;
     font-size: 1.75em;
 
-    transition: border 0.2s ease-in-out,
+    transition:
+        border 0.2s ease-in-out,
         box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
 }
@@ -77,7 +78,7 @@ html {
         0 0 0 3px var(--bg-color-dark-theme),
         0 0 0 6px var(--primary-color-dark-theme);
 
-    font-size: 1.80em;
+    font-size: 1.8em;
 }
 
 .default-button:active {
@@ -91,7 +92,8 @@ html {
     padding: 4px;
     border-radius: 10px;
 
-    transition: border 0.2s ease-in-out,
+    transition:
+        border 0.2s ease-in-out,
         box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
 }
@@ -102,5 +104,4 @@ html {
     box-shadow:
         0 0 0 2px var(--bg-color-dark-theme),
         0 0 0 4px var(--primary-color-dark-theme);
-
 }

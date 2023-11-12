@@ -15,14 +15,11 @@ export class AppComponent {
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService) {
-
-
-
+        private authenticationService: AuthenticationService
+    ) {
         router.events.forEach(async (event) => {
             if (event instanceof NavigationStart) {
-                if (event['url'] == '/login' ||
-                    event['url'] == '/signup') {
+                if (event['url'] == '/login' || event['url'] == '/signup') {
                     this.showHeader = false;
                 } else {
                     this.showHeader = true;
@@ -34,7 +31,5 @@ export class AppComponent {
                 }
             }
         });
-
-
     }
 }

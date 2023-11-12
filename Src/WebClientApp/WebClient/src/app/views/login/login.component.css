@@ -1,32 +1,30 @@
-.logo{
-  width: 200px;
-  height: 200px;
+.logo {
+    width: 200px;
+    height: 200px;
 }
 
-.container{
-  height: 100%;
+.container {
+    height: 100%;
 }
 
-@media (min-width: 500px){
-  .mainPage{
-    width: 500px;
-  }
+@media (min-width: 500px) {
+    .mainPage {
+        width: 500px;
+    }
 }
 
-@media (max-width: 500px){
-  .mainPage{
-    width: 90%;
-  }
-
+@media (max-width: 500px) {
+    .mainPage {
+        width: 90%;
+    }
 }
 
-input::placeholder{
-  color: var(--primary-color-dark-theme);
-  opacity: 0.8;
+input::placeholder {
+    color: var(--primary-color-dark-theme);
+    opacity: 0.8;
 }
 
-input::-ms-input-placeholder{
-  color: var(--primary-color-dark-theme);
-  opacity: 0.8;
+input::-ms-input-placeholder {
+    color: var(--primary-color-dark-theme);
+    opacity: 0.8;
 }
-

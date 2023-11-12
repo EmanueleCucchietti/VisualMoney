@@ -1,11 +1,11 @@
-import { User } from "../../user";
+import { User } from '../../user';
 
-export class SignupRequestDto{
-  public User : User;
-  public password: string;
+export class SignupRequestDto {
+    public User: User;
+    public password: string;
 
-  constructor(User: User, password: string){
-    this.User = User;
-    this.password = password;
-  }
+    constructor(User: User, password: string) {
+        this.User = User;
+        this.password = password;
+    }
 }

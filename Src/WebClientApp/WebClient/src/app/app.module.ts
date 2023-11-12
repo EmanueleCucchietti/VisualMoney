@@ -17,25 +17,20 @@ import { SignupComponent } from './views/signup/signup.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    CommonButtonComponent,
-    LoginComponent,
-    SignupComponent,
-    TestComponent,
-    PageNotFoundComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        CommonButtonComponent,
+        LoginComponent,
+        SignupComponent,
+        TestComponent,
+        PageNotFoundComponent
+    ],
+    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

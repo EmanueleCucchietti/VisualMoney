@@ -1,26 +1,25 @@
-<div class="container
-            d-flex
-            flex-column
-            align-items-center">
-
-  <!-- logo svg -->
-  <div class="d-flex
-  			flex-column
-        align-items-center
-        h-100
-        mainPage">
-
-    <br><br>
-    <img src="assets/img/logo.svg" alt="logo" class="logo">
-    <br><br>
-    <input class="default-input" type="text" [(ngModel)]="loginRequestData.emailOrUsername" placeholder="Username Or Email">
-    <br><br>
-    <input class="default-input" type="password" [(ngModel)]="loginRequestData.password" placeholder="Password">
-    <br><br>
-    <button class="default-button" (click)="login()">Login</button>
-    <br><br><br><br>
-    <a class="default-link" routerLink="/signup">Not a User? Sign Up</a>
-  </div>
+<div class="container d-flex flex-column align-items-center">
+    <!-- logo svg -->
+    <div class="d-flex flex-column align-items-center h-100 mainPage">
+        <br /><br />
+        <img src="assets/img/logo.svg" alt="logo" class="logo" />
+        <br /><br />
+        <input
+            class="default-input"
+            type="text"
+            [(ngModel)]="loginRequestData.emailOrUsername"
+            placeholder="Username Or Email"
+        />
+        <br /><br />
+        <input
+            class="default-input"
+            type="password"
+            [(ngModel)]="loginRequestData.password"
+            placeholder="Password"
+        />
+        <br /><br />
+        <button class="default-button" (click)="login()">Login</button>
+        <br /><br /><br /><br />
+        <a class="default-link" routerLink="/signup">Not a User? Sign Up</a>
+    </div>
 </div>
-
-

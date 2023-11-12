@@ -1,15 +1,14 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-common-button',
-  templateUrl: './common-button.component.html',
-  styleUrls: ['./common-button.component.css']
+    selector: 'app-common-button',
+    templateUrl: './common-button.component.html',
+    styleUrls: ['./common-button.component.css']
 })
 export class CommonButtonComponent {
-  @Input() text: string = 'Button';
+    @Input() text: string = 'Button';
 
-  constructor() { }
+    constructor() {}
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {}
 }
