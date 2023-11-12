@@ -84,6 +84,15 @@ export class AuthenticationService {
             );
     }
 
+
+    isUsernameAvailable(username: string): Observable<boolean> {
+        return this.httpClient.get<boolean>(`${environment.serverApiUrl}/user/is-username-available?username=${username}`);
+    }
+
+    isEmailAvailable(email: string): Observable<boolean> {
+        return this.httpClient.get<boolean>(`${environment.serverApiUrl}/user/is-email-available?email=${email}`);
+    }
+
     public canAccessPage(): boolean {
         return this.isAccessTokenDefined();
     }

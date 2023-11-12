@@ -44,3 +44,8 @@ input::-ms-input-placeholder {
 .hide {
     display: none;
 }
+
+.availabilityError{
+	margin-top: 10px;
+	margin-bottom: -15px;
+}

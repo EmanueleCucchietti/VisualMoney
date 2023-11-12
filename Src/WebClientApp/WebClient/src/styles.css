@@ -5,6 +5,7 @@
     --bg-color-dark-theme-rgb: 31, 22, 22;
     --primary-color-dark-theme: #ba3cde;
     --primary-color-dark-theme-rgb: 186, 60, 222;
+	--error-color-dark-theme: #cf0000;
 }
 
 * {
@@ -104,4 +105,8 @@ html {
     box-shadow:
         0 0 0 2px var(--bg-color-dark-theme),
         0 0 0 4px var(--primary-color-dark-theme);
+}
+
+.error{
+	color: var(--error-color-dark-theme);
 }

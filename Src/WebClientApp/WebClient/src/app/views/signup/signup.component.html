@@ -9,8 +9,11 @@
             class="default-input"
             type="text"
             [(ngModel)]="email"
+			(ngModelChange)="checkEmail($event)"
             placeholder="Email"
         />
+		<!-- error for email not available -->
+		<label *ngIf="emailError" class="error availabilityError" >Email not available</label>
         <input
             *ngIf="step == 1"
             class="default-input"
@@ -24,8 +27,11 @@
             class="default-input"
             type="text"
             [(ngModel)]="username"
+			(ngModelChange)="checkUsername($event)"
             placeholder="Username"
         />
+		<!-- error for username not available -->
+		<label *ngIf="usernameError" class="error availabilityError" >Username not available</label>
         <input
             *ngIf="step == 1"
             class="default-input"

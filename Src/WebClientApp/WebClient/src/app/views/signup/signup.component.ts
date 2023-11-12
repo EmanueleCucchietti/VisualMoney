@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SignupRequestDto } from 'src/app/_models/';
 import { User } from 'src/app/_models/user';
+import { AuthenticationService } from 'src/app/_services';
 
 @Component({
     selector: 'app-signup',
@@ -14,7 +15,10 @@ export class SignupComponent {
     surname: string = '';
     password: string = '';
 
-    constructor() {}
+	usernameError: boolean = false;
+	emailError: boolean = false;
+
+    constructor(private authService: AuthenticationService) {}
 
     step = 0;
 
@@ -96,4 +100,38 @@ export class SignupComponent {
     passToStep1() {}
 
     passToStep2() {}
+
+    checkUsername($event: any) {
+		if(this.username.length == 0) {
+			this.usernameError = false;
+			return;
+		}
+
+        this.authService.isUsernameAvailable(this.username).subscribe({
+            next: (response) => {
+                console.log(response);
+				this.usernameError = !response;
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    }
+
+    checkEmail($event: any) {
+		if(this.email.length == 0) {
+			this.emailError = false;
+			return;
+		}
+
+        this.authService.isEmailAvailable(this.email).subscribe({
+            next: (response) => {
+                console.log(response);
+				this.emailError = !response;
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    }
 }
