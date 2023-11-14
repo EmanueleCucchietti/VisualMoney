@@ -27,7 +27,8 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                // we need to create a json in order to make angular able to read it (it reads json)
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -50,7 +51,8 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                // we need to create a json in order to make angular able to read it (it reads json)
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -73,8 +75,9 @@ namespace WebApi.Controllers
                 return Ok(responseDto);
             }
             catch (Exception e)
-            {       
-                return BadRequest(e.Message);
+            {
+                // we need to create a json in order to make angular able to read it (it reads json)
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -88,7 +91,8 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                // we need to create a json in order to make angular able to read it (it reads json)
+                return BadRequest(new { message = e.Message });
             }
         }
 
@@ -102,7 +106,8 @@ namespace WebApi.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                // we need to create a json in order to make angular able to read it (it reads json)
+                return BadRequest(new { message = e.Message });
             }
         }
     }
