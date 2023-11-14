@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/_services';
 import { LoginRequestDto } from 'src/app/_models';
 import { first } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -15,25 +16,22 @@ export class LoginComponent {
     loginRequestData: LoginRequestDto = new LoginRequestDto('', '');
 
     login() {
-        // this.authService.login(this.loginRequestData)
-        // .then((res) => {
-        //   console.log(res);
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // })
         this.authService
             .login(this.loginRequestData)
             .pipe(first())
             .subscribe({
                 next: (res) => {
                     console.log(res);
+					alert('Successfully logged in');
+					this.router.navigate(['/']);
                 },
                 error: (err) => {
                     console.log(err);
+					alert('Error while logging in: ' + err);
                 }
             });
     }
 
-    constructor(private authService: AuthenticationService) {}
+    constructor(private authService: AuthenticationService,
+		private router: Router) {}
 }

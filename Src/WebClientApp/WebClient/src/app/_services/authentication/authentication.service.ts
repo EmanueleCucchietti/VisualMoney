@@ -2,7 +2,11 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, lastValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LoginRequestDto, LoginResponseDto } from 'src/app/_models';
+import {
+    LoginRequestDto,
+    LoginResponseDto,
+    SignupRequestDto
+} from 'src/app/_models';
 import { environment } from 'src/app/environments/environment';
 
 @Injectable({
@@ -84,13 +88,24 @@ export class AuthenticationService {
             );
     }
 
+    signup(signupRequestDto: SignupRequestDto) : Observable<any> {
+		return this.httpClient.post<any>(
+			`${environment.serverApiUrl}/user/register`,
+			signupRequestDto,
+			{ withCredentials: true }
+		);
+    }
 
     isUsernameAvailable(username: string): Observable<boolean> {
-        return this.httpClient.get<boolean>(`${environment.serverApiUrl}/user/is-username-available?username=${username}`);
+        return this.httpClient.get<boolean>(
+            `${environment.serverApiUrl}/user/is-username-available?username=${username}`
+        );
     }
 
     isEmailAvailable(email: string): Observable<boolean> {
-        return this.httpClient.get<boolean>(`${environment.serverApiUrl}/user/is-email-available?email=${email}`);
+        return this.httpClient.get<boolean>(
+            `${environment.serverApiUrl}/user/is-email-available?email=${email}`
+        );
     }
 
     public canAccessPage(): boolean {

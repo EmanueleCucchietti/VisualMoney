@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
+import { first, lastValueFrom } from 'rxjs';
 import { SignupRequestDto } from 'src/app/_models/';
 import { User } from 'src/app/_models/user';
 import { AuthenticationService } from 'src/app/_services';
@@ -21,7 +22,10 @@ export class SignupComponent {
     isLevel0error: boolean = false;
     level0errorMessage: string = '';
 
-    constructor(private authService: AuthenticationService) {}
+    constructor(
+        private authService: AuthenticationService,
+        private router: Router
+    ) {}
 
     step = 0;
 
@@ -33,23 +37,34 @@ export class SignupComponent {
             this.password
         );
         console.log(signupRequestDto);
-        // let loginRequestDto = new LoginRequestDto(user, this.password);
-        // this.authenticationService.signup(loginRequestDto).subscribe(
-        //   (response) => {
-        //     console.log(response);
-        //   },
-        //   (error) => {
-        //     console.log(error);
-        //   }
-        // );
+
+        this.authService
+            .signup(signupRequestDto)
+            .subscribe({
+                next: (response) => {
+                    console.log(response);
+					alert('Successfully signed up');
+                    this.router.navigate(['/login']);
+                },
+                error: (err) => {
+                    console.log(err);
+                    alert('Error while signing up: ' + err);
+                }
+            });
     }
 
     next() {
-		if (this.validateStep()) {
-			this.step++;
-		} else {
-			alert("Please fill in all the fields correctly");
-		}
+        if (!this.validateStep()) {
+            alert('Please fill in all the fields correctly');
+            return;
+        }
+
+        if (this.step == 2) {
+            this.signup();
+            return;
+        }
+
+        this.step++;
     }
 
     back() {
@@ -59,7 +74,7 @@ export class SignupComponent {
     }
 
     validateStep() {
-		return !this.isLevel0error && !this.isLevel1error;
+        return !this.isLevel0error && !this.isLevel1error;
     }
 
     checkUsername($event: any) {
@@ -111,40 +126,39 @@ export class SignupComponent {
             }
         });
     }
+
     checkName($event: any) {
-		const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
+        const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
 
-		if(!alphanumericRegex.test(this.name))
-		{
-			this.isLevel0error = true;
-			this.level0errorMessage = "Invalid name";
-			return;
-		}
+        if (!alphanumericRegex.test(this.name)) {
+            this.isLevel0error = true;
+            this.level0errorMessage = 'Invalid name';
+            return;
+        }
 
-		this.isLevel0error = false;
+        this.isLevel0error = false;
     }
 
     checkSurname($event: any) {
-		const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
+        const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
 
-		if(!alphanumericRegex.test(this.surname))
-		{
-			this.isLevel1error = true;
-			this.level1errorMessage = "Invalid surname";
-			return;
-		}
+        if (!alphanumericRegex.test(this.surname)) {
+            this.isLevel1error = true;
+            this.level1errorMessage = 'Invalid surname';
+            return;
+        }
 
-		this.isLevel1error = false;
+        this.isLevel1error = false;
     }
 
     checkPassword($event: any) {
-        if(this.password.length < 4)
-		{
-			this.isLevel1error = true;
-			this.level1errorMessage = "Password must be at least 8 characters long";
-			return;
-		}
+        if (this.password.length < 4) {
+            this.isLevel1error = true;
+            this.level1errorMessage =
+                'Password must be at least 8 characters long';
+            return;
+        }
 
-		this.isLevel1error = false;
+        this.isLevel1error = false;
     }
 }

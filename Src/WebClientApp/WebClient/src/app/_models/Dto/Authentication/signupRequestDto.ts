@@ -1,11 +1,22 @@
-import { User } from '../../user';
+import { User } from "../../user";
 
 export class SignupRequestDto {
-    public User: User;
+	public email: string;
+	public username: string;
+	public name: string;
+	public surname: string;
     public password: string;
 
-    constructor(User: User, password: string) {
-        this.User = User;
-        this.password = password;
-    }
+	constructor(
+		user: User,
+		password: string
+	) {
+		this.email = user.email;
+		this.username = user.username;
+		this.name = user.name;
+		this.surname = user.surname;
+		this.password = password;
+	}
+
+
 }
