@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { SignupRequestDto } from 'src/app/_models/';
 import { User } from 'src/app/_models/user';
 import { AuthenticationService } from 'src/app/_services';
@@ -15,8 +16,10 @@ export class SignupComponent {
     surname: string = '';
     password: string = '';
 
-	usernameError: boolean = false;
-	emailError: boolean = false;
+    isLevel1error: boolean = false;
+    level1errorMessage: string = '';
+    isLevel0error: boolean = false;
+    level0errorMessage: string = '';
 
     constructor(private authService: AuthenticationService) {}
 
@@ -42,33 +45,11 @@ export class SignupComponent {
     }
 
     next() {
-        switch (this.step) {
-            case 0:
-                if (this.validateStep0()) {
-                    this.step++;
-                    this.passToStep1();
-                } else {
-                    alert('Invalid email or username');
-                }
-                break;
-            case 1:
-                if (this.validateStep1()) {
-                    this.step++;
-                    this.passToStep2();
-                } else {
-                    alert('Invalid name or surname');
-                }
-                break;
-            case 2:
-                if (this.validateStep2()) {
-                    this.signup();
-                } else {
-                    alert(
-                        'Invalid password. Must be at least 8 characters long'
-                    );
-                }
-                break;
-        }
+		if (this.validateStep()) {
+			this.step++;
+		} else {
+			alert("Please fill in all the fields correctly");
+		}
     }
 
     back() {
@@ -77,40 +58,27 @@ export class SignupComponent {
         }
     }
 
-    validateStep0() {
-        const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
-
-        return (
-            emailRegex.test(this.email) && alphanumericRegex.test(this.username)
-        );
+    validateStep() {
+		return !this.isLevel0error && !this.isLevel1error;
     }
-    validateStep1() {
-        const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
-
-        return (
-            alphanumericRegex.test(this.name) &&
-            alphanumericRegex.test(this.surname)
-        );
-    }
-    validateStep2() {
-        return this.password.length > 8;
-    }
-
-    passToStep1() {}
-
-    passToStep2() {}
 
     checkUsername($event: any) {
-		if(this.username.length == 0) {
-			this.usernameError = false;
-			return;
-		}
+        const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
+        if (!alphanumericRegex.test(this.username)) {
+            this.isLevel1error = true;
+            this.level1errorMessage = 'Invalid username';
+            return;
+        }
+
+        this.isLevel1error = false;
 
         this.authService.isUsernameAvailable(this.username).subscribe({
             next: (response) => {
                 console.log(response);
-				this.usernameError = !response;
+                if (!response) {
+                    this.isLevel1error = true;
+                    this.level1errorMessage = 'Username already in use';
+                }
             },
             error: (err) => {
                 console.log(err);
@@ -119,19 +87,64 @@ export class SignupComponent {
     }
 
     checkEmail($event: any) {
-		if(this.email.length == 0) {
-			this.emailError = false;
-			return;
-		}
+        const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.email)) {
+            this.isLevel0error = true;
+            this.level0errorMessage = 'Invalid email';
+            return;
+        }
+
+        this.isLevel0error = false;
 
         this.authService.isEmailAvailable(this.email).subscribe({
             next: (response) => {
                 console.log(response);
-				this.emailError = !response;
+                if (!response) {
+                    this.isLevel0error = true;
+                    this.level0errorMessage = 'Email already in use';
+                }
             },
             error: (err) => {
                 console.log(err);
+                this.isLevel0error = true;
+                this.level0errorMessage = 'Error checking email';
             }
         });
+    }
+    checkName($event: any) {
+		const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
+
+		if(!alphanumericRegex.test(this.name))
+		{
+			this.isLevel0error = true;
+			this.level0errorMessage = "Invalid name";
+			return;
+		}
+
+		this.isLevel0error = false;
+    }
+
+    checkSurname($event: any) {
+		const alphanumericRegex: RegExp = /^[a-zA-Z0-9]+$/;
+
+		if(!alphanumericRegex.test(this.surname))
+		{
+			this.isLevel1error = true;
+			this.level1errorMessage = "Invalid surname";
+			return;
+		}
+
+		this.isLevel1error = false;
+    }
+
+    checkPassword($event: any) {
+        if(this.password.length < 4)
+		{
+			this.isLevel1error = true;
+			this.level1errorMessage = "Password must be at least 8 characters long";
+			return;
+		}
+
+		this.isLevel1error = false;
     }
 }

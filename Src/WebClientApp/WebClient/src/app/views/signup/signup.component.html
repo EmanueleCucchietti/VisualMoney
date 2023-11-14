@@ -9,43 +9,50 @@
             class="default-input"
             type="text"
             [(ngModel)]="email"
-			(ngModelChange)="checkEmail($event)"
+            (ngModelChange)="checkEmail($event)"
             placeholder="Email"
         />
-		<!-- error for email not available -->
-		<label *ngIf="emailError" class="error availabilityError" >Email not available</label>
         <input
             *ngIf="step == 1"
             class="default-input"
             type="text"
             [(ngModel)]="name"
+            (ngModelChange)="checkName($event)"
             placeholder="Name"
         />
+        <!-- error for email not available -->
+        <label *ngIf="isLevel0error" class="error availabilityError">{{
+            level0errorMessage
+        }}</label>
         <br /><br />
         <input
             *ngIf="step == 0"
             class="default-input"
             type="text"
             [(ngModel)]="username"
-			(ngModelChange)="checkUsername($event)"
+            (ngModelChange)="checkUsername($event)"
             placeholder="Username"
         />
-		<!-- error for username not available -->
-		<label *ngIf="usernameError" class="error availabilityError" >Username not available</label>
         <input
             *ngIf="step == 1"
             class="default-input"
             type="text"
             [(ngModel)]="surname"
+            (ngModelChange)="checkSurname($event)"
             placeholder="Surname"
         />
         <input
             *ngIf="step == 2"
             class="default-input"
-            type="text"
+            type="password"
             [(ngModel)]="password"
+            (ngModelChange)="checkPassword($event)"
             placeholder="password"
         />
+        <!-- error for username not available -->
+        <label *ngIf="isLevel1error" class="error availabilityError">{{
+            level1errorMessage
+        }}</label>
         <br /><br />
         <div class="row justify-content-between w-100">
             <button
