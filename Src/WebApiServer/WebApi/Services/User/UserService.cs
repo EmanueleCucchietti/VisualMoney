@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using DataAccessLayer.Data;
+using DataAccessLayer.Data.User;
 using DataAccessLayer.Models.Entities;
 using WebApi.Helpers;
 using WebApi.Models.Dto.User;
 
-namespace WebApi.Services
+namespace WebApi.Services.User
 {
     public class UserService : IUserService
     {
@@ -49,7 +49,7 @@ namespace WebApi.Services
             {
                 var user = await _userData.GetUserByEmailOrUsername(userDto.EmailOrUsername);
 
-                if (user is null || 
+                if (user is null ||
                     _authenticationHelper.GeneratePasswordHash(userDto.Password, user.PasswordSalt)
                         != user.PasswordHash)
                     throw new Exception("User not found or wrong password");
@@ -63,7 +63,8 @@ namespace WebApi.Services
                 return responseDto;
 
 
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 // TODO: Log exception
 

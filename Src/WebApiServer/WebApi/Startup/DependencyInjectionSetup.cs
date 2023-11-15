@@ -1,11 +1,13 @@
-﻿using DataAccessLayer.Data;
+﻿using DataAccessLayer.Data.User;
+using DataAccessLayer.Data.Wallet;
 using DataAccessLayer.DbAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApi.Configuration;
 using WebApi.Helpers;
-using WebApi.Services;
+using WebApi.Services.User;
+using WebApi.Services.Wallet;
 
 namespace WebApi.Startup
 {
@@ -26,9 +28,11 @@ namespace WebApi.Startup
             // DataAccess
             services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
             services.AddSingleton<IUserData, UserData>();
+            services.AddSingleton<IWalletData, WalletData>();
 
             // Controller Services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IWalletService, WalletService>();
 
             // Helpers
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();

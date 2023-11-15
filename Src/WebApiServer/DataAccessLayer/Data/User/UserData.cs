@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Data
+namespace DataAccessLayer.Data.User
 {
     public class UserData : IUserData
     {

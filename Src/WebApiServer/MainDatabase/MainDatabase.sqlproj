@@ -61,6 +61,7 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\StoredProcedures\User" />
+    <Folder Include="dbo\StoredProcedures\Wallet" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
@@ -79,6 +80,10 @@
     <Build Include="dbo\StoredProcedures\User\spGetUserById.sql" />
     <Build Include="dbo\StoredProcedures\User\spIsEmailAvailable].sql" />
     <Build Include="dbo\StoredProcedures\User\spIsUsernameAvailable.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spCreateWallet.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spGetWallets.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spGetWallet.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spUpdateWallet.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />

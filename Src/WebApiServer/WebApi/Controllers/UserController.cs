@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Runtime.Intrinsics.X86;
 using WebApi.Models.Dto.User;
-using WebApi.Services;
+using WebApi.Services.User;
 
 namespace WebApi.Controllers
 {
