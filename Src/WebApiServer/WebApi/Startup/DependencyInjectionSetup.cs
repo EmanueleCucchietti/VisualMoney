@@ -4,9 +4,11 @@ using DataAccessLayer.Data.Wallet;
 using DataAccessLayer.DbAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 using WebApi.Configuration;
 using WebApi.Helpers;
+using WebApi.Middlewares;
 using WebApi.Services.CounterParty;
 using WebApi.Services.User;
 using WebApi.Services.Wallet;
@@ -26,6 +28,12 @@ namespace WebApi.Startup
             var jwtConfigurationSection = _configuration.GetSection("JwtConfiguration");
             var jwtConfiguration = jwtConfigurationSection.Get<JwtConfiguration>()!;
             services.Configure<JwtConfiguration>(_configuration.GetSection("JwtConfiguration"));
+
+            // Logging
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(_configuration)
+                .CreateLogger();
+            services.AddSingleton(Log.Logger);
 
             // DataAccess
             services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
@@ -72,6 +80,9 @@ namespace WebApi.Startup
                         .AllowCredentials();
                 });
             });
+
+            // Error Handling
+            services.AddTransient<ErrorHandlerMiddleware>();
 
             return services;
         }
