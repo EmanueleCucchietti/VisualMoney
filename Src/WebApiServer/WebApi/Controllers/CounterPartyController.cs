@@ -67,7 +67,7 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            await _counterPartyService.UpdateCounterParty(counterPartyDto);
+            await _counterPartyService.UpdateCounterParty(counterPartyDto, userId);
             
             return Ok(counterPartyDto);
         }

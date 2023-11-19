@@ -42,7 +42,8 @@ namespace DataAccessLayer.Data.CounterParty
                 {
                     counterParty.Id,
                     counterParty.Name,
-                    counterParty.IsHidden
+                    counterParty.IsHidden,
+                    counterParty.IdUser
                 },
                 useStoredProcedure: true);
         }

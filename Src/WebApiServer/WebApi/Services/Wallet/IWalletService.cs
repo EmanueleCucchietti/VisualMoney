@@ -8,6 +8,6 @@ namespace WebApi.Services.Wallet
         Task CreateWallet(int userId, WalletDto wallet);
         Task<WalletModel?> GetWallet(int walletId);
         Task<IEnumerable<WalletModel>> GetWallets(int userId);
-        Task UpdateWallet(WalletWithIdDto wallet);
+        Task UpdateWallet(WalletWithIdDto wallet, int userId);
     }
 }

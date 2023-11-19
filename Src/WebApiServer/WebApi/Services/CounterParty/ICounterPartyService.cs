@@ -8,6 +8,6 @@ namespace WebApi.Services.CounterParty
         Task CreateCounterParty(int userId, CounterPartyDto counterPartyDto);
         Task<IEnumerable<CounterPartyModel>> GetCounterParties(int userId);
         Task<CounterPartyModel?> GetCounterParty(int id);
-        Task UpdateCounterParty(CounterPartyWithIdDto counterPartyDto);
+        Task UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId);
     }
 }

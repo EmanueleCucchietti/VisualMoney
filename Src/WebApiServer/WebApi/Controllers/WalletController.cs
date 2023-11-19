@@ -60,7 +60,11 @@ namespace WebApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] WalletWithIdDto wallet)
         {
-            await _walletService.UpdateWallet(wallet);
+            if (!HttpContext.Items.ContainsKey("UserId")
+                || HttpContext.Items["UserId"] is not int userId)
+                return Unauthorized();
+            
+            await _walletService.UpdateWallet(wallet, userId);
 
             return Ok(wallet);
         }

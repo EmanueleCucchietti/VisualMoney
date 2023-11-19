@@ -44,7 +44,8 @@ namespace DataAccessLayer.Data.Wallet
                     wallet.Id,
                     wallet.Name,
                     wallet.CurrencyCode,
-                    wallet.Amount
+                    wallet.Amount,
+                    wallet.IdUser
                 },
                 useStoredProcedure: true);
         }

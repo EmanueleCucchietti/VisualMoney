@@ -35,11 +35,13 @@ namespace WebApi.Services.Wallet
             }
         }
 
-        public async Task UpdateWallet(WalletWithIdDto wallet)
+        public async Task UpdateWallet(WalletWithIdDto wallet, int userId)
         {
             try
             {
                 var walletModel = _mapper.Map<WalletModel>(wallet);
+
+                walletModel.IdUser = userId;
 
                 await _walletData.UpdateWallet(walletModel);
             }

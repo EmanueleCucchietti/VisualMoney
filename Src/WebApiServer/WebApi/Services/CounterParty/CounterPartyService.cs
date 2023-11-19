@@ -62,11 +62,13 @@ namespace WebApi.Services.CounterParty
         }
 
 
-        public async Task UpdateCounterParty(CounterPartyWithIdDto counterPartyDto)
+        public async Task UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId)
         {
             try
             {
                 var counterPartyModel = _mapper.Map<CounterPartyModel>(counterPartyDto);
+
+                counterPartyModel.IdUser = userId;
 
                 await _counterPartyData.UpdateCounterParty(counterPartyModel);
             }
