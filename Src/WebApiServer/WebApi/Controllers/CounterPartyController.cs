@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using WebApi.Models.Dto;
 using WebApi.Models.Dto.CounterParty;
 using WebApi.Services.CounterParty;
 
@@ -54,7 +55,8 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            await _counterPartyService.CreateCounterParty(userId, counterPartyDto);
+            if(!await _counterPartyService.CreateCounterParty(userId, counterPartyDto))
+                return StatusCode(500, new GenericErrorDto<CounterPartyDto>(counterPartyDto));
 
             return Ok(counterPartyDto);
         }
@@ -64,11 +66,12 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Put([FromBody] CounterPartyWithIdDto counterPartyDto)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
-                || HttpContext.Items["UserId"] is not int userId)
+                || HttpContext.Items["UserId"] is not int userId)   
                 return Unauthorized();
 
-            await _counterPartyService.UpdateCounterParty(counterPartyDto, userId);
-            
+            if(!await _counterPartyService.UpdateCounterParty(counterPartyDto, userId))
+                return StatusCode(500, new GenericErrorDto<CounterPartyWithIdDto>(counterPartyDto));
+
             return Ok(counterPartyDto);
         }
     }

@@ -17,11 +17,11 @@ namespace DataAccessLayer.Data.CounterParty
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task CreateCounterParty(CounterPartyModel counterPartyModel)
+        public async Task<int> CreateCounterParty(CounterPartyModel counterPartyModel)
         {
             string sql = @"spCreateCounterParty";
 
-            await _sqlDataAccess.SaveData(
+            return await _sqlDataAccess.SaveData(
                 sql,
                 new
                 {
@@ -32,11 +32,11 @@ namespace DataAccessLayer.Data.CounterParty
                 useStoredProcedure: true);
         }
 
-        public async Task UpdateCounterParty(CounterPartyModel counterParty)
+        public async Task<int> UpdateCounterParty(CounterPartyModel counterParty)
         {
             string sql = @"spUpdateCounterParty";
 
-            await _sqlDataAccess.SaveData(
+            return await _sqlDataAccess.SaveData(
                 sql,
                 new
                 {

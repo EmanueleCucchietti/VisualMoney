@@ -4,9 +4,9 @@ namespace DataAccessLayer.Data.CounterParty
 {
     public interface ICounterPartyData
     {
-        Task CreateCounterParty(CounterPartyModel counterPartyModel);
+        Task<int> CreateCounterParty(CounterPartyModel counterPartyModel);
         Task<IEnumerable<CounterPartyModel>> GetCounterParties(int idUser);
         Task<CounterPartyModel?> GetCounterParty(int counterPartyId);
-        Task UpdateCounterParty(CounterPartyModel counterParty);
+        Task<int> UpdateCounterParty(CounterPartyModel counterParty);
     }
 }

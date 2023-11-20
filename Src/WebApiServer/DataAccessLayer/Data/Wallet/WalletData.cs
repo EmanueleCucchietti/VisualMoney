@@ -17,11 +17,11 @@ namespace DataAccessLayer.Data.Wallet
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task CreateWallet(WalletModel walletModel)
+        public async Task<int> CreateWallet(WalletModel walletModel)
         {
             string sql = @"spCreateWallet";
 
-            await _sqlDataAccess.SaveData(
+            return await _sqlDataAccess.SaveData(
                 sql,
                 new
                 {
@@ -33,11 +33,11 @@ namespace DataAccessLayer.Data.Wallet
                 useStoredProcedure: true);
         }
 
-        public async Task UpdateWallet(WalletModel wallet)
+        public async Task<int> UpdateWallet(WalletModel wallet)
         {
             string sql = @"spUpdateWallet";
 
-            await _sqlDataAccess.SaveData(
+            return await _sqlDataAccess.SaveData(
                 sql,
                 new 
                 { 

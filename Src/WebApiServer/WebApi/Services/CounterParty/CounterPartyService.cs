@@ -43,7 +43,7 @@ namespace WebApi.Services.CounterParty
                 throw;
             }
         }
-        public async Task CreateCounterParty(int userId, CounterPartyDto counterPartyDto)
+        public async Task<bool> CreateCounterParty(int userId, CounterPartyDto counterPartyDto)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace WebApi.Services.CounterParty
 
                 counterPartyModel.IdUser = userId;
 
-                await _counterPartyData.CreateCounterParty(counterPartyModel);
+                return await _counterPartyData.CreateCounterParty(counterPartyModel) == 1;
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace WebApi.Services.CounterParty
         }
 
 
-        public async Task UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId)
+        public async Task<bool> UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace WebApi.Services.CounterParty
 
                 counterPartyModel.IdUser = userId;
 
-                await _counterPartyData.UpdateCounterParty(counterPartyModel);
+                return await _counterPartyData.UpdateCounterParty(counterPartyModel) == 1;
             }
             catch (Exception ex)
             {

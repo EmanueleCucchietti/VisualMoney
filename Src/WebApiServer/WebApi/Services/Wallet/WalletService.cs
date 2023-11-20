@@ -17,7 +17,7 @@ namespace WebApi.Services.Wallet
             _mapper = mapper;
         }
 
-        public async Task CreateWallet(int userId, WalletDto wallet)
+        public async Task<bool> CreateWallet(int userId, WalletDto wallet)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace WebApi.Services.Wallet
 
                 walletModel.IdUser = userId;
 
-                await _walletData.CreateWallet(walletModel);
+                return await _walletData.CreateWallet(walletModel) == 1;
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace WebApi.Services.Wallet
             }
         }
 
-        public async Task UpdateWallet(WalletWithIdDto wallet, int userId)
+        public async Task<bool> UpdateWallet(WalletWithIdDto wallet, int userId)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace WebApi.Services.Wallet
 
                 walletModel.IdUser = userId;
 
-                await _walletData.UpdateWallet(walletModel);
+                return await _walletData.UpdateWallet(walletModel) == 1;
             }
             catch (Exception ex)
             {

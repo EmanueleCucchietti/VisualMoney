@@ -5,9 +5,9 @@ namespace WebApi.Services.CounterParty
 {
     public interface ICounterPartyService
     {
-        Task CreateCounterParty(int userId, CounterPartyDto counterPartyDto);
+        Task<bool> CreateCounterParty(int userId, CounterPartyDto counterPartyDto);
         Task<IEnumerable<CounterPartyModel>> GetCounterParties(int userId);
         Task<CounterPartyModel?> GetCounterParty(int id);
-        Task UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId);
+        Task<bool> UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId);
     }
 }

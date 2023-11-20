@@ -1,8 +1,10 @@
 ﻿using DataAccessLayer.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Security.Claims;
 using System.Security.Principal;
+using WebApi.Models.Dto;
 using WebApi.Models.Dto.Wallet;
 using WebApi.Services.Wallet;
 
@@ -52,7 +54,8 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            await _walletService.CreateWallet(userId, wallet);
+            if (!await _walletService.CreateWallet(userId, wallet))
+                return StatusCode(500, new GenericErrorDto<WalletDto>(wallet));
 
             return Ok(wallet);
         }
@@ -64,7 +67,8 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
             
-            await _walletService.UpdateWallet(wallet, userId);
+            if(!await _walletService.UpdateWallet(wallet, userId))
+                return StatusCode(500, new GenericErrorDto<WalletWithIdDto>(wallet));
 
             return Ok(wallet);
         }
