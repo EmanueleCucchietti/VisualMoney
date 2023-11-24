@@ -1,4 +1,4 @@
-﻿namespace WebApi.Models.Dto.Wallet
+﻿    namespace WebApi.Models.Dto.Wallet
 {
     public class WalletDto
     {

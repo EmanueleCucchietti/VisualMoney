@@ -16,11 +16,13 @@ namespace WebApi.Services.CounterParty
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CounterPartyModel>> GetCounterParties(int userId)
+        public async Task<IEnumerable<CounterPartyResponseDto>> GetCounterParties(int userId)
         {
             try
             {
-                return await _counterPartyData.GetCounterParties(userId);
+                var counterPartyModels =  await _counterPartyData.GetCounterParties(userId);
+
+                return _mapper.Map<IEnumerable<CounterPartyResponseDto>>(counterPartyModels);
             }
             catch (Exception ex)
             {
@@ -30,11 +32,13 @@ namespace WebApi.Services.CounterParty
             }
         }
 
-        public async Task<CounterPartyModel?> GetCounterParty(int id)
+        public async Task<CounterPartyResponseDto?> GetCounterParty(int id)
         {
             try
             {
-                return await _counterPartyData.GetCounterParty(id);
+                var counterPartyModel = await _counterPartyData.GetCounterParty(id);
+
+                return _mapper.Map<CounterPartyResponseDto>(counterPartyModel);
             }
             catch(Exception ex)
             {
@@ -62,11 +66,13 @@ namespace WebApi.Services.CounterParty
         }
 
 
-        public async Task<bool> UpdateCounterParty(CounterPartyWithIdDto counterPartyDto, int userId)
+        public async Task<bool> UpdateCounterParty(int id, CounterPartyDto counterPartyDto, int userId)
         {
             try
             {
                 var counterPartyModel = _mapper.Map<CounterPartyModel>(counterPartyDto);
+
+                counterPartyModel.Id = id;
 
                 counterPartyModel.IdUser = userId;
 

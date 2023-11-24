@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Models.Dto.Wallet
 {
-    public class WalletWithIdDto
+    public class WalletResponseDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

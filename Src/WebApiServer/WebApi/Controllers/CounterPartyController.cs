@@ -62,15 +62,15 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] CounterPartyWithIdDto counterPartyDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] CounterPartyDto counterPartyDto)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
                 || HttpContext.Items["UserId"] is not int userId)   
                 return Unauthorized();
 
-            if(!await _counterPartyService.UpdateCounterParty(counterPartyDto, userId))
-                return StatusCode(500, new GenericErrorDto<CounterPartyWithIdDto>(counterPartyDto));
+            if(!await _counterPartyService.UpdateCounterParty(id, counterPartyDto, userId))
+                return StatusCode(500, new GenericErrorDto<CounterPartyDto>(counterPartyDto));
 
             return Ok(counterPartyDto);
         }

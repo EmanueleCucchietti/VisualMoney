@@ -14,11 +14,10 @@ namespace WebApi.Mapping
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.IdUser, opt => opt.Ignore());
 
-            CreateMap<CounterPartyModel, CounterPartyWithIdDto>();
+            CreateMap<CounterPartyModel, CounterPartyResponseDto>();
 
-            CreateMap<CounterPartyWithIdDto, CounterPartyModel>()
+            CreateMap<CounterPartyResponseDto, CounterPartyModel>()
                 .ForMember(dest => dest.IdUser, opt => opt.Ignore());
-
         }
     }
 }

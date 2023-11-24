@@ -32,7 +32,7 @@ namespace DataAccessLayer.Data.CounterParty
                 useStoredProcedure: true);
         }
 
-        public async Task<int> UpdateCounterParty(CounterPartyModel counterParty)
+        public async Task<int> UpdateCounterParty(CounterPartyModel counterPartyModel)
         {
             string sql = @"spUpdateCounterParty";
 
@@ -40,10 +40,10 @@ namespace DataAccessLayer.Data.CounterParty
                 sql,
                 new
                 {
-                    counterParty.Id,
-                    counterParty.Name,
-                    counterParty.IsHidden,
-                    counterParty.IdUser
+                    counterPartyModel.Id,
+                    counterPartyModel.Name,
+                    counterPartyModel.IsHidden,
+                    counterPartyModel.IdUser
                 },
                 useStoredProcedure: true);
         }

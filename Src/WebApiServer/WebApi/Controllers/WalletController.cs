@@ -60,15 +60,15 @@ namespace WebApi.Controllers
             return Ok(wallet);
         }
         
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] WalletWithIdDto wallet)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] WalletDto wallet)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
             
-            if(!await _walletService.UpdateWallet(wallet, userId))
-                return StatusCode(500, new GenericErrorDto<WalletWithIdDto>(wallet));
+            if(!await _walletService.UpdateWallet(id, wallet, userId))
+                return StatusCode(500, new GenericErrorDto<WalletDto>(wallet));
 
             return Ok(wallet);
         }

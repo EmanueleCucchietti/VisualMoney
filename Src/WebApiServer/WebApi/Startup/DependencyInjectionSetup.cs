@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Data.CounterParty;
+﻿using DataAccessLayer.Data.Category;
+using DataAccessLayer.Data.CounterParty;
 using DataAccessLayer.Data.User;
 using DataAccessLayer.Data.Wallet;
 using DataAccessLayer.DbAccess;
@@ -9,6 +10,7 @@ using System.Text;
 using WebApi.Configuration;
 using WebApi.Helpers;
 using WebApi.Middlewares;
+using WebApi.Services.Category;
 using WebApi.Services.CounterParty;
 using WebApi.Services.User;
 using WebApi.Services.Wallet;
@@ -40,11 +42,15 @@ namespace WebApi.Startup
             services.AddSingleton<IUserData, UserData>();
             services.AddSingleton<IWalletData, WalletData>();
             services.AddSingleton<ICounterPartyData, CounterPartyData>();
+            services.AddSingleton<ICategoryData, CategoryData>();
+            services.AddSingleton<ISuperCategoryData, SuperCategoryData>();
 
             // Controller Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IWalletService, WalletService>();
             services.AddScoped<ICounterPartyService, CounterPartyService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISuperCategoryService, SuperCategoryService>();
 
             // Helpers
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();

@@ -35,11 +35,13 @@ namespace WebApi.Services.Wallet
             }
         }
 
-        public async Task<bool> UpdateWallet(WalletWithIdDto wallet, int userId)
+        public async Task<bool> UpdateWallet(int id, WalletDto wallet, int userId)
         {
             try
             {
                 var walletModel = _mapper.Map<WalletModel>(wallet);
+
+                walletModel.Id = id;
 
                 walletModel.IdUser = userId;
 
@@ -53,11 +55,13 @@ namespace WebApi.Services.Wallet
             }
         }
 
-        public async Task<IEnumerable<WalletModel>> GetWallets(int userId)
+        public async Task<IEnumerable<WalletResponseDto>> GetWallets(int userId)
         {
             try
             {
-                return await _walletData.GetWallets(userId);
+                var walletModels =  await _walletData.GetWallets(userId);
+
+                return _mapper.Map<IEnumerable<WalletResponseDto>>(walletModels);
             }
             catch (Exception ex)
             {
@@ -67,11 +71,13 @@ namespace WebApi.Services.Wallet
             }
         }
 
-        public async Task<WalletModel?> GetWallet(int walletId)
+        public async Task<WalletResponseDto?> GetWallet(int walletId)
         {
             try
             {
-                return await _walletData.GetWallet(walletId);
+                var walletModel =  await _walletData.GetWallet(walletId);
+
+                return _mapper.Map<WalletResponseDto>(walletModel);
             }
             catch (Exception ex)
             {

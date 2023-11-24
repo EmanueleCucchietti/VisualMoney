@@ -14,9 +14,9 @@ namespace WebApi.Mapping
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.IdUser, opt => opt.Ignore());
 
-            CreateMap<WalletModel, WalletWithIdDto> ();
+            CreateMap<WalletModel, WalletResponseDto>();
 
-            CreateMap<WalletWithIdDto, WalletModel>()
+            CreateMap<WalletResponseDto, WalletModel>()
                 .ForMember(dest => dest.IdUser, opt => opt.Ignore());
         }
     }
