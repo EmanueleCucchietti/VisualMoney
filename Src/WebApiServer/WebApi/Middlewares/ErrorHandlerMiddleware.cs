@@ -20,7 +20,10 @@ namespace WebApi.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError(ex, "Error processing the request {protocol} {method} {path}",
+                    context.Request.Protocol,
+                    context.Request.Method,
+                    context.Request.Path);
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 

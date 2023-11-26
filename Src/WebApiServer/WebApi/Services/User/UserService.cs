@@ -23,108 +23,60 @@ namespace WebApi.Services.User
 
         public async Task Register(UserRegisterDto userDto)
         {
-            try
-            {
-                var user = _mapper.Map<UserModel>(userDto);
+            var user = _mapper.Map<UserModel>(userDto);
 
-                user.PasswordSalt = _authenticationHelper.GenerateSalt();
+            user.PasswordSalt = _authenticationHelper.GenerateSalt();
 
-                user.PasswordHash = _authenticationHelper.GeneratePasswordHash(
-                    userDto.Password, user.PasswordSalt);
+            user.PasswordHash = _authenticationHelper.GeneratePasswordHash(
+                userDto.Password, user.PasswordSalt);
 
-                await _userData.CreateUserIfNotExists(user);
-
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            await _userData.CreateUserIfNotExists(user);
         }
 
         public async Task<UserLoginResponseDto> Login(UserLoginDto userDto)
         {
-            try
-            {
-                var user = await _userData.GetUserByEmailOrUsername(userDto.EmailOrUsername);
+            var user = await _userData.GetUserByEmailOrUsername(userDto.EmailOrUsername);
 
-                if (user is null ||
-                    _authenticationHelper.GeneratePasswordHash(userDto.Password, user.PasswordSalt)
-                        != user.PasswordHash)
-                    throw new Exception("User not found or wrong password");
+            if (user is null ||
+                _authenticationHelper.GeneratePasswordHash(userDto.Password, user.PasswordSalt)
+                    != user.PasswordHash)
+                throw new Exception("User not found or wrong password");
 
-                var responseDto = new UserLoginResponseDto();
+            var responseDto = new UserLoginResponseDto();
 
-                responseDto.AccessToken = _authenticationHelper.GenerateAccessToken(user);
+            responseDto.AccessToken = _authenticationHelper.GenerateAccessToken(user);
 
-                responseDto.RefreshToken = _authenticationHelper.GenerateRefreshToken(user);
+            responseDto.RefreshToken = _authenticationHelper.GenerateRefreshToken(user);
 
-                return responseDto;
-
-
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return responseDto;
         }
 
         public async Task<UserLoginResponseDto> RefreshToken(string? refreshToken)
         {
-            try
-            {
-                var userId = _authenticationHelper.ValidateRefreshTokenAndGetUserId(refreshToken);
+            var userId = _authenticationHelper.ValidateRefreshTokenAndGetUserId(refreshToken);
 
-                var user = await _userData.GetUserById(userId);
+            var user = await _userData.GetUserById(userId);
 
-                if (user is null)
-                    throw new Exception("Refresh token is invalid");
+            if (user is null)
+                throw new Exception("Refresh token is invalid");
 
-                var responseDto = new UserLoginResponseDto();
+            var responseDto = new UserLoginResponseDto();
 
-                responseDto.AccessToken = _authenticationHelper.GenerateAccessToken(user);
+            responseDto.AccessToken = _authenticationHelper.GenerateAccessToken(user);
 
-                responseDto.RefreshToken = _authenticationHelper.GenerateRefreshToken(user);
+            responseDto.RefreshToken = _authenticationHelper.GenerateRefreshToken(user);
 
-                return responseDto;
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return responseDto;
         }
 
         public Task<bool> IsEmailAvailable(string email)
         {
-            try
-            {
-                return _userData.IsEmailAvailable(email);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return _userData.IsEmailAvailable(email);
         }
 
         public Task<bool> IsUsernameAvailable(string username)
         {
-            try
-            {
-                return _userData.IsUsernameAvailable(username);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return _userData.IsUsernameAvailable(username);
         }
     }
 }

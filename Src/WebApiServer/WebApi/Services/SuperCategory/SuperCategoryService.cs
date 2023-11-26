@@ -17,71 +17,36 @@ namespace WebApi.Services.Category
         }
         public async Task<bool> CreateCategory(int userId, SuperCategoryDto superCategoryDto)
         {
-            try
-            {
-                var categoryModel = _mapper.Map<SuperCategoryModel>(superCategoryDto);
+            var categoryModel = _mapper.Map<SuperCategoryModel>(superCategoryDto);
 
-                categoryModel.IdUser = userId;
+            categoryModel.IdUser = userId;
 
-                return await _categoryData.CreateCategory(categoryModel) == 1;
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return await _categoryData.CreateCategory(categoryModel) == 1;
         }
+        
         public async Task<IEnumerable<SuperCategoryResponseDto>> GetCategories(int userId)
         {
-            try
-            {
-                var categories = await _categoryData.GetCategories(userId);
+            var categories = await _categoryData.GetCategories(userId);
 
-                return _mapper.Map<IEnumerable<SuperCategoryResponseDto>>(categories);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return _mapper.Map<IEnumerable<SuperCategoryResponseDto>>(categories);
         }
 
         public async Task<SuperCategoryResponseDto?> GetCategory(int id, int userId)
         {
-            try
-            {
-                var category = await _categoryData.GetCategory(id, userId);
+            var category = await _categoryData.GetCategory(id, userId);
                 
-                return _mapper.Map<SuperCategoryResponseDto>(category);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return _mapper.Map<SuperCategoryResponseDto>(category);
         }
 
         public async Task<bool> UpdateCategory(int id, SuperCategoryDto superCategoryDto, int userId)
         {
-            try
-            {
-                var categoryModel = _mapper.Map<SuperCategoryModel>(superCategoryDto);
+            var categoryModel = _mapper.Map<SuperCategoryModel>(superCategoryDto);
 
-                categoryModel.Id = id;
+            categoryModel.Id = id;
 
-                categoryModel.IdUser = userId;
+            categoryModel.IdUser = userId;
 
-                return await _categoryData.UpdateCategory(categoryModel) == 1;
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return await _categoryData.UpdateCategory(categoryModel) == 1;
         }
     }
 }

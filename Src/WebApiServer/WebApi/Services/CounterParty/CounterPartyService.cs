@@ -18,72 +18,36 @@ namespace WebApi.Services.CounterParty
 
         public async Task<IEnumerable<CounterPartyResponseDto>> GetCounterParties(int userId)
         {
-            try
-            {
-                var counterPartyModels =  await _counterPartyData.GetCounterParties(userId);
+            var counterPartyModels =  await _counterPartyData.GetCounterParties(userId);
 
-                return _mapper.Map<IEnumerable<CounterPartyResponseDto>>(counterPartyModels);
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return _mapper.Map<IEnumerable<CounterPartyResponseDto>>(counterPartyModels);
         }
 
         public async Task<CounterPartyResponseDto?> GetCounterParty(int id)
         {
-            try
-            {
-                var counterPartyModel = await _counterPartyData.GetCounterParty(id);
+            var counterPartyModel = await _counterPartyData.GetCounterParty(id);
 
-                return _mapper.Map<CounterPartyResponseDto>(counterPartyModel);
-            }
-            catch(Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return _mapper.Map<CounterPartyResponseDto>(counterPartyModel);
         }
+        
         public async Task<bool> CreateCounterParty(int userId, CounterPartyDto counterPartyDto)
         {
-            try
-            {
-                var counterPartyModel = _mapper.Map<CounterPartyModel>(counterPartyDto);
+            var counterPartyModel = _mapper.Map<CounterPartyModel>(counterPartyDto);
 
-                counterPartyModel.IdUser = userId;
+            counterPartyModel.IdUser = userId;
 
-                return await _counterPartyData.CreateCounterParty(counterPartyModel) == 1;
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return await _counterPartyData.CreateCounterParty(counterPartyModel) == 1;
         }
-
 
         public async Task<bool> UpdateCounterParty(int id, CounterPartyDto counterPartyDto, int userId)
         {
-            try
-            {
-                var counterPartyModel = _mapper.Map<CounterPartyModel>(counterPartyDto);
+            var counterPartyModel = _mapper.Map<CounterPartyModel>(counterPartyDto);
 
-                counterPartyModel.Id = id;
+            counterPartyModel.Id = id;
 
-                counterPartyModel.IdUser = userId;
+            counterPartyModel.IdUser = userId;
 
-                return await _counterPartyData.UpdateCounterParty(counterPartyModel) == 1;
-            }
-            catch (Exception ex)
-            {
-                // TODO: Log exception
-
-                throw;
-            }
+            return await _counterPartyData.UpdateCounterParty(counterPartyModel) == 1;
         }
     }
 }
