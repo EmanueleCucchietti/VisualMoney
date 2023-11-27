@@ -6,6 +6,7 @@ namespace DataAccessLayer.Data.CounterParty
     {
         Task<int> CreateCounterParty(CounterPartyModel counterPartyModel);
         Task<IEnumerable<CounterPartyModel>> GetCounterParties(int idUser);
+        Task<IEnumerable<CounterPartyModel>> GetCounterPartiesByTransaction(int idTransaction, int idUser);
         Task<CounterPartyModel?> GetCounterParty(int counterPartyId);
         Task<int> UpdateCounterParty(CounterPartyModel counterParty);
     }

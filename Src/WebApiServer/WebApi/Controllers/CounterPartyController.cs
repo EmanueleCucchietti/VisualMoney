@@ -44,6 +44,18 @@ namespace WebApi.Controllers
             return Ok(counterParty);
         }
 
+        [HttpGet("Transaction/{idTransaction}")]
+        public async Task<IActionResult> GetCounterPartyByTransaction(int idTransaction)
+        {
+            if (!HttpContext.Items.ContainsKey("UserId")
+                || HttpContext.Items["UserId"] is not int idUser)
+                return Unauthorized();
+
+            var counterParties = await _counterPartyService.GetCounterPartiesByTransaction(idTransaction, idUser);
+
+            return Ok(counterParties);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CounterPartyDto counterPartyDto)
         {

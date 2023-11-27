@@ -56,5 +56,12 @@ namespace WebApi.Services.Category
 
             return await _categoryData.UpdateCategory(categoryModel) == 1;
         }
+
+        public async Task<IEnumerable<CategoryResponseDto>> GetCategoriesByTransaction(int idTransaction, int idUser)
+        {
+            var categoryModels = await _categoryData.GetCategoriesByTransaction(idTransaction, idUser);
+
+            return _mapper.Map<IEnumerable<CategoryResponseDto>>(categoryModels);
+        }
     }
 }

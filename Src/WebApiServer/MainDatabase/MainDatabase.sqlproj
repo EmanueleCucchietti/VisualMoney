@@ -110,6 +110,8 @@
     <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByCounterParty.sql" />
     <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByWallet.sql" />
     <Build Include="dbo\StoredProcedures\Transaction\spUpdateTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spGetCategoriesByTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\CounterParty\spGetCounterPartiesByTransaction.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />

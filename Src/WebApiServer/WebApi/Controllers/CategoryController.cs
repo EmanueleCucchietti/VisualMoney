@@ -49,10 +49,10 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetCategoryBySuperCategory(int idSuperCategory)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
-                || HttpContext.Items["UserId"] is not int userId)
+                || HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            var category = await _categoryService.GetCategoriesBySuperCategory(idSuperCategory, userId);
+            var category = await _categoryService.GetCategoriesBySuperCategory(idSuperCategory, idUser);
 
             if (category is null)
                 return NotFound();
@@ -60,14 +60,27 @@ namespace WebApi.Controllers
             return Ok(category);
         }
 
+        [HttpGet("Transaction/{idTransaction}")]
+        public async Task<IActionResult> GetCategoriesByTransaction(int idTransaction)
+        {
+            if (!HttpContext.Items.ContainsKey("UserId")
+                || HttpContext.Items["UserId"] is not int idUser)
+                return Unauthorized();
+
+            var categories = await _categoryService.GetCategoriesByTransaction(idTransaction, idUser);
+
+            return Ok(categories);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CategoryDto categoryDto)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
-                || HttpContext.Items["UserId"] is not int userId)
+                || HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            if (!await _categoryService.CreateCategory(userId, categoryDto))
+            if (!await _categoryService.CreateCategory(idUser, categoryDto))
                 return StatusCode(500, new GenericErrorDto<CategoryDto>(categoryDto));
 
             return Ok(categoryDto);
@@ -77,10 +90,10 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] CategoryDto categoryDto)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
-                || HttpContext.Items["UserId"] is not int userId)
+                || HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            if (!await _categoryService.UpdateCategory(id, categoryDto, userId))
+            if (!await _categoryService.UpdateCategory(id, categoryDto, idUser))
                 return StatusCode(500, new GenericErrorDto<CategoryDto>(categoryDto));
 
             return Ok(categoryDto);

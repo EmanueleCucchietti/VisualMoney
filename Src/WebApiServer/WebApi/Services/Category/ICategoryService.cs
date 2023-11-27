@@ -5,10 +5,11 @@ namespace WebApi.Services.Category
 {
     public interface ICategoryService
     {
-        Task<bool> CreateCategory(int userId, CategoryDto categoryDto);
-        Task<IEnumerable<CategoryResponseDto>> GetCategories(int userId);
-        Task<IEnumerable<CategoryResponseDto>> GetCategoriesBySuperCategory(int idSuperCategory, int userId);
-        Task<CategoryResponseDto?> GetCategory(int id, int userId);
-        Task<bool> UpdateCategory(int id, CategoryDto categoryDto, int userId);
+        Task<bool> CreateCategory(int idUser, CategoryDto categoryDto);
+        Task<IEnumerable<CategoryResponseDto>> GetCategories(int idUser);
+        Task<IEnumerable<CategoryResponseDto>> GetCategoriesBySuperCategory(int idSuperCategory, int idUser);
+        Task<CategoryResponseDto?> GetCategory(int id, int idUser);
+        Task<IEnumerable<CategoryResponseDto>> GetCategoriesByTransaction(int idTransaction, int idUser);
+        Task<bool> UpdateCategory(int id, CategoryDto categoryDto, int idUser);
     }
 }

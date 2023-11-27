@@ -49,5 +49,12 @@ namespace WebApi.Services.CounterParty
 
             return await _counterPartyData.UpdateCounterParty(counterPartyModel) == 1;
         }
+
+        public async Task<IEnumerable<CounterPartyResponseDto>> GetCounterPartiesByTransaction(int idTransaction, int idUser)
+        {
+            var counterPartyModels = await _counterPartyData.GetCounterPartiesByTransaction(idTransaction, idUser);
+
+            return _mapper.Map<IEnumerable<CounterPartyResponseDto>>(counterPartyModels);
+        }
     }
 }

@@ -79,5 +79,15 @@ namespace DataAccessLayer.Data.Category
 
             return categories.FirstOrDefault();
         }
+
+        public Task<IEnumerable<CategoryModel>> GetCategoriesByTransaction(int idTransaction, int idUser)
+        {
+            string sql = @"spGetCategoriesByTransaction";
+
+            return _sqlDataAccess.LoadData<CategoryModel, dynamic>(
+                sql,
+                new { idTransaction, idUser },
+                useStoredProcedure: true);
+        }
     }
 }

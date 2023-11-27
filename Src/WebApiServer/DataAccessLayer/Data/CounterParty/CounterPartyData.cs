@@ -17,11 +17,11 @@ namespace DataAccessLayer.Data.CounterParty
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<int> CreateCounterParty(CounterPartyModel counterPartyModel)
+        public Task<int> CreateCounterParty(CounterPartyModel counterPartyModel)
         {
             string sql = @"spCreateCounterParty";
 
-            return await _sqlDataAccess.SaveData(
+            return _sqlDataAccess.SaveData(
                 sql,
                 new
                 {
@@ -32,11 +32,11 @@ namespace DataAccessLayer.Data.CounterParty
                 useStoredProcedure: true);
         }
 
-        public async Task<int> UpdateCounterParty(CounterPartyModel counterPartyModel)
+        public Task<int> UpdateCounterParty(CounterPartyModel counterPartyModel)
         {
             string sql = @"spUpdateCounterParty";
 
-            return await _sqlDataAccess.SaveData(
+            return _sqlDataAccess.SaveData(
                 sql,
                 new
                 {
@@ -48,11 +48,11 @@ namespace DataAccessLayer.Data.CounterParty
                 useStoredProcedure: true);
         }
 
-        public async Task<IEnumerable<CounterPartyModel>> GetCounterParties(int idUser)
+        public Task<IEnumerable<CounterPartyModel>> GetCounterParties(int idUser)
         {
             string sql = @"spGetCounterParties";
 
-            return await _sqlDataAccess.LoadData<CounterPartyModel, dynamic>(
+            return _sqlDataAccess.LoadData<CounterPartyModel, dynamic>(
                 sql,
                 new { idUser },
                 useStoredProcedure: true);
@@ -65,6 +65,16 @@ namespace DataAccessLayer.Data.CounterParty
             var counterParties = await _sqlDataAccess.LoadData<CounterPartyModel, dynamic>(sql, new { counterPartyId }, useStoredProcedure: true);
 
             return counterParties.FirstOrDefault();
+        }
+
+        public Task<IEnumerable<CounterPartyModel>> GetCounterPartiesByTransaction(int idTransaction, int idUser)
+        {
+            string sql = @"spGetCounterPartiesByTransaction";
+
+            return _sqlDataAccess.LoadData<CounterPartyModel, dynamic>(
+                sql,
+                new { idTransaction, idUser },
+                useStoredProcedure: true);
         }
     }
 }
