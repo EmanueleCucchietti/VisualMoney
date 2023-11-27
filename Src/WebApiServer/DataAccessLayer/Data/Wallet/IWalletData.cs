@@ -6,7 +6,7 @@ namespace DataAccessLayer.Data.Wallet
     {
         Task<int> CreateWallet(WalletModel walletModel);
         Task<int> UpdateWallet(WalletModel wallet);
-        Task<WalletModel?> GetWallet(int walletId);
+        Task<WalletModel?> GetWallet(int walletId, int userId);
         Task<IEnumerable<WalletModel>> GetWallets(int userId);
     }
 }

@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[Transaction]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] NVARCHAR(50) NOT NULL, 
+    [Name] NVARCHAR(50) NOT NULL,
+	[Date] DATETIME NOT NULL,
     [Amount] MONEY NOT NULL, 
     [CurrencyCode] NCHAR(3) NOT NULL DEFAULT 'EUR', 
     [IsIncome] BIT NOT NULL, 

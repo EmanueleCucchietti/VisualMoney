@@ -57,11 +57,11 @@ namespace DataAccessLayer.Data.Wallet
             return await _sqlDataAccess.LoadData<WalletModel, dynamic>(sql, new { idUser }, useStoredProcedure: true);
         }
 
-        public async Task<WalletModel?> GetWallet(int walletId)
+        public async Task<WalletModel?> GetWallet(int walletId, int idUser)
         {
             string sql = @"spGetWallet";
 
-            return (await _sqlDataAccess.LoadData<WalletModel, dynamic>(sql, new { walletId }, useStoredProcedure: true)).FirstOrDefault();
+            return (await _sqlDataAccess.LoadData<WalletModel, dynamic>(sql, new { walletId, idUser }, useStoredProcedure: true)).FirstOrDefault();
         }
 
     }

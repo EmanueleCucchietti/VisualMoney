@@ -25,7 +25,7 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            var categories = await _superCategoryService.GetCategories(userId);
+            var categories = await _superCategoryService.GetCategoriesAsync(userId);
 
             return Ok(categories);
         }
@@ -37,22 +37,7 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            var category = await _superCategoryService.GetCategory(id, userId);
-
-            if (category is null)
-                return NotFound();
-
-            return Ok(category);
-        }
-
-        [HttpGet("GetCategoryBySuperCategory")]
-        public async Task<IActionResult> GetCategoryBySuperCategory(int idSuperCategory)
-        {
-            if (!HttpContext.Items.ContainsKey("UserId")
-                || HttpContext.Items["UserId"] is not int userId)
-                return Unauthorized();
-
-            var category = await _superCategoryService.GetCategory(idSuperCategory, userId);
+            var category = await _superCategoryService.GetCategoryAsync(id, userId);
 
             if (category is null)
                 return NotFound();
@@ -67,7 +52,7 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            if (!await _superCategoryService.CreateCategory(userId, categoryDto))
+            if (!await _superCategoryService.CreateCategoryAsync(userId, categoryDto))
                 return StatusCode(500, new GenericErrorDto<SuperCategoryDto>(categoryDto));
 
             return Ok(categoryDto);
@@ -80,7 +65,7 @@ namespace WebApi.Controllers
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            if (!await _superCategoryService.UpdateCategory(id, categoryDto, userId))
+            if (!await _superCategoryService.UpdateCategoryAsync(id, categoryDto, userId))
                 return StatusCode(500, new GenericErrorDto<SuperCategoryDto>(categoryDto));
 
             return Ok(categoryDto);

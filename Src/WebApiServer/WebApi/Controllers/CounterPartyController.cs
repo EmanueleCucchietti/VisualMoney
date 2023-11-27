@@ -36,10 +36,6 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            if (!HttpContext.Items.ContainsKey("UserId")
-                || HttpContext.Items["UserId"] is not int userId)
-                return Unauthorized();
-
             var counterParty = await _counterPartyService.GetCounterParty(id);
 
             if (counterParty is null)

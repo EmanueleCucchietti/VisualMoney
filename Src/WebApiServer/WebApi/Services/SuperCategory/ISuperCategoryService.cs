@@ -5,9 +5,9 @@ namespace WebApi.Services.Category
 {
     public interface ISuperCategoryService
     {
-        Task<bool> CreateCategory(int userId, SuperCategoryDto superCategoryDto);
-        Task<IEnumerable<SuperCategoryResponseDto>> GetCategories(int userId);
-        Task<SuperCategoryResponseDto?> GetCategory(int id, int userId);
-        Task<bool> UpdateCategory(int id, SuperCategoryDto superCategoryDto, int userId);
+        Task<bool> CreateCategoryAsync(int userId, SuperCategoryDto superCategoryDto);
+        Task<IEnumerable<SuperCategoryResponseDto>> GetCategoriesAsync(int userId);
+        Task<SuperCategoryResponseDto?> GetCategoryAsync(int id, int userId);
+        Task<bool> UpdateCategoryAsync(int id, SuperCategoryDto superCategoryDto, int userId);
     }
 }

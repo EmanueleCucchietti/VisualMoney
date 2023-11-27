@@ -17,7 +17,7 @@ namespace DataAccessLayer.Data.Category
             _sqlDataAccess = sqlDataAccess;
         }
 
-        public async Task<int> CreateCategory(SuperCategoryModel superCategoryModel)
+        public async Task<int> CreateSuperCategoryAsync(SuperCategoryModel superCategoryModel)
         {
             string sql = @"spCreateSuperCategory";
 
@@ -31,7 +31,7 @@ namespace DataAccessLayer.Data.Category
                 useStoredProcedure: true);
         }
 
-        public async Task<int> UpdateCategory(SuperCategoryModel superCategoryModel)
+        public async Task<int> UpdateSuperCategoryAsync(SuperCategoryModel superCategoryModel)
         {
             string sql = @"spUpdateSuperCategory";
                 
@@ -46,7 +46,7 @@ namespace DataAccessLayer.Data.Category
                 useStoredProcedure: true);
         }
 
-        public async Task<IEnumerable<SuperCategoryModel>> GetCategories(int idUser)
+        public async Task<IEnumerable<SuperCategoryModel>> GetSuperCategoriesAsync(int idUser)
         {
             string sql = @"spGetSuperCategories";
 
@@ -56,7 +56,7 @@ namespace DataAccessLayer.Data.Category
                 useStoredProcedure: true);
         }
 
-        public async Task<SuperCategoryModel?> GetCategory(int id, int idUser)
+        public async Task<SuperCategoryModel?> GetSuperCategoryAsync(int id, int idUser)
         {
             string sql = @"spGetSuperCategory";
 

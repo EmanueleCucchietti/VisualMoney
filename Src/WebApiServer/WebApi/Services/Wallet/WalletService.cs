@@ -44,9 +44,9 @@ namespace WebApi.Services.Wallet
             return _mapper.Map<IEnumerable<WalletResponseDto>>(walletModels);
         }
 
-        public async Task<WalletResponseDto?> GetWallet(int walletId)
+        public async Task<WalletResponseDto?> GetWallet(int walletId, int userId)
         {
-            var walletModel =  await _walletData.GetWallet(walletId);
+            var walletModel =  await _walletData.GetWallet(walletId, userId);
 
             return _mapper.Map<WalletResponseDto>(walletModel);
         }

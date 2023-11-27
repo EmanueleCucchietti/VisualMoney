@@ -65,6 +65,7 @@
     <Folder Include="dbo\StoredProcedures\CounterParty" />
     <Folder Include="dbo\StoredProcedures\Category" />
     <Folder Include="dbo\StoredProcedures\SuperCategory" />
+    <Folder Include="dbo\StoredProcedures\Transaction" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
@@ -100,6 +101,15 @@
     <Build Include="dbo\StoredProcedures\SuperCategory\spGetSuperCategory.sql" />
     <Build Include="dbo\StoredProcedures\SuperCategory\spUpdateSuperCategory.sql" />
     <Build Include="dbo\StoredProcedures\SuperCategory\spGetSuperCategories.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactions.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spCreateTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spAddCategoryToTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByCategory.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spAddCounterPartyToTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByCounterParty.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByWallet.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spUpdateTransaction.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />

@@ -39,7 +39,9 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var wallet = await _walletService.GetWallet(id);
+            var userId = Convert.ToInt32(HttpContext.Items["UserId"]);
+
+            var wallet = await _walletService.GetWallet(id, userId);
 
             if (wallet is null)
                 return NotFound();

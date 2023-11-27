@@ -7,38 +7,38 @@ namespace WebApi.Services.Category
 {
     public class SuperCategoryService : ISuperCategoryService
     {
-        private readonly ISuperCategoryData _categoryData;
+        private readonly ISuperCategoryData _superCategoryData;
         private readonly IMapper _mapper;
 
         public SuperCategoryService(ISuperCategoryData categoryData, IMapper mapper)
         {
-            _categoryData = categoryData;
+            _superCategoryData = categoryData;
             _mapper = mapper;
         }
-        public async Task<bool> CreateCategory(int userId, SuperCategoryDto superCategoryDto)
+        public async Task<bool> CreateCategoryAsync(int userId, SuperCategoryDto superCategoryDto)
         {
             var categoryModel = _mapper.Map<SuperCategoryModel>(superCategoryDto);
 
             categoryModel.IdUser = userId;
 
-            return await _categoryData.CreateCategory(categoryModel) == 1;
+            return await _superCategoryData.CreateSuperCategoryAsync(categoryModel) == 1;
         }
         
-        public async Task<IEnumerable<SuperCategoryResponseDto>> GetCategories(int userId)
+        public async Task<IEnumerable<SuperCategoryResponseDto>> GetCategoriesAsync(int userId)
         {
-            var categories = await _categoryData.GetCategories(userId);
+            var categories = await _superCategoryData.GetSuperCategoriesAsync(userId);
 
             return _mapper.Map<IEnumerable<SuperCategoryResponseDto>>(categories);
         }
 
-        public async Task<SuperCategoryResponseDto?> GetCategory(int id, int userId)
+        public async Task<SuperCategoryResponseDto?> GetCategoryAsync(int id, int userId)
         {
-            var category = await _categoryData.GetCategory(id, userId);
+            var category = await _superCategoryData.GetSuperCategoryAsync(id, userId);
                 
             return _mapper.Map<SuperCategoryResponseDto>(category);
         }
 
-        public async Task<bool> UpdateCategory(int id, SuperCategoryDto superCategoryDto, int userId)
+        public async Task<bool> UpdateCategoryAsync(int id, SuperCategoryDto superCategoryDto, int userId)
         {
             var categoryModel = _mapper.Map<SuperCategoryModel>(superCategoryDto);
 
@@ -46,7 +46,7 @@ namespace WebApi.Services.Category
 
             categoryModel.IdUser = userId;
 
-            return await _categoryData.UpdateCategory(categoryModel) == 1;
+            return await _superCategoryData.UpdateSuperCategoryAsync(categoryModel) == 1;
         }
     }
 }

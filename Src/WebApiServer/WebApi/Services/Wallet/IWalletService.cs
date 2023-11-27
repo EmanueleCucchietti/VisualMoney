@@ -7,7 +7,7 @@ namespace WebApi.Services.Wallet
     {
         Task<bool> CreateWallet(int userId, WalletDto wallet);
         Task<bool> UpdateWallet(int id, WalletDto wallet, int userId);
-        Task<WalletResponseDto?> GetWallet(int walletId);
+        Task<WalletResponseDto?> GetWallet(int walletId, int userId);
         Task<IEnumerable<WalletResponseDto>> GetWallets(int userId);
     }
 }

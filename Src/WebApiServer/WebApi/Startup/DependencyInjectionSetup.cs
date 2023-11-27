@@ -1,10 +1,12 @@
 ﻿using DataAccessLayer.Data.Category;
 using DataAccessLayer.Data.CounterParty;
+using DataAccessLayer.Data.Transaction;
 using DataAccessLayer.Data.User;
 using DataAccessLayer.Data.Wallet;
 using DataAccessLayer.DbAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
 using WebApi.Configuration;
@@ -12,6 +14,7 @@ using WebApi.Helpers;
 using WebApi.Middlewares;
 using WebApi.Services.Category;
 using WebApi.Services.CounterParty;
+using WebApi.Services.Transaction;
 using WebApi.Services.User;
 using WebApi.Services.Wallet;
 
@@ -44,6 +47,7 @@ namespace WebApi.Startup
             services.AddSingleton<ICounterPartyData, CounterPartyData>();
             services.AddSingleton<ICategoryData, CategoryData>();
             services.AddSingleton<ISuperCategoryData, SuperCategoryData>();
+            services.AddSingleton<ITransactionData, TransactionData>();
 
             // Controller Services
             services.AddScoped<IUserService, UserService>();
@@ -51,6 +55,7 @@ namespace WebApi.Startup
             services.AddScoped<ICounterPartyService, CounterPartyService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISuperCategoryService, SuperCategoryService>();
+            services.AddScoped<ITransactionService, TransactionService>();
 
             // Helpers
             services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
@@ -89,6 +94,36 @@ namespace WebApi.Startup
 
             // Error Handling
             services.AddTransient<ErrorHandlerMiddleware>();
+
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
+                opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+
+                opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
+            });
+
 
             return services;
         }

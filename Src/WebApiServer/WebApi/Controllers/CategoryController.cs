@@ -45,7 +45,7 @@ namespace WebApi.Controllers
             return Ok(category);
         }
 
-        [HttpGet("BySuperCategory/{idSuperCategory}")]
+        [HttpGet("SuperCategory/{idSuperCategory}")]
         public async Task<IActionResult> GetCategoryBySuperCategory(int idSuperCategory)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
