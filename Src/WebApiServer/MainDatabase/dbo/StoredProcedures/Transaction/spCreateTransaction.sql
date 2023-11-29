@@ -8,6 +8,9 @@
 	@IdUser INT
 AS
 BEGIN
-	INSERT INTO [dbo].[Transaction] ([Name], [Amount], [CurrencyCode], [Date], [IsIncome], [IdWallet], [IdUser])
-	VALUES (@Name, @Amount, @CurrencyCode, @Date, @IsIncome, @IdWallet, @IdUser)
+	IF(EXISTS(SELECT * FROM [Wallet] WHERE [Id] = @IdWallet AND [IdUser] = @IdUser))
+	BEGIN
+		INSERT INTO [Transaction] ([Name], [Amount], [CurrencyCode], [Date], [IsIncome], [IdWallet], [IdUser])
+		VALUES (@Name, @Amount, @CurrencyCode, @Date, @IsIncome, @IdWallet, @IdUser)
+	END
 END

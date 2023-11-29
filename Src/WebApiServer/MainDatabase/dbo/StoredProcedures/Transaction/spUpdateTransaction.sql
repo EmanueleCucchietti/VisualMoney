@@ -9,13 +9,16 @@
 	@IdUser INT
 AS
 BEGIN
-	UPDATE [dbo].[Transaction]
-	SET [Name] = @Name,
-		[Amount] = @Amount,	 
-		[CurrencyCode] = @CurrencyCode,
-		[Date] = @Date,
-		[IsIncome] = @IsIncome,
-		[IdWallet] = @IdWallet,
-		[IdUser] = @IdUser
-	WHERE [Id] = @Id AND [IdUser] = @IdUser
+	IF(EXISTS(SELECT * FROM [Wallet] WHERE [Id] = @IdWallet AND [IdUser] = @IdUser))
+	BEGIN
+		UPDATE [dbo].[Transaction]
+		SET [Name] = @Name,
+			[Amount] = @Amount,	 
+			[CurrencyCode] = @CurrencyCode,
+			[Date] = @Date,
+			[IsIncome] = @IsIncome,
+			[IdWallet] = @IdWallet,
+			[IdUser] = @IdUser
+		WHERE [Id] = @Id AND [IdUser] = @IdUser
+	END
 END
