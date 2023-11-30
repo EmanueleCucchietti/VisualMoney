@@ -17,7 +17,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userDto)
         {
             try
@@ -32,7 +32,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userDto)
         {
             try
@@ -56,7 +56,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("refresh-token")]
+        [HttpPost("RefreshToken")]
         public async Task<IActionResult> RefreshToken()
         {
             try
@@ -81,7 +81,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("is-username-available")]
+        [HttpGet("IsUsernameAvailable")]
         public async Task<IActionResult> IsUsernameAvailable(string username)
         {
             try
@@ -96,7 +96,7 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpGet("is-email-available")]
+        [HttpGet("IsEmailAvailable")]
         public async Task<IActionResult> IsEmailAvailable(string email)
         {
             try
