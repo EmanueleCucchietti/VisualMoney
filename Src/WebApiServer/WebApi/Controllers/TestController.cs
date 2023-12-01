@@ -18,11 +18,13 @@ namespace WebApi.Controllers
     {
         private readonly ISqlDataAccess _sqlDataAccess;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<TestController> _logger;
 
-        public TestController(ISqlDataAccess sqlDataAccess, IConfiguration configuration)
+        public TestController(ISqlDataAccess sqlDataAccess, IConfiguration configuration, ILogger<TestController> logger)
         {
             _sqlDataAccess = sqlDataAccess;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -94,5 +96,13 @@ namespace WebApi.Controllers
             return Ok(user.FirstOrDefault());
         }
 
+        [AllowAnonymous]
+        [HttpGet("logTest")]
+        public IActionResult LogTest()
+        {
+            Random rnd = new Random();
+            _logger.LogInformation("Test log {param1}: {param2}", rnd.Next(0,10).ToString(), rnd.Next(10,20).ToString());
+            return Ok();
+        }
     }
 }

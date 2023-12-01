@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.Models.Entities;
 
-namespace DataAccessLayer.Data
+namespace DataAccessLayer.Data.User
 {
     public interface IUserData
     {

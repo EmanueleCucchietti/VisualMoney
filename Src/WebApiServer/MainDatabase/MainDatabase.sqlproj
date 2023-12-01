@@ -61,6 +61,11 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\StoredProcedures\User" />
+    <Folder Include="dbo\StoredProcedures\Wallet" />
+    <Folder Include="dbo\StoredProcedures\CounterParty" />
+    <Folder Include="dbo\StoredProcedures\Category" />
+    <Folder Include="dbo\StoredProcedures\SuperCategory" />
+    <Folder Include="dbo\StoredProcedures\Transaction" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
@@ -79,6 +84,34 @@
     <Build Include="dbo\StoredProcedures\User\spGetUserById.sql" />
     <Build Include="dbo\StoredProcedures\User\spIsEmailAvailable].sql" />
     <Build Include="dbo\StoredProcedures\User\spIsUsernameAvailable.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spCreateWallet.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spGetWallets.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spGetWallet.sql" />
+    <Build Include="dbo\StoredProcedures\Wallet\spUpdateWallet.sql" />
+    <Build Include="dbo\StoredProcedures\CounterParty\spCreateCounterParty.sql" />
+    <Build Include="dbo\StoredProcedures\CounterParty\spGetCounterParty.sql" />
+    <Build Include="dbo\StoredProcedures\CounterParty\spGetCounterParties.sql" />
+    <Build Include="dbo\StoredProcedures\CounterParty\spUpdateCounterParty.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spCreateCategory.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spUpdateCategory.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spGetCategoriesBySuperCategory.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spGetCategories.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spGetCategory.sql" />
+    <Build Include="dbo\StoredProcedures\SuperCategory\spCreateSuperCategory.sql" />
+    <Build Include="dbo\StoredProcedures\SuperCategory\spGetSuperCategory.sql" />
+    <Build Include="dbo\StoredProcedures\SuperCategory\spUpdateSuperCategory.sql" />
+    <Build Include="dbo\StoredProcedures\SuperCategory\spGetSuperCategories.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactions.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spCreateTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spAddCategoryToTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByCategory.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spAddCounterPartyToTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByCounterParty.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsByWallet.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spUpdateTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Category\spGetCategoriesByTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\CounterParty\spGetCounterPartiesByTransaction.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />

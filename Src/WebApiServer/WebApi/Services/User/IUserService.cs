@@ -1,6 +1,6 @@
 ﻿using WebApi.Models.Dto.User;
 
-namespace WebApi.Services
+namespace WebApi.Services.User
 {
     public interface IUserService
     {

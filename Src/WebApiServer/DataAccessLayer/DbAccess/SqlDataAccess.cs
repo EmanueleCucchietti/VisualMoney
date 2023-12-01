@@ -1,12 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.DbAccess
 {
@@ -33,7 +28,7 @@ namespace DataAccessLayer.DbAccess
                 commandType: (useStoredProcedure) ? CommandType.StoredProcedure : CommandType.Text);
         }
 
-        public async Task SaveData<T>(
+        public async Task<int> SaveData<T>(
             string sqlStatement,
             T parameters,
             string connectionStringName = "DefaultConnection",
@@ -42,7 +37,7 @@ namespace DataAccessLayer.DbAccess
 
             using IDbConnection connection = new SqlConnection(_configuration.GetConnectionString(connectionStringName));
 
-            await connection.ExecuteAsync(
+            return await connection.ExecuteAsync(
                 sqlStatement,
                 parameters,
                 commandType: (useStoredProcedure) ? CommandType.StoredProcedure : CommandType.Text);
