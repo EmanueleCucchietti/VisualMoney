@@ -73,7 +73,7 @@ export class AuthenticationService {
     login(loginRequestData: LoginRequestDto): Observable<LoginResponseDto> {
         return this.httpClient
             .post<any>(
-                `${environment.serverApiUrl}/user/login`,
+                `${environment.serverApiUrl}/User/login`,
                 loginRequestData,
                 { withCredentials: true }
             )
@@ -90,7 +90,7 @@ export class AuthenticationService {
 
     signup(signupRequestDto: SignupRequestDto) : Observable<any> {
 		return this.httpClient.post<any>(
-			`${environment.serverApiUrl}/user/register`,
+			`${environment.serverApiUrl}/User/register`,
 			signupRequestDto,
 			{ withCredentials: true }
 		);
@@ -98,13 +98,13 @@ export class AuthenticationService {
 
     isUsernameAvailable(username: string): Observable<boolean> {
         return this.httpClient.get<boolean>(
-            `${environment.serverApiUrl}/user/is-username-available?username=${username}`
+            `${environment.serverApiUrl}/User/isusernameavailable?username=${username}`
         );
     }
 
     isEmailAvailable(email: string): Observable<boolean> {
         return this.httpClient.get<boolean>(
-            `${environment.serverApiUrl}/user/is-email-available?email=${email}`
+            `${environment.serverApiUrl}/User/isemailavailable?email=${email}`
         );
     }
 
