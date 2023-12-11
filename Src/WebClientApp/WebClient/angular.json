@@ -65,6 +65,10 @@
                             "browserTarget": "WebClient:build:development"
                         }
                     },
+					"options": {
+						"sslKey": "./src/assets/keys/localhost-key.pem",
+						"sslCert": "./src/assets/keys/localhost.pem"
+					},
                     "defaultConfiguration": "development"
                 },
                 "extract-i18n": {
@@ -79,7 +83,9 @@
                         "polyfills": ["zone.js", "zone.js/testing"],
                         "tsConfig": "tsconfig.spec.json",
                         "assets": ["src/favicon.ico", "src/assets"],
-                        "styles": ["src/styles.css"],
+                        "styles": ["src/styles.css",
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"node_modules/bootstrap-icons/font/bootstrap-icons.css"],
                         "scripts": []
                     }
                 }

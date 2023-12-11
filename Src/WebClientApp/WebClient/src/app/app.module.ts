@@ -15,6 +15,12 @@ import { TestComponent } from './views/test/test.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+import { WalletComponent } from './views/wallet/wallet.component';
+import { WalletListComponent } from './views/wallet/wallet-list/wallet-list.component';
+import { WalletCreateComponent } from './views/wallet/wallet-create/wallet-create.component';
+import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
+import { WalletStartComponent } from './views/wallet/wallet-start/wallet-start.component';
+import { AuthenticationService, WalletService } from './_services';
 
 @NgModule({
     declarations: [
@@ -24,12 +30,19 @@ import { PageNotFoundComponent } from './views/page-not-found/page-not-found.com
         LoginComponent,
         SignupComponent,
         TestComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        WalletComponent,
+        WalletListComponent,
+        WalletCreateComponent,
+        WalletEditComponent,
+        WalletStartComponent
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        AuthenticationService,
+        WalletService
     ],
     bootstrap: [AppComponent]
 })

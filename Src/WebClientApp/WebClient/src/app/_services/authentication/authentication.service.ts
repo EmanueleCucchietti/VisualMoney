@@ -48,6 +48,7 @@ export class AuthenticationService {
         } catch (error) {
             // need to logout, because refresh token is invalid
             // so we need to clear the access token and redirect to login page
+			console.log(error);
             this.logout();
         }
     }
@@ -56,7 +57,7 @@ export class AuthenticationService {
         // return the observable that handles the request
         // but also set the access token if the request is successful
         return this.httpClient
-            .post<any>('https://localhost:7232/user/refresh-token', null, {
+            .post<any>(`${environment.serverApiUrl}/User/RefreshToken`, null, {
                 withCredentials: true
             })
             .pipe(
@@ -73,7 +74,7 @@ export class AuthenticationService {
     login(loginRequestData: LoginRequestDto): Observable<LoginResponseDto> {
         return this.httpClient
             .post<any>(
-                `${environment.serverApiUrl}/User/login`,
+                `${environment.serverApiUrl}/User/Login`,
                 loginRequestData,
                 { withCredentials: true }
             )
@@ -90,7 +91,7 @@ export class AuthenticationService {
 
     signup(signupRequestDto: SignupRequestDto) : Observable<any> {
 		return this.httpClient.post<any>(
-			`${environment.serverApiUrl}/User/register`,
+			`${environment.serverApiUrl}/User/Register`,
 			signupRequestDto,
 			{ withCredentials: true }
 		);
@@ -98,13 +99,13 @@ export class AuthenticationService {
 
     isUsernameAvailable(username: string): Observable<boolean> {
         return this.httpClient.get<boolean>(
-            `${environment.serverApiUrl}/User/isusernameavailable?username=${username}`
+            `${environment.serverApiUrl}/User/IsUsernameAvailable?username=${username}`
         );
     }
 
     isEmailAvailable(email: string): Observable<boolean> {
         return this.httpClient.get<boolean>(
-            `${environment.serverApiUrl}/User/isemailavailable?email=${email}`
+            `${environment.serverApiUrl}/User/IsEmailAvailable?email=${email}`
         );
     }
 

@@ -1,0 +1,42 @@
+<div class="component-header">
+    <div>
+        <i class="bi bi-arrow-left-circle pointer" [routerLink]="['/wallet']" style="cursor: pointer;"></i>
+        &nbsp;&nbsp;
+        <span>View Wallet</span>
+    </div>
+    <span class="header-amount">
+        Balance:
+        <span class="header-amount-value"
+            >{{ this.walletService.selectedWallet.amount }}
+            {{ this.walletService.selectedWallet.currencyCode }}</span
+        ></span
+    >
+</div>
+
+<br /><br />
+
+<div class="row">
+    <input
+        class="default-input primary"
+        type="text"
+        [(ngModel)]="this.walletService.selectedWallet.name"
+        placeholder="Wallet Name"
+    />
+</div>
+<div class="row">
+    <input
+        class="default-input primary"
+        type="text"
+        [(ngModel)]="this.walletService.selectedWallet.currencyCode"
+        placeholder="Wallet Currency Code"
+    />
+</div>
+
+<br /><br /><br />
+
+<div class="row bottom-button">
+    <!-- <button class="default-button" (click)="this.walletService.addWallet()">
+        Create Wallet
+    </button> -->
+    <button class="default-button" (click)="editWallet()">Edit Wallet</button>
+</div>

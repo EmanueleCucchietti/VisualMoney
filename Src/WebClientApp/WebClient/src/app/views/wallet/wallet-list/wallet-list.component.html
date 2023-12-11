@@ -1,0 +1,20 @@
+<div class="default-list">
+    <div
+        class="default-editable-list-item"
+        *ngFor="let wallet of this.walletService.wallets"
+        [routerLink]="['/wallet', wallet.id]"
+        (click)="this.walletService.selectWallet(wallet.id)"
+    >
+        <div>
+            <p style="margin: 0;"> {{ wallet.name }}</p>
+        </div>
+        <div>
+            <div class="text-end amount-value">
+                {{ wallet.amount }}
+            </div>
+            <div class="text-end">
+                {{ wallet.currencyCode }}
+            </div>
+        </div>
+    </div>
+</div>

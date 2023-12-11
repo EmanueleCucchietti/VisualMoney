@@ -19,12 +19,6 @@
     }
 }
 
-input::placeholder {
-    color: var(--primary-color-dark-theme);
-    opacity: 0.8;
-}
-
-input::-ms-input-placeholder {
-    color: var(--primary-color-dark-theme);
-    opacity: 0.8;
+.default-input{
+	padding: 15px;
 }

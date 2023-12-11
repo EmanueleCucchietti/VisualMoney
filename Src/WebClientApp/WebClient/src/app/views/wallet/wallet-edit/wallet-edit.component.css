@@ -1,0 +1,22 @@
+.default-input {
+    margin: 20px 0;
+}
+
+.bottom-button {
+	margin-top: 5%;
+}
+
+.component-header{
+	font-size: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.header-amount{
+	font-size: 1.5rem;
+}
+
+.header-amount-value{
+	color: var(--income-color-dark-theme);
+}

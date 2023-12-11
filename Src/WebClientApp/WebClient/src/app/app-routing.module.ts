@@ -5,6 +5,10 @@ import { TestComponent } from './views/test/test.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { SignupComponent } from './views/signup/signup.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+import { WalletComponent } from './views/wallet/wallet.component';
+import { WalletCreateComponent } from './views/wallet/wallet-create/wallet-create.component';
+import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
+import { WalletStartComponent } from './views/wallet/wallet-start/wallet-start.component';
 
 const routes: Routes = [
     {
@@ -22,6 +26,17 @@ const routes: Routes = [
         component: TestComponent,
         canActivate: [AuthGuard],
         data: { layout: 'default-layout' }
+    },
+    {
+        path: 'wallet',
+        component: WalletComponent,
+        canActivate: [AuthGuard],
+        data: { layout: 'default-layout' },
+        children: [
+			{ path: '', component: WalletStartComponent },
+            { path: 'create', component: WalletCreateComponent },
+            { path: ':id', component: WalletEditComponent }
+        ]
     },
 
     // page not found

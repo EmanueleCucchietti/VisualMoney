@@ -1,0 +1,14 @@
+.default-input{
+	margin: 20px 0;
+}
+
+.bottom-button {
+	margin-top: 5%;
+}
+
+.component-header{
+	font-size: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
