@@ -3,6 +3,7 @@ import { WalletService } from 'src/app/_services';
 
 @Component({
   selector: 'app-wallet-list',
+  host: { 'class': 'childRouteFlex' },
   templateUrl: './wallet-list.component.html',
   styleUrls: ['./wallet-list.component.css']
 })

@@ -21,6 +21,8 @@ import { WalletCreateComponent } from './views/wallet/wallet-create/wallet-creat
 import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
 import { WalletStartComponent } from './views/wallet/wallet-start/wallet-start.component';
 import { AuthenticationService, WalletService } from './_services';
+import { TransactionComponent } from './views/transaction/transaction/transaction.component';
+import { TransactionListComponent } from './views/transaction/transaction-list/transaction-list.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +37,9 @@ import { AuthenticationService, WalletService } from './_services';
         WalletListComponent,
         WalletCreateComponent,
         WalletEditComponent,
-        WalletStartComponent
+        WalletStartComponent,
+        TransactionComponent,
+        TransactionListComponent
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [

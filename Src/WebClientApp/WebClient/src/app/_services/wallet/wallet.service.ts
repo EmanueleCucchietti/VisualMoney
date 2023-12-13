@@ -94,4 +94,5 @@ export class WalletService {
             this.selectedWallet = new WalletModel();
         }
     }
+
 }

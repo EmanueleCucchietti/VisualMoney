@@ -1,8 +1,12 @@
 <div class="component-header">
     <div>
-        <i class="bi bi-arrow-left-circle pointer" [routerLink]="['/wallet']" style="cursor: pointer;"></i>
+        <i
+            class="bi bi-arrow-left-circle pointer"
+            [routerLink]="['/wallet']"
+            style="cursor: pointer"
+        ></i>
         &nbsp;&nbsp;
-        <span>View Wallet</span>
+        <span>{{ this.walletService.selectedWallet.name }}</span>
     </div>
     <span class="header-amount">
         Balance:
@@ -15,28 +19,38 @@
 
 <br /><br />
 
-<div class="row">
-    <input
-        class="default-input primary"
-        type="text"
-        [(ngModel)]="this.walletService.selectedWallet.name"
-        placeholder="Wallet Name"
-    />
+<div>
+    <div class="default-input primary">
+        <label for="name" class="label">Wallet Name</label>
+        <input
+            class="no-style-input"
+            type="text"
+            id="name"
+            [(ngModel)]="this.walletService.selectedWallet.name"
+            placeholder="Wallet Name"
+        />
+    </div>
 </div>
-<div class="row">
-    <input
-        class="default-input primary"
-        type="text"
-        [(ngModel)]="this.walletService.selectedWallet.currencyCode"
-        placeholder="Wallet Currency Code"
-    />
+<div>
+    <div class="default-input primary">
+        <label for="currencyCode" class="label">Currency Code </label>
+        <input
+            class="no-style-input"
+            type="text"
+            id="currencyCode"
+            [(ngModel)]="this.walletService.selectedWallet.currencyCode"
+            placeholder="Wallet Currency Code"
+        />
+    </div>
 </div>
 
-<br /><br /><br />
+<br />
 
-<div class="row bottom-button">
-    <!-- <button class="default-button" (click)="this.walletService.addWallet()">
-        Create Wallet
-    </button> -->
+<div class="list-container">
+    <app-transaction-list [transactions]="transactions"></app-transaction-list>
+</div>
+
+
+<div class="bottom-button">
     <button class="default-button" (click)="editWallet()">Edit Wallet</button>
 </div>

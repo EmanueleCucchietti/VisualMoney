@@ -3,20 +3,33 @@
 }
 
 .bottom-button {
-	margin-top: 5%;
+	margin: 40px 0;
 }
 
-.component-header{
-	font-size: 2rem;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+.component-header {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	flex-wrap: wrap;
 }
 
-.header-amount{
-	font-size: 1.5rem;
+.header-amount {
+    font-size: 1.5rem;
+	margin-left: auto;
 }
 
-.header-amount-value{
-	color: var(--income-color-dark-theme);
+.header-amount-value {
+    color: var(--income-color-dark-theme);
+}
+
+.label {
+    border-right: 2px solid var(--primary-color-dark-theme);
+	padding-right: 10px;
+    margin-right: 10px;
+}
+
+.list-container {
+    position: relative;
+    flex: 1;
 }

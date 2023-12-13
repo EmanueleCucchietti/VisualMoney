@@ -6,26 +6,26 @@
     </div>
 </div>
 
-<br /><br />
+<br />
 
-<div class="row">
-    <input
-        class="default-input primary"
-        type="text"
-        [(ngModel)]="this.walletService.newWallet.name"
-        placeholder="Wallet Name"
-    />
+<div class="childMainPage">
+	<div>
+		<input
+			class="default-input primary"
+			type="text"
+			[(ngModel)]="this.walletService.newWallet.name"
+			placeholder="Wallet Name"
+		/>
+	</div>
+	<div>
+		<input
+			class="default-input primary"
+			type="text"
+			[(ngModel)]="this.walletService.newWallet.currencyCode"
+			placeholder="Wallet Currency Code"
+		/>
+	</div>
 </div>
-<div class="row">
-    <input
-        class="default-input primary"
-        type="text"
-        [(ngModel)]="this.walletService.newWallet.currencyCode"
-        placeholder="Wallet Currency Code"
-    />
-</div>
-
-<br /><br /><br />
 
 <div class="row bottom-button">
     <button class="default-button" (click)="addWallet()">

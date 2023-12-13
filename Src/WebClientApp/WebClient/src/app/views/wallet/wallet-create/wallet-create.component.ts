@@ -5,6 +5,7 @@ import { WalletService } from 'src/app/_services';
 
 @Component({
     selector: 'app-wallet-create',
+	host: { 'class': 'childRouteFlex' },
     templateUrl: './wallet-create.component.html',
     styleUrls: ['./wallet-create.component.css']
 })

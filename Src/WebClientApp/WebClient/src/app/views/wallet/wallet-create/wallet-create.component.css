@@ -3,7 +3,7 @@
 }
 
 .bottom-button {
-	margin-top: 5%;
+	margin: 40px 0;
 }
 
 .component-header{
@@ -11,4 +11,8 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.childMainPage{
+	flex: 1;
 }

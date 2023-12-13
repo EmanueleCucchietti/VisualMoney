@@ -1,0 +1,24 @@
+<div class="default-list">
+    <div
+        class="default-editable-list-item"
+        *ngFor="let transaction of transactions"
+    >
+        <div>
+            <p style="margin: 0">{{ transaction.name }}</p>
+        </div>
+        <div>
+            <div
+                class="text-end amount-value"
+                [ngClass]="{
+                    'income-amount': transaction.isIncome,
+                    'expense-amount': !transaction.isIncome
+                }"
+            >
+                {{ transaction.amount }}
+            </div>
+            <div class="text-end">
+                {{ transaction.currencyCode }}
+            </div>
+        </div>
+    </div>
+</div>

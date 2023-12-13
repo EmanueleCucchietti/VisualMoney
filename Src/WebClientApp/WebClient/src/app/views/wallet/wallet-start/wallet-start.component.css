@@ -1,3 +1,21 @@
 .bottom-button {
-	margin-top: 5%;
+    margin: 40px 0;
+}
+
+.mainPage {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.component-header {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list-container {
+    position: relative;
+    flex: 1;
 }

@@ -1,9 +1,21 @@
-<div style="width: 100%;">
+<!-- <div class="component-header">
+    <div>
+        <i
+            class="bi bi-arrow-left-circle pointer"
+            [routerLink]="['/wallet']"
+            style="cursor: pointer"
+        ></i>
+        &nbsp;&nbsp;
+        <span>New Wallet</span>
+    </div>
+</div> -->
+
+<br>
+
+<div class="list-container">
     <app-wallet-list></app-wallet-list>
-
-    <br/><br />
-
-    <button class="default-button bottom-button" [routerLink]="['/wallet/create']">
-        <span class="secondary">Create Wallet</span>
-    </button>
 </div>
+
+<button class="default-button bottom-button" [routerLink]="['/wallet/create']">
+    <span class="secondary">Create Wallet</span>
+</button>

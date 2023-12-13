@@ -1,15 +1,24 @@
-*{
-	color: var(--primary-color-dark-theme);
+* {
+    color: var(--primary-color-dark-theme);
 }
 
-.default-editable-list-item{
-	cursor: pointer;
-	display: flex;
-	flex-direction: row;
-	flex: 1;
-	align-items: flex-start;
+.default-editable-list-item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: flex-start;
 }
 
-.amount-value{
-	color: var(--income-color-dark-theme);
+.amount-value {
+    color: var(--income-color-dark-theme);
+}
+
+:host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
 }
