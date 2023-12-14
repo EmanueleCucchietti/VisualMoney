@@ -1,23 +1,40 @@
-<div class="default-list">
-    <div
-        class="default-editable-list-item"
-        *ngFor="let transaction of transactions"
-    >
-        <div>
-            <p style="margin: 0">{{ transaction.name }}</p>
-        </div>
-        <div>
-            <div
-                class="text-end amount-value"
-                [ngClass]="{
-                    'income-amount': transaction.isIncome,
-                    'expense-amount': !transaction.isIncome
-                }"
-            >
-                {{ transaction.amount }}
+<div class="default-list-container">
+    <div *ngIf="transactions.length === 0" class="empty-list-container">
+        <h1 class="text-center">...</h1>
+        <br />
+        <h6 *ngIf="loading" class="text-center">Loading Transactions</h6>
+        <p *ngIf="loading" class="text-center">Please wait some time.</p>
+
+        <h6 *ngIf="!loading" class="text-center">No Transactions found.</h6>
+        <p *ngIf="!loading" class="text-center">
+            Let's add one
+            <span><a class="embeded-link" routerLink="/transaction/create">here</a></span
+            >.
+        </p>
+        <br /><br />
+    </div>
+
+    <div class="default-list">
+        <div
+            class="default-editable-list-item"
+            *ngFor="let transaction of transactions"
+        >
+            <div>
+                <p style="margin: 0">{{ transaction.name }}</p>
             </div>
-            <div class="text-end">
-                {{ transaction.currencyCode }}
+            <div>
+                <div
+                    class="text-end amount-value"
+                    [ngClass]="{
+                        'income-amount': transaction.isIncome,
+                        'expense-amount': !transaction.isIncome
+                    }"
+                >
+                    {{ transaction.amount }}
+                </div>
+                <div class="text-end">
+                    {{ transaction.currencyCode }}
+                </div>
             </div>
         </div>
     </div>

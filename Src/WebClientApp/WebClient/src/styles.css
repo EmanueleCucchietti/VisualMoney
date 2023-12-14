@@ -130,6 +130,21 @@ html {
         0 0 0 4px var(--primary-color-dark-theme);
 }
 
+.embeded-link {
+	text-decoration: none;
+	color: var(--primary-color-dark-theme);
+	font-size: 1em;
+	box-shadow: 0 0 0 2px var(--bg-color-dark-theme),
+		0 3px 0 0 var(--primary-color-dark-theme);
+
+	transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+		font-size 0.2s ease-in-out;
+}
+
+.embeded-link:hover {
+	font-size: 1.1em;
+}
+
 .error {
     color: var(--error-color-dark-theme);
 }

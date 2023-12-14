@@ -1,30 +1,35 @@
 <div class="default-list-container">
-	<div *ngIf="this.walletService.wallets.length === 0" class="empty-list-container">
-		<h1 class="text-center">...</h1>
-		<br>
-		<h6 class="text-center">No wallets found.</h6>
-		<p class="text-center">Create a new wallet to get started.</p>
-		<br><br>
-
-	</div>
-    <div class="default-list">
-		<div
-        class="default-editable-list-item"
-        *ngFor="let wallet of this.walletService.wallets"
-        [routerLink]="['/wallet', wallet.id]"
-        (click)="this.walletService.selectWallet(wallet.id)"
+    <div
+        *ngIf="this.walletService.wallets.length === 0"
+        class="empty-list-container"
     >
-        <div>
-            <p style="margin: 0;"> {{ wallet.name }}</p>
-        </div>
-        <div>
-            <div class="text-end amount-value">
-                {{ wallet.amount }}
+        <h1 class="text-center">...</h1>
+        <br />
+		<h6 *ngIf="loading" class="text-center">Loading Wallets</h6>
+        <p *ngIf="loading" class="text-center">Please wait some time.</p>
+
+        <h6 *ngIf="!loading" class="text-center">No wallets found.</h6>
+        <p *ngIf="!loading" class="text-center">Create a new wallet to get started.</p>
+        <br /><br />
+    </div>
+    <div class="default-list">
+        <div
+            class="default-editable-list-item"
+            *ngFor="let wallet of this.walletService.wallets"
+            [routerLink]="['/wallet', wallet.id]"
+            (click)="this.walletService.selectWallet(wallet.id)"
+        >
+            <div>
+                <p style="margin: 0">{{ wallet.name }}</p>
             </div>
-            <div class="text-end">
-                {{ wallet.currencyCode }}
+            <div>
+                <div class="text-end amount-value">
+                    {{ wallet.amount }}
+                </div>
+                <div class="text-end">
+                    {{ wallet.currencyCode }}
+                </div>
             </div>
         </div>
     </div>
-	</div>
 </div>

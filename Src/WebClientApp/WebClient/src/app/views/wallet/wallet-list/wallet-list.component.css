@@ -27,8 +27,6 @@
     right: 0;
     bottom: 0;
     overflow: auto;
-	padding: 40px;
-	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border-radius: 20px;
 }
 

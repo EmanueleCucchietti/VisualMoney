@@ -1,11 +1,3 @@
-.income-amount{
-	color: var(--income-color-dark-theme);
-}
-
-.expense-amount{
-	color: var(--expense-color-dark-theme);
-}
-
 :host {
     position: absolute;
     top: 0;
@@ -13,4 +5,28 @@
     right: 0;
     bottom: 0;
     overflow: auto;
+}
+
+.default-list-container{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.empty-list-container{
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+}
+
+
+.income-amount{
+	color: var(--income-color-dark-theme);
+}
+
+.expense-amount{
+	color: var(--expense-color-dark-theme);
 }

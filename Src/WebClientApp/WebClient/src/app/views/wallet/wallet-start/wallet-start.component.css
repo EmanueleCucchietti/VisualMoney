@@ -19,3 +19,17 @@
     position: relative;
     flex: 1;
 }
+
+.mainChild {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+.list-container {
+    position: relative;
+    flex: 1;
+}
