@@ -1,14 +1,15 @@
 /* Color Constants for the app */
 
 :root {
-    --bg-color-dark-theme: #1f1616;
+    --bg-color-dark-theme: #181f2b;
     --bg-color-dark-theme-rgb: 31, 22, 22;
-    --primary-color-dark-theme: #ba3cde;
-    --primary-color-dark-theme-rgb: 186, 60, 222;
-	--error-color-dark-theme: #cf0000;
+    /* --primary-color-dark-theme: #BD47DE; */
+    --primary-color-dark-theme: #de47ac;
+    --primary-color-dark-theme-rgb: 222, 71, 172;
+    --error-color-dark-theme: #cf0000;
 
-	--income-color-dark-theme: #00bfa5;
-	--expense-color-dark-theme: #ff1744;
+    --income-color-dark-theme: #00bfa5;
+    --expense-color-dark-theme: #ff1744;
 }
 
 * {
@@ -17,13 +18,12 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-.primary{
-	color: var(--primary-color-dark-theme) !important;
+.primary {
+    color: var(--primary-color-dark-theme) !important;
 }
 
-.secondary{
-	color: var(--bg-color-dark-theme) !important;
+.secondary {
+    color: var(--bg-color-dark-theme) !important;
 }
 
 body,
@@ -35,8 +35,8 @@ html {
     width: 100%;
 
     border-radius: 20px;
-	padding: 5px;
-	padding-left: 10px;
+    padding: 5px;
+    padding-left: 10px;
 
     outline: none;
     border: 2px solid var(--primary-color-dark-theme);
@@ -45,17 +45,14 @@ html {
 
     font-size: 16px;
 
-    transition:
-        border 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out,
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
 }
 
 .default-input:hover {
     outline: none;
     /* border: 3px solid var(--primary-color-dark-theme); */
-    box-shadow:
-        0 0 0 3px var(--bg-color-dark-theme),
+    box-shadow: 0 0 0 3px var(--bg-color-dark-theme),
         0 0 0 6px var(--primary-color-dark-theme);
 }
 
@@ -69,12 +66,12 @@ html {
     opacity: 0.8;
 }
 
-.no-style-input{
-	border: none;
-	outline: none;
-	background-color: transparent;
-	color: var(--primary-color-dark-theme);
-	font-size: 1em;
+.no-style-input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--primary-color-dark-theme);
+    font-size: 1em;
 }
 
 .default-button,
@@ -94,19 +91,18 @@ html {
     background-color: var(--primary-color-dark-theme);
     color: var(--bg-color-dark-theme);
 
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
     cursor: pointer;
     font-size: 1.75em;
 
-    transition:
-        border 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out,
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
 }
 
 .default-button:hover {
     outline: none;
-    box-shadow:
-        0 0 0 3px var(--bg-color-dark-theme),
+    box-shadow: 0 0 0 3px var(--bg-color-dark-theme),
         0 0 0 6px var(--primary-color-dark-theme);
 
     font-size: 1.8em;
@@ -123,45 +119,70 @@ html {
     padding: 4px;
     border-radius: 10px;
 
-    transition:
-        border 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out,
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
 }
 
 .default-link:hover {
     text-decoration: none;
     color: var(--primary-color-dark-theme);
-    box-shadow:
-        0 0 0 2px var(--bg-color-dark-theme),
+    box-shadow: 0 0 0 2px var(--bg-color-dark-theme),
         0 0 0 4px var(--primary-color-dark-theme);
 }
 
-.error{
-	color: var(--error-color-dark-theme);
+.error {
+    color: var(--error-color-dark-theme);
 }
 
-.default-list{
-	list-style-type: none;
-	padding: 0;
+.default-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.default-editable-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--primary-color-dark-theme);
+}
+
+.default-editable-list-item > a {
+    text-decoration: none;
+    color: var(--primary-color-dark-theme);
+}
+
+.childRouteFlex {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: linear-gradient(180deg, rgba(222,71,172,0) 0%, rgba(222,71,172,0) 0%, rgba(222,71,172,0.3) 20%, rgba(222,71,172,0.3) 50%, rgba(222,71,172,0.3) 80%, rgba(222,71,172,0) 100%);
 
 }
 
-.default-editable-list-item{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px;
-	border-bottom: 1px solid var(--primary-color-dark-theme);
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 5px;
 }
 
-.default-editable-list-item > a{
-	text-decoration: none;
-	color: var(--primary-color-dark-theme);
+*::-webkit-scrollbar-track {
+    background: transparent
 }
 
-.childRouteFlex{
-	display: flex;
-	flex-direction: column;
-	flex: 1;
+*::-webkit-scrollbar-thumb {
+    /* background-color: rgba(var(--primary-color-dark-theme-rgb), 0.3); */
+	/* transparent gradient */
+	background: -moz-linear-gradient(180deg, rgba(222,71,172,0) 0%, rgba(222,71,172,0) 0%, rgba(222,71,172,0.3) 20%, rgba(222,71,172,0.3) 50%, rgba(222,71,172,0.3) 80%, rgba(222,71,172,0) 100%);
+	background: -webkit-linear-gradient(180deg, rgba(222,71,172,0) 0%, rgba(222,71,172,0) 0%, rgba(222,71,172,0.3) 20%, rgba(222,71,172,0.3) 50%, rgba(222,71,172,0.3) 80%, rgba(222,71,172,0) 100%);
+	background: linear-gradient(180deg, rgba(222,71,172,0) 0%, rgba(222,71,172,0) 0%, rgba(222,71,172,0.3) 20%, rgba(222,71,172,0.3) 50%, rgba(222,71,172,0.3) 80%, rgba(222,71,172,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#de47ac",endColorstr="#de47ac",GradientType=1);
+	border-radius: 20px;
+
+    -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
 }

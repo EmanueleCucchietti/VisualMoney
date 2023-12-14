@@ -7,8 +7,9 @@ import { SignupComponent } from './views/signup/signup.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { WalletComponent } from './views/wallet/wallet.component';
 import { WalletCreateComponent } from './views/wallet/wallet-create/wallet-create.component';
-import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
 import { WalletStartComponent } from './views/wallet/wallet-start/wallet-start.component';
+import { WalletViewComponent } from './views/wallet/wallet-view/wallet-view.component';
+import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
         children: [
 			{ path: '', component: WalletStartComponent },
             { path: 'create', component: WalletCreateComponent },
-            { path: ':id', component: WalletEditComponent }
+            { path: ':id', component: WalletViewComponent },
+			{ path: 'edit/:id', component: WalletEditComponent}
         ]
     },
 

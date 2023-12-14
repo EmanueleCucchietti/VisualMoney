@@ -1,5 +1,14 @@
-<div class="default-list">
-    <div
+<div class="default-list-container">
+	<div *ngIf="this.walletService.wallets.length === 0" class="empty-list-container">
+		<h1 class="text-center">...</h1>
+		<br>
+		<h6 class="text-center">No wallets found.</h6>
+		<p class="text-center">Create a new wallet to get started.</p>
+		<br><br>
+
+	</div>
+    <div class="default-list">
+		<div
         class="default-editable-list-item"
         *ngFor="let wallet of this.walletService.wallets"
         [routerLink]="['/wallet', wallet.id]"
@@ -17,4 +26,5 @@
             </div>
         </div>
     </div>
+	</div>
 </div>

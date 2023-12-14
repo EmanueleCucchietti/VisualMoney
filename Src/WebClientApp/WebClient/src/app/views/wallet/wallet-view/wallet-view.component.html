@@ -1,0 +1,32 @@
+<div class="component-header">
+    <div>
+        <i
+            class="bi bi-arrow-left-circle pointer"
+            [routerLink]="['/wallet']"
+            style="cursor: pointer"
+        ></i>
+        &nbsp;&nbsp;
+        <span>{{ this.walletService.selectedWallet.name }}</span>
+    </div>
+    <span class="header-amount">
+        Balance:
+        <span class="header-amount-value"
+            >{{ this.walletService.selectedWallet.amount }}
+            {{ this.walletService.selectedWallet.currencyCode }}</span
+        ></span
+    >
+</div>
+
+<div class="mainChild">
+	<h5>Transactions</h5>
+
+    <div class="list-container">
+        <app-transaction-list
+            [transactions]="transactions"
+        ></app-transaction-list>
+    </div>
+</div>
+
+<div class="bottom-button">
+    <button class="default-button" (click)="editWallet()">Edit Wallet</button>
+</div>

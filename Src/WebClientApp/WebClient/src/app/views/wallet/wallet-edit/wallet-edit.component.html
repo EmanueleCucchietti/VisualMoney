@@ -2,7 +2,7 @@
     <div>
         <i
             class="bi bi-arrow-left-circle pointer"
-            [routerLink]="['/wallet']"
+            [routerLink]="['/wallet', this.walletService.selectedWallet.id]"
             style="cursor: pointer"
         ></i>
         &nbsp;&nbsp;
@@ -17,25 +17,21 @@
     >
 </div>
 
-<br /><br />
-
-<div>
-    <div class="default-input primary">
+<div class="mainChild">
+    <div class="default-input composed-input primary">
         <label for="name" class="label">Wallet Name</label>
         <input
-            class="no-style-input"
+            class="no-style-input inner-input"
             type="text"
             id="name"
             [(ngModel)]="this.walletService.selectedWallet.name"
             placeholder="Wallet Name"
         />
     </div>
-</div>
-<div>
-    <div class="default-input primary">
+    <div class="default-input composed-input primary">
         <label for="currencyCode" class="label">Currency Code </label>
         <input
-            class="no-style-input"
+            class="no-style-input inner-input"
             type="text"
             id="currencyCode"
             [(ngModel)]="this.walletService.selectedWallet.currencyCode"
@@ -44,13 +40,8 @@
     </div>
 </div>
 
-<br />
-
-<div class="list-container">
-    <app-transaction-list [transactions]="transactions"></app-transaction-list>
-</div>
-
-
 <div class="bottom-button">
-    <button class="default-button" (click)="editWallet()">Edit Wallet</button>
+    <button class="default-button" (click)="editWallet()">
+        Confirm Edit Wallet
+    </button>
 </div>

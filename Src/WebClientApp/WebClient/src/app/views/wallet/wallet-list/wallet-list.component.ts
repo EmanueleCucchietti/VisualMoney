@@ -10,8 +10,16 @@ import { WalletService } from 'src/app/_services';
 export class WalletListComponent {
 
   constructor(public walletService : WalletService) {
-	if(walletService.wallets.length == 0)
-		walletService.getWalletsFromServer().subscribe();
+	if(walletService.wallets.length == 0){
+		walletService.getWalletsFromServer().subscribe(()=>{
+			walletService.wallets.push(...walletService.wallets);
+			walletService.wallets.push(...walletService.wallets);
+			walletService.wallets.push(...walletService.wallets);
+		});
+	}
+
+
   }
+
 
 }

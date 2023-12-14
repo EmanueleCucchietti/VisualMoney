@@ -18,11 +18,12 @@ import { PageNotFoundComponent } from './views/page-not-found/page-not-found.com
 import { WalletComponent } from './views/wallet/wallet.component';
 import { WalletListComponent } from './views/wallet/wallet-list/wallet-list.component';
 import { WalletCreateComponent } from './views/wallet/wallet-create/wallet-create.component';
-import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
+import { WalletViewComponent } from './views/wallet/wallet-view/wallet-view.component';
 import { WalletStartComponent } from './views/wallet/wallet-start/wallet-start.component';
 import { AuthenticationService, WalletService } from './_services';
 import { TransactionComponent } from './views/transaction/transaction/transaction.component';
 import { TransactionListComponent } from './views/transaction/transaction-list/transaction-list.component';
+import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
 
 @NgModule({
     declarations: [
@@ -36,10 +37,11 @@ import { TransactionListComponent } from './views/transaction/transaction-list/t
         WalletComponent,
         WalletListComponent,
         WalletCreateComponent,
-        WalletEditComponent,
+        WalletViewComponent,
         WalletStartComponent,
         TransactionComponent,
-        TransactionListComponent
+        TransactionListComponent,
+        WalletEditComponent
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [

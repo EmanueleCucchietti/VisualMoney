@@ -49,3 +49,7 @@ input::-ms-input-placeholder {
 	margin-top: 10px;
 	margin-bottom: -15px;
 }
+
+.default-input{
+	padding: 15px;
+}
