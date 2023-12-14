@@ -122,6 +122,16 @@ namespace WebApi.Controllers
             return Ok(transaction);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (HttpContext.Items["UserId"] is not int userId)
+                return Unauthorized();
+
+            await _transactionService.DeleteTransactionAsync(id, userId);
+            return Ok();
+        }
+
 
     }
 }
