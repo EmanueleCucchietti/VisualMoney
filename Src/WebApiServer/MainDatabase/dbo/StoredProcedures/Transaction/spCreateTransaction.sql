@@ -8,9 +8,33 @@
 	@IdUser INT
 AS
 BEGIN
-	IF(EXISTS(SELECT * FROM [Wallet] WHERE [Id] = @IdWallet AND [IdUser] = @IdUser))
-	BEGIN
-		INSERT INTO [Transaction] ([Name], [Amount], [CurrencyCode], [Date], [IsIncome], [IdWallet], [IdUser])
-		VALUES (@Name, @Amount, @CurrencyCode, @Date, @IsIncome, @IdWallet, @IdUser)
-	END
+	BEGIN TRANSACTION;
+
+	BEGIN TRY
+		IF(EXISTS(SELECT * FROM [Wallet] WHERE [Id] = @IdWallet AND [IdUser] = @IdUser))
+		BEGIN
+			INSERT INTO [Transaction] ([Name], [Amount], [CurrencyCode], [Date], [IsIncome], [IdWallet], [IdUser])
+			VALUES (@Name, @Amount, @CurrencyCode, @Date, @IsIncome, @IdWallet, @IdUser);
+		
+			IF(@IsIncome = 1)
+			BEGIN
+				UPDATE [Wallet] 
+				SET [Amount] = [Amount] + @Amount 
+				WHERE [Id] = @IdWallet AND [IdUser] = @IdUser;
+			END
+			ELSE
+			BEGIN
+				UPDATE [Wallet] 
+				SET [Amount] = [Amount] - @Amount 
+				WHERE [Id] = @IdWallet AND [IdUser] = @IdUser;
+			END
+		END
+
+		COMMIT TRANSACTION;
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		THROW;
+	END CATCH
+	
 END

@@ -51,7 +51,7 @@ namespace WebApi.Services.Transaction
 
             transactionModel.IdUser = idUser;
 
-            return await _transactionData.AddTransactionAsync(transactionModel) == 1;
+            return await _transactionData.AddTransactionAsync(transactionModel) == 2;
         }
         public async Task<bool> UpdateTransaction(int id, TransactionDto transaction, int idUser)
         {
@@ -60,10 +60,15 @@ namespace WebApi.Services.Transaction
             transactionModel.Id = id;
             transactionModel.IdUser = idUser;
 
-            return await _transactionData.UpdateTransactionAsync(transactionModel) == 1;
+            return await _transactionData.UpdateTransactionAsync(transactionModel) == 3;
         }
 
-        
+        public async Task<bool> DeleteTransactionAsync(int id, int idUser)
+        {
+            return await _transactionData.DeleteTransactionAsync(id, idUser) == 2;
+        }
+
+
 
         public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCategoryAsync(int idCategory, int idUser)
         {

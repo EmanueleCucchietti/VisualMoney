@@ -121,5 +121,19 @@ namespace DataAccessLayer.Data.Transaction
                 },
                 useStoredProcedure: true);
         }
+
+        public Task<int> DeleteTransactionAsync(int id, int idUser)
+        {
+            string sql = "spDeleteTransaction";
+
+            return _sqlDataAccess.SaveData(
+                sql,
+                new
+                {
+                    id,
+                    idUser
+                },
+                useStoredProcedure: true);
+        }
     }
 }

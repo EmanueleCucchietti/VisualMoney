@@ -112,6 +112,7 @@
     <Build Include="dbo\StoredProcedures\Transaction\spUpdateTransaction.sql" />
     <Build Include="dbo\StoredProcedures\Category\spGetCategoriesByTransaction.sql" />
     <Build Include="dbo\StoredProcedures\CounterParty\spGetCounterPartiesByTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spDeleteTransaction.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />
