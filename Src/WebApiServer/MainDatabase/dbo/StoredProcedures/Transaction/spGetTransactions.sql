@@ -6,6 +6,7 @@ BEGIN
         [Name],
         [Amount],
         [CurrencyCode],
+        [Date],
         [IsIncome],
         [IdWallet],
         [IdUser]
