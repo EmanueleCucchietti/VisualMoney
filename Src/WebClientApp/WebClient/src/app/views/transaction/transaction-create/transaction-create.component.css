@@ -1,0 +1,86 @@
+.childMainPage{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.default-button{
+	margin: 40px 0;
+}
+
+.composed-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.default-input{
+	margin: 20px 0;
+}
+
+/* select income or expense */
+.component-header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	font-size: 2rem;
+}
+
+.component-header > *:last-child{
+	margin-left: auto;
+}
+
+.is-income-slider{
+	display: flex;
+	flex-direction: row;
+	justify-content:left;
+	align-items: center;
+	font-size: 1rem;
+}
+
+.is-income-slider > *{
+	padding: 0 5px;
+}
+
+.slider-input-container{
+	display: flex;
+	align-items: center;
+}
+
+
+.toggle-input {
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border-radius: 25px;
+    outline: none;
+    background-color: var(--income-color-dark-theme);
+    -webkit-appearance: none;
+    transition: background .3s;
+}
+.toggle-input::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    background-color: var(--bg-color-dark-theme);
+    transition: left .3s;
+}
+
+.toggle-input:checked {
+    background-color: var(--expense-color-dark-theme);
+}
+
+.toggle-input:checked::after {
+    left: 70%;
+}

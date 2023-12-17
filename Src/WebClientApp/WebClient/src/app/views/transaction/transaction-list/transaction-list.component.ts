@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TransactionModel } from 'src/app/_models/Transaction/transactionModel';
+import { TransactionService } from 'src/app/_services/transaction/transaction.service';
 
 @Component({
   selector: 'app-transaction-list',
@@ -13,9 +14,16 @@ export class TransactionListComponent {
 	loading : boolean = true;
 
 	ngOnInit() {
-		if (this.transactions.length == 0) {
+		if(this.transactions.length > 0) {
 			this.loading = false;
 		}
+	}
+
+	constructor(transactionService : TransactionService){
+		transactionService.getTransactionsFromServer().subscribe((transactions) => {
+			this.loading = false;
+			this.transactions = transactions;
+		});
 	}
 
 }

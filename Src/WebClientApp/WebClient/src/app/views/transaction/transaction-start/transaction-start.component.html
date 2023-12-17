@@ -1,0 +1,40 @@
+<div class="mainChild">
+    <div class="list-container">
+        <app-transaction-list></app-transaction-list>
+    </div>
+</div>
+
+<div
+    id="buttonCreate"
+    class="default-button bottom-button invert-button"
+    ngClass="{{ showButtonChoseIsIncome ? 'active' : '' }}"
+>
+    <div
+        class="button-create"
+        ngClass="{{
+            showButtonChoseIsIncome ? 'active' : !firstLoad ? 'off' : ''
+        }}"
+        (click)="CreateTransaction()"
+    >
+        <div class="button-create-text secondary">
+            <span *ngIf="!showButtonChoseIsIncome">Create Transaction</span>
+            <span *ngIf="showButtonChoseIsIncome">X</span>
+        </div>
+    </div>
+    <div class="income-expense-container">
+        <div
+            class="sub-button"
+            [routerLink]="['/transaction/create']"
+            (click)="setTransactionType(true)"
+        >
+            <span class="income-amount">Income</span>
+        </div>
+        <div
+            class="sub-button"
+            [routerLink]="['/transaction/create']"
+            (click)="setTransactionType(false)"
+        >
+            <span class="expense-amount">Expense</span>
+        </div>
+    </div>
+</div>

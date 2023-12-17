@@ -8,7 +8,26 @@ import { environment } from 'src/app/environments/environment';
     providedIn: 'root'
 })
 export class TransactionService {
+
     constructor(public httpClient: HttpClient) {}
+
+	transactions: TransactionModel[] = [];
+	selectedTransaction: TransactionModel = new TransactionModel();
+	newTransaction: TransactionModel = new TransactionModel();
+
+
+	getTransactionsFromServer() {
+		return this.httpClient
+			.get<TransactionModel[]>(`${environment.serverApiUrl}/Transaction`, {
+				withCredentials: true
+			})
+			.pipe(
+				catchError((error) => {
+					console.log(error);
+					return [];
+				})
+			);
+	}
 
     getTransactionsByWalletId(idWallet: number) {
         return this.httpClient
@@ -25,4 +44,21 @@ export class TransactionService {
                 })
             );
     }
+
+	addTransaction() {
+		return this.httpClient
+			.post<TransactionModel>(
+				`${environment.serverApiUrl}/Transaction`,
+				this.newTransaction,
+				{
+					withCredentials: true
+				}
+			)
+			.pipe(
+				catchError((error) => {
+					console.log(error);
+					return [];
+				})
+			);
+	}
 }

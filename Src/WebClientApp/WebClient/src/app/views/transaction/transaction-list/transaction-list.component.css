@@ -22,11 +22,3 @@
 	flex: 1;
 }
 
-
-.income-amount{
-	color: var(--income-color-dark-theme);
-}
-
-.expense-amount{
-	color: var(--expense-color-dark-theme);
-}

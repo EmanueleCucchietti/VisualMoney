@@ -1,0 +1,36 @@
+<div class="custom-select default-input">
+	<div class="selected-option" (click)="selectShowDropdown()">
+		<span *ngIf="!selectedWallet.name">Select Wallet</span>
+		{{ selectedWallet.name }}
+	</div>
+	<div
+		class="default-dropdown"
+		[ngClass]="{
+			'dropdown-show': showDropdown,
+			'dropdown-hide': !showDropdown,
+			'dropdown-display-none': !showDropdown && dropdownNone
+		}"
+	>
+		<div
+			class="default-dropdown-option"
+			*ngFor="let wallet of wallets"
+			(click)="selectWallet(wallet)"
+		>
+			<div>
+				{{ wallet.name }}
+			</div>
+			<div class="sub-wallet-container">
+				<div class="latest-transaction">21/12/2023 12:51</div>
+				<div
+					[ngClass]="{
+						'income-amount': wallet.amount >= 0,
+						'expense-amount': wallet.amount < 0
+					}"
+					class="wallet-amount"
+				>
+					{{ wallet.amount }} {{ wallet.currencyCode }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

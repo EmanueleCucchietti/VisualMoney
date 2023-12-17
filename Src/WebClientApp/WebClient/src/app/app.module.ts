@@ -21,9 +21,14 @@ import { WalletCreateComponent } from './views/wallet/wallet-create/wallet-creat
 import { WalletViewComponent } from './views/wallet/wallet-view/wallet-view.component';
 import { WalletStartComponent } from './views/wallet/wallet-start/wallet-start.component';
 import { AuthenticationService, WalletService } from './_services';
-import { TransactionComponent } from './views/transaction/transaction/transaction.component';
 import { TransactionListComponent } from './views/transaction/transaction-list/transaction-list.component';
 import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.component';
+import { TransactionStartComponent } from './views/transaction/transaction-start/transaction-start.component';
+import { TransactionEditComponent } from './views/transaction/transaction-edit/transaction-edit.component';
+import { TransactionCreateComponent } from './views/transaction/transaction-create/transaction-create.component';
+import { TransactionViewComponent } from './views/transaction/transaction-view/transaction-view.component';
+import { TransactionComponent } from './views/transaction/transaction.component';
+import { DropdownWalletComponent } from './components/shared/dropdown-wallet/dropdownWallet.component';
 
 @NgModule({
     declarations: [
@@ -39,9 +44,14 @@ import { WalletEditComponent } from './views/wallet/wallet-edit/wallet-edit.comp
         WalletCreateComponent,
         WalletViewComponent,
         WalletStartComponent,
-        TransactionComponent,
         TransactionListComponent,
-        WalletEditComponent
+        WalletEditComponent,
+        TransactionStartComponent,
+        TransactionEditComponent,
+        TransactionCreateComponent,
+        TransactionViewComponent,
+        TransactionComponent,
+        DropdownWalletComponent
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [

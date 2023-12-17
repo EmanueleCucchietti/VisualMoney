@@ -11,9 +11,6 @@ export class WalletListComponent {
     constructor(public walletService: WalletService) {
         if (walletService.wallets.length == 0) {
             walletService.getWalletsFromServer().subscribe(() => {
-                walletService.wallets.push(...walletService.wallets);
-                walletService.wallets.push(...walletService.wallets);
-                walletService.wallets.push(...walletService.wallets);
 				this.loading = false;
             });
         }

@@ -1,0 +1,76 @@
+<div class="component-header">
+    <div>
+        <i
+            class="bi bi-arrow-left-circle pointer"
+            [routerLink]="['/transaction']"
+            style="cursor: pointer"
+        ></i>
+        &nbsp;&nbsp;
+        <span>New Transaction</span>
+    </div>
+    <div>
+        <div class="is-income-slider">
+            <div class="sub-button">
+                <span class="income-amount" (click)="setTransactionType(true)"
+                    >Income</span
+                >
+            </div>
+            <div class="slider-input-container">
+                <input
+                    type="checkbox"
+                    class="toggle-input"
+                    name="isIncome"
+                    [checked]="!this.transactionService.newTransaction.isIncome"
+                    (change)="setTransactionTypeByCheckbox($event)"
+                />
+            </div>
+            <div class="sub-button">
+                <span class="expense-amount" (click)="setTransactionType(false)"
+                    >Expense</span
+                >
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="childMainPage">
+    <div>
+        <input
+            class="default-input primary"
+            type="text"
+            [(ngModel)]="this.transactionService.newTransaction.name"
+            placeholder="Transaction Name"
+        />
+    </div>
+    <div>
+        <input
+            class="default-input primary"
+            type="text"
+            [(ngModel)]="this.transactionService.newTransaction.amount"
+            placeholder="Transaction Amount"
+        />
+    </div>
+    <div>
+        <input
+            class="default-input primary"
+            type="text"
+            [(ngModel)]="this.transactionService.newTransaction.currencyCode"
+            placeholder="Transaction Currency Code"
+        />
+    </div>
+	<br>
+    <div>
+        <app-dropdown
+            [wallets]="walletService.wallets"
+            (selectWalletEmitter)="test($event)"
+        ></app-dropdown>
+    </div>
+</div>
+
+<div class="row bottom-button">
+    <button class="default-button" (click)="addTransaction()">
+        Create Wallet
+    </button>
+</div>

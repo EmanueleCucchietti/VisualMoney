@@ -30,7 +30,9 @@
                         'expense-amount': !transaction.isIncome
                     }"
                 >
+					{{ transaction.isIncome ? '+' : '-' }}
                     {{ transaction.amount }}
+					{{ transaction.currencyCode }}
                 </div>
                 <div class="text-end">
                     {{ transaction.currencyCode }}

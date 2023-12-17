@@ -2,7 +2,7 @@
 
 :root {
     --bg-color-dark-theme: #181f2b;
-    --bg-color-dark-theme-rgb: 31, 22, 22;
+    --bg-color-dark-theme-rgb: 24, 31, 43;
     /* --primary-color-dark-theme: #BD47DE; */
     --primary-color-dark-theme: #de47ac;
     --primary-color-dark-theme-rgb: 222, 71, 172;
@@ -200,4 +200,12 @@ html {
 	border-radius: 20px;
 
     -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
+}
+
+.income-amount{
+	color: var(--income-color-dark-theme);
+}
+
+.expense-amount{
+	color: var(--expense-color-dark-theme);
 }

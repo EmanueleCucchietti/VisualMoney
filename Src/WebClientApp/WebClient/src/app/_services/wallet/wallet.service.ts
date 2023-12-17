@@ -15,10 +15,6 @@ export class WalletService {
     selectedWallet: WalletModel = new WalletModel();
     newWallet: WalletModel = new WalletModel();
 
-    getWallets(): WalletModel[] {
-        return this.wallets;
-    }
-
     getWalletsFromServer() {
         return this.httpClient
             .get<WalletModel[]>(`${environment.serverApiUrl}/Wallet`, {
