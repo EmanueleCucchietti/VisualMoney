@@ -8,7 +8,10 @@
         <h6 *ngIf="!loading" class="text-center">No Transactions found.</h6>
         <p *ngIf="!loading" class="text-center">
             Let's add one
-            <span><a class="embeded-link" routerLink="/transaction/create">here</a></span
+            <span
+                ><a class="embeded-link" routerLink="/transaction/create"
+                    >here</a
+                ></span
             >.
         </p>
         <br /><br />
@@ -19,10 +22,13 @@
             class="default-editable-list-item"
             *ngFor="let transaction of transactions"
         >
-            <div>
-                <p style="margin: 0">{{ transaction.name }}</p>
+            <div class="d-flex flex-column flex-grow-1">
+                <div>{{ transaction.name }}</div>
+                <div class="date-label">{{ transaction.date | date : 'dd/MM/yyyy HH:mm' }}</div>
             </div>
-            <div>
+			<div>
+			</div>
+            <div class="d-flex flex-column flex-grow-1">
                 <div
                     class="text-end amount-value"
                     [ngClass]="{
@@ -30,12 +36,14 @@
                         'expense-amount': !transaction.isIncome
                     }"
                 >
-					{{ transaction.isIncome ? '+' : '-' }}
+                    {{ transaction.isIncome ? '+' : '-' }}
                     {{ transaction.amount }}
-					{{ transaction.currencyCode }}
-                </div>
-                <div class="text-end">
                     {{ transaction.currencyCode }}
+                </div>
+                <div class="d-flex justify-content-end flex-wrap">
+					<div *ngFor="let category of transaction.categories">
+						<span class="badge m-1">{{ category.name }}</span>
+					</div>
                 </div>
             </div>
         </div>
