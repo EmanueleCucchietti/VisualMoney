@@ -24,9 +24,9 @@ namespace WebApi.Services.Transaction
 
             return _mapper.Map<TransactionResponseDto>(transactionModels);
         }
-        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsAsync(int idUser)
+        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsAsync(int idUser, bool loadCategoriesAndCounterParties = false)
         {
-            var transactionModels = await _transactionData.GetTransactionsAsync(idUser);
+            var transactionModels = await _transactionData.GetTransactionsAsync(idUser, loadCategoriesAndCounterParties);
 
             return _mapper.Map<IEnumerable<TransactionResponseDto>>(transactionModels);
         }

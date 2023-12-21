@@ -9,7 +9,7 @@ namespace WebApi.Services.Transaction
         Task<bool> AddTransactionAsync(int userId, TransactionDto transaction);
         Task<bool> DeleteTransactionAsync(int id, int idUser);
         Task<TransactionResponseDto?> GetTransactionAsync(int id, int userId);
-        Task<IEnumerable<TransactionResponseDto>> GetTransactionsAsync(int userId);
+        Task<IEnumerable<TransactionResponseDto>> GetTransactionsAsync(int userId, bool loadCategoriesAndCounterParties = false);
         Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCategoryAsync(int idCategory, int idUser);
         Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCounterPartyAsync(int userId, int counterPartyId);
         Task<IEnumerable<TransactionResponseDto>> GetTransactionsByWallet(int userId, int walletId);

@@ -1,6 +1,8 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using DataAccessLayer.DbAccess;
 using DataAccessLayer.Models.Entities;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DataAccessLayer.Data.Transaction
 {
@@ -12,14 +14,52 @@ namespace DataAccessLayer.Data.Transaction
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public async Task<IEnumerable<TransactionModel>> GetTransactionsAsync(int idUser)
+        public async Task<IEnumerable<TransactionModel>> GetTransactionsAsync(int idUser, bool loadCategoriesAndCounterParties = false)
         {
             string sql = "spGetTransactions";
-
-            return await _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new
+            if (!loadCategoriesAndCounterParties)
             {
-                idUser
-            }, useStoredProcedure: true);
+                return await _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new
+                {
+                    idUser
+                }, useStoredProcedure: true);
+            }
+
+
+            sql = @"spGetTransactionsWithCategoryAndCounterParties";
+
+            var transactions = await _sqlDataAccess.UseConnection(async (conn) =>
+            {
+                return await conn.QueryAsync<TransactionModel, CategoryModel, CounterPartyModel, TransactionModel>(sql,
+                    (transaction, category, counterpary) =>
+                    {
+                        transaction.CounterParties.Add(counterpary);
+                        transaction.Categories.Add(category);
+                        return transaction;
+                    },
+                    splitOn: "Id, Id",
+                    param: new { IdUser = idUser });
+            });
+
+            var result = transactions.GroupBy(c => c.Id).Select(g =>
+            {
+                var gTransaction = g.First();
+
+                // group by and if element is not null add to list
+                // distinct by is used since redoundant elements are made up by the join
+
+                gTransaction.Categories = g.Any(t => t.Categories.Single() is not null) ?
+                    g.Select(t => t.Categories.Single()).DistinctBy(c => c.Id).ToList() :
+                    new();
+
+                gTransaction.CounterParties = g.Any(t => t.CounterParties.Single() is not null) ?
+                    g.Select(t => t.CounterParties.Single()).DistinctBy(c => c.Id).ToList() :
+                    new();
+
+                return gTransaction;
+            });
+
+            return result;
         }
 
         public async Task<TransactionModel?> GetTransactionAsync(int id, int idUser)
@@ -49,7 +89,7 @@ namespace DataAccessLayer.Data.Transaction
                 useStoredProcedure: true);
         }
 
-        
+
 
         public Task<IEnumerable<TransactionModel>> GetTransactionsByCategoryAsync(int idUser, int idCategory)
         {
@@ -79,7 +119,7 @@ namespace DataAccessLayer.Data.Transaction
                 },
                 useStoredProcedure: true);
         }
-        
+
         public Task<int> AddCounterPartyToTransactionAsync(int idTransaction, int idCounterParty, int idUser)
         {
             string sql = "spAddCounterPartyToTransaction";

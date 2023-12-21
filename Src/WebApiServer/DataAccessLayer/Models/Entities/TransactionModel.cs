@@ -18,5 +18,7 @@ namespace DataAccessLayer.Models.Entities
         public WalletModel? Wallet { get; set; }
         public int IdUser { get; set; }
         public UserModel? User { get; set; }
+        public List<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
+        public List<CounterPartyModel> CounterParties { get; set; } = new List<CounterPartyModel>();
     }
 }
