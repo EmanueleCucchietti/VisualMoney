@@ -37,7 +37,7 @@ export class WalletViewComponent {
         }
 
         this.transactionService
-            .getTransactionsByWalletId(this.currentWalletId ?? 0)
+            .getTransactionsByWalletId(this.currentWalletId ?? 0, true)
             .subscribe((transactions: TransactionModel[]) => {
                 this.transactions = transactions;
             });

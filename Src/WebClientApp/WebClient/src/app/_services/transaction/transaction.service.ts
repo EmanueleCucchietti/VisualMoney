@@ -18,20 +18,20 @@ export class TransactionService {
 	newTransaction: TransactionModel = new TransactionModel();
 
 
-	getTransactionsFromServer() {
+	getTransactionsFromServer(loadAllData : boolean = false) {
 		return this.httpClient
-			.get<TransactionModel[]>(`${environment.serverApiUrl}/Transaction`, {
+			.get<TransactionModel[]>(`${environment.serverApiUrl}/Transaction?loadAllData=${loadAllData}`, {
 				withCredentials: true
 			})
 			.pipe(
-				map((transactions: TransactionModel[]) => {
-					transactions.forEach((transaction) => {
-						this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
-							transaction.categories = categories;
-						});
-					});
-					return transactions;
-				}),
+				// map((transactions: TransactionModel[]) => {
+				// 	transactions.forEach((transaction) => {
+				// 		this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
+				// 			transaction.categories = categories;
+				// 		});
+				// 	});
+				// 	return transactions;
+				// }),
 				catchError((error) => {
 					console.log(error);
 					return [];
@@ -39,23 +39,23 @@ export class TransactionService {
 			);
 	}
 
-    getTransactionsByWalletId(idWallet: number) {
+    getTransactionsByWalletId(idWallet: number, loadAllData : boolean = false) {
         return this.httpClient
             .get<TransactionModel[]>(
-                `${environment.serverApiUrl}/Transaction/Wallet/${idWallet}`,
+                `${environment.serverApiUrl}/Transaction/Wallet/${idWallet}?loadAllData=${loadAllData}`,
                 {
                     withCredentials: true
                 }
             )
             .pipe(
-				map((transactions: TransactionModel[]) => {
-					transactions.forEach((transaction) => {
-						this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
-							transaction.categories = categories;
-						});
-					});
-					return transactions;
-				}),
+				// map((transactions: TransactionModel[]) => {
+				// 	transactions.forEach((transaction) => {
+				// 		this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
+				// 			transaction.categories = categories;
+				// 		});
+				// 	});
+				// 	return transactions;
+				// }),
                 catchError((error) => {
                     console.log(error);
                     return [];

@@ -1,8 +1,7 @@
 export class CategoryModel {
-	id: number;
+	id?: number;
 	name: string;
-	constructor(id = 0, name = '') {
-		this.id = id;
+	constructor(name = '') {
 		this.name = name;
 	}
 }

@@ -22,7 +22,7 @@ export class TransactionListComponent {
     constructor(transactionService: TransactionService) {
         if (this.transactions.length == 0) {
             transactionService
-                .getTransactionsFromServer()
+                .getTransactionsFromServer(true)
                 .subscribe((transactions) => {
                     this.loading = false;
                     this.transactions = transactions;

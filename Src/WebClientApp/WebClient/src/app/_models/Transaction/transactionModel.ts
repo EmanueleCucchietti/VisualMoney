@@ -1,4 +1,5 @@
 import { CategoryModel } from "../Category/CategoryModel";
+import { CounterPartyModel } from "../CounterParty/CounterPartyModel";
 
 export class TransactionModel {
     id: number | undefined;
@@ -9,6 +10,7 @@ export class TransactionModel {
     isIncome: boolean;
     idWallet: number;
 	categories : CategoryModel[];
+	counterParties : CounterPartyModel[]
 
     constructor(
         name: string = '',
@@ -17,7 +19,8 @@ export class TransactionModel {
         date: Date = new Date(),
         isIncome: boolean = true,
         idWallet: number = 0,
-		categories: CategoryModel[] = []
+		categories: CategoryModel[] = [],
+		counterParties: CounterPartyModel[] = []
     ) {
         this.name = name;
         this.amount = amount;
@@ -26,5 +29,6 @@ export class TransactionModel {
         this.isIncome = isIncome;
         this.idWallet = idWallet;
 		this.categories = categories;
+		this.counterParties = counterParties;
     }
 }
