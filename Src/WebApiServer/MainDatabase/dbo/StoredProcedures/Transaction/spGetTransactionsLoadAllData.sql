@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spGetTransactionsWithCategoryAndCounterParties]
+﻿CREATE PROCEDURE [dbo].[spGetTransactionsLoadAllData]
 	@IdUser INT
 AS
 BEGIN
@@ -13,13 +13,13 @@ BEGIN
 	    cat.Id,
 	    cat.[Name],
         cat.[IdSuperCategory],
-        count.Id,
-        count.[Name],
-        count.IsHidden
+        counterParty.Id,
+        counterParty.[Name],
+        counterParty.IsHidden
     FROM [Transaction] t
     LEFT JOIN CategoryTransaction ct ON ct.IdTransaction = t.Id
     LEFT JOIN Category cat ON cat.Id = ct.IdCategory
     LEFT JOIN CounterpartyTransaction cpt ON cpt.IdTransaction = t.Id
-    LEFT JOIN CounterParty count ON count.Id = cpt.IdCounterParty
+    LEFT JOIN CounterParty counterParty ON counterParty.Id = cpt.IdCounterParty
     WHERE t.IdUser = @IdUser
 END

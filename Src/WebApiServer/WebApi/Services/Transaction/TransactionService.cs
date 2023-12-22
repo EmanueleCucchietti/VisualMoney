@@ -18,29 +18,29 @@ namespace WebApi.Services.Transaction
 
 
 
-        public async Task<TransactionResponseDto?> GetTransactionAsync(int id, int idUser)
+        public async Task<TransactionResponseDto?> GetTransactionAsync(int id, int idUser, bool loadAllData = false)
         {
-            var transactionModels = await _transactionData.GetTransactionAsync(id, idUser);
+            var transactionModels = await _transactionData.GetTransactionAsync(id, idUser, loadAllData);
 
             return _mapper.Map<TransactionResponseDto>(transactionModels);
         }
-        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsAsync(int idUser, bool loadCategoriesAndCounterParties = false)
+        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsAsync(int idUser, bool loadAllData = false)
         {
-            var transactionModels = await _transactionData.GetTransactionsAsync(idUser, loadCategoriesAndCounterParties);
+            var transactionModels = await _transactionData.GetTransactionsAsync(idUser, loadAllData);
 
             return _mapper.Map<IEnumerable<TransactionResponseDto>>(transactionModels);
         }
 
-        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCounterPartyAsync(int idUser, int idCounterParty)
+        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCounterPartyAsync(int idUser, int idCounterParty, bool loadAllData = false)
         {
-            var transactionModels = await _transactionData.GetTransactionsByCounterPartyAsync(idUser, idCounterParty);
+            var transactionModels = await _transactionData.GetTransactionsByCounterPartyAsync(idUser, idCounterParty, loadAllData);
 
             return _mapper.Map<IEnumerable<TransactionResponseDto>>(transactionModels);
         }
 
-        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByWallet(int idUser, int idWallet)
+        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByWallet(int idUser, int idWallet, bool loadAllData = false)
         {
-            var transactionModels = await _transactionData.GetTransactionsByWalletAsync(idUser, idWallet);
+            var transactionModels = await _transactionData.GetTransactionsByWalletAsync(idUser, idWallet, loadAllData);
 
             return _mapper.Map<IEnumerable<TransactionResponseDto>>(transactionModels);
         }
@@ -70,9 +70,9 @@ namespace WebApi.Services.Transaction
 
 
 
-        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCategoryAsync(int idCategory, int idUser)
+        public async Task<IEnumerable<TransactionResponseDto>> GetTransactionsByCategoryAsync(int idCategory, int idUser, bool loadAllData = false)
         {
-            var transactionModels = await _transactionData.GetTransactionsByCategoryAsync(idUser, idCategory);
+            var transactionModels = await _transactionData.GetTransactionsByCategoryAsync(idUser, idCategory, loadAllData);
 
             return _mapper.Map<IEnumerable<TransactionResponseDto>>(transactionModels);
         }

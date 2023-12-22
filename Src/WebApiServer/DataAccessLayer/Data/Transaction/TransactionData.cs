@@ -2,7 +2,10 @@
 using Dapper.Contrib.Extensions;
 using DataAccessLayer.DbAccess;
 using DataAccessLayer.Models.Entities;
+using DataAccessLayer.Models.Filters;
+using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
+using System.Transactions;
 
 namespace DataAccessLayer.Data.Transaction
 {
@@ -14,10 +17,10 @@ namespace DataAccessLayer.Data.Transaction
         {
             _sqlDataAccess = sqlDataAccess;
         }
-        public async Task<IEnumerable<TransactionModel>> GetTransactionsAsync(int idUser, bool loadCategoriesAndCounterParties = false)
+        public async Task<IEnumerable<TransactionModel>> GetTransactionsAsync(int idUser, bool loadAllData = false)
         {
             string sql = "spGetTransactions";
-            if (!loadCategoriesAndCounterParties)
+            if (!loadAllData)
             {
                 return await _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new
                 {
@@ -25,9 +28,12 @@ namespace DataAccessLayer.Data.Transaction
                 }, useStoredProcedure: true);
             }
 
-
-            sql = @"spGetTransactionsWithCategoryAndCounterParties";
-
+            return await this.getTransactionsLoadAllDataFilteredAsync(idUser, new());
+        }
+        
+        private async Task<IEnumerable<TransactionModel>> getTransactionsLoadAllDataFilteredAsync(int idUser, TransactionsLoadFilter filters)
+        {
+            string sql = @"spGetTransactionsLoadAllDataWithFilters";
             var transactions = await _sqlDataAccess.UseConnection(async (conn) =>
             {
                 return await conn.QueryAsync<TransactionModel, CategoryModel, CounterPartyModel, TransactionModel>(sql,
@@ -38,7 +44,13 @@ namespace DataAccessLayer.Data.Transaction
                         return transaction;
                     },
                     splitOn: "Id, Id",
-                    param: new { IdUser = idUser });
+                    param: new { 
+                        IdUser = idUser,
+                        filters.IdCategory,
+                        filters.IdCounterParty,
+                        filters.IdWallet,
+                        filters.IdTransaction 
+                    });
             });
 
             var result = transactions.GroupBy(c => c.Id).Select(g =>
@@ -62,12 +74,17 @@ namespace DataAccessLayer.Data.Transaction
             return result;
         }
 
-        public async Task<TransactionModel?> GetTransactionAsync(int id, int idUser)
+        public async Task<TransactionModel?> GetTransactionAsync(int id, int idUser, bool loadAllData)
         {
-            string sql = "spGetTransaction";
+            if (!loadAllData)
+            {
+                string sql = "spGetTransaction";
 
-            return (await _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, id }, useStoredProcedure: true))
-                .FirstOrDefault();
+                return (await _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, id }, useStoredProcedure: true))
+                    .FirstOrDefault();
+            }
+
+            return (await getTransactionsLoadAllDataFilteredAsync(idUser, new() { IdTransaction = id })).FirstOrDefault();
         }
 
         public async Task<int> AddTransactionAsync(TransactionModel transactionModel)
@@ -91,18 +108,29 @@ namespace DataAccessLayer.Data.Transaction
 
 
 
-        public Task<IEnumerable<TransactionModel>> GetTransactionsByCategoryAsync(int idUser, int idCategory)
+        public Task<IEnumerable<TransactionModel>> GetTransactionsByCategoryAsync(int idUser, int idCategory, bool loadAllData = false)
         {
-            string sql = "spGetTransactionsByCategory";
+            if (!loadAllData)
+            {
+                string sql = "spGetTransactionsByCategory";
 
-            return _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, idCategory }, useStoredProcedure: true);
+                return _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, idCategory }, useStoredProcedure: true);
+            }
+
+            return getTransactionsLoadAllDataFilteredAsync(idUser, new() { IdCategory = idCategory});
+
         }
 
-        public Task<IEnumerable<TransactionModel>> GetTransactionsByCounterPartyAsync(int idUser, int idCounterParty)
+        public Task<IEnumerable<TransactionModel>> GetTransactionsByCounterPartyAsync(int idUser, int idCounterParty, bool loadAllData = false)
         {
-            string sql = "spGetTransactionsByCounterParty";
+            if (!loadAllData)
+            {
+                string sql = "spGetTransactionsByCounterParty";
 
-            return _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, idCounterParty }, useStoredProcedure: true);
+                return _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, idCounterParty }, useStoredProcedure: true);
+            }
+
+            return getTransactionsLoadAllDataFilteredAsync(idUser, new() { IdCounterParty = idCounterParty });
         }
 
         public Task<int> AddCategoryToTransactionAsync(int idTransaction, int idCategory, int idUser)
@@ -135,11 +163,16 @@ namespace DataAccessLayer.Data.Transaction
                 useStoredProcedure: true);
         }
 
-        public Task<IEnumerable<TransactionModel>> GetTransactionsByWalletAsync(int idUser, int idWallet)
+        public Task<IEnumerable<TransactionModel>> GetTransactionsByWalletAsync(int idUser, int idWallet, bool loadAllData = false)
         {
-            string sql = "spGetTransactionsByWallet";
+            if (!loadAllData)
+            {
+                string sql = "spGetTransactionsByWallet";
 
-            return _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, idWallet }, useStoredProcedure: true);
+                return _sqlDataAccess.LoadData<TransactionModel, dynamic>(sql, new { idUser, idWallet }, useStoredProcedure: true);
+            }
+
+            return getTransactionsLoadAllDataFilteredAsync(idUser, new() { IdWallet = idWallet });
         }
 
         public Task<int> UpdateTransactionAsync(TransactionModel transactionModel)
