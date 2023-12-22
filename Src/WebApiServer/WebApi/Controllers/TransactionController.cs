@@ -20,22 +20,22 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(bool loadAllData = false)
         {
-            if (HttpContext.Items["UserId"] is not int userId)
+            if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            var transactions = await _transactionService.GetTransactionsAsync(userId);
+            var transactions = await _transactionService.GetTransactionsAsync(idUser, loadAllData);
 
             return Ok(transactions);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id, bool loadAllData = false)
         {
             var userId = Convert.ToInt32(HttpContext.Items["UserId"]);
 
-            var transaction = await _transactionService.GetTransactionAsync(id, userId);
+            var transaction = await _transactionService.GetTransactionAsync(id, userId, loadAllData);
 
             if (transaction is null)
                 return NotFound();
@@ -44,34 +44,34 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("Wallet/{walletId}")]
-        public async Task<IActionResult> GetByWallet(int walletId)
+        public async Task<IActionResult> GetByWallet(int walletId, bool loadAllData = false)
         {
-            if (HttpContext.Items["UserId"] is not int userId)
+            if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            var transactions = await _transactionService.GetTransactionsByWallet(userId, walletId);
+            var transactions = await _transactionService.GetTransactionsByWallet(idUser, walletId, loadAllData);
 
             return Ok(transactions);
         }
 
         [HttpGet("Category/{idCategory}")]
-        public async Task<IActionResult> GetByCategory(int idCategory)
+        public async Task<IActionResult> GetByCategory(int idCategory, bool loadAllData = false)
         {
             if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            var transactions = await _transactionService.GetTransactionsByCategoryAsync(idCategory, idUser);
+            var transactions = await _transactionService.GetTransactionsByCategoryAsync(idCategory, idUser, loadAllData);
 
             return Ok(transactions);
         }
 
         [HttpGet("CounterParty/{counterPartyId}")]
-        public async Task<IActionResult> GetByCounterParty(int counterPartyId)
+        public async Task<IActionResult> GetByCounterParty(int counterPartyId, bool loadAllData = false)
         {
             if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            var transactions = await _transactionService.GetTransactionsByCounterPartyAsync(idUser, counterPartyId);
+            var transactions = await _transactionService.GetTransactionsByCounterPartyAsync(idUser, counterPartyId, loadAllData);
 
             return Ok(transactions);
         }
@@ -79,7 +79,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TransactionDto transaction)
         {
-            if(HttpContext.Items["UserId"] is not int idUser)
+            if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
             await _transactionService.AddTransactionAsync(idUser, transaction);
@@ -115,20 +115,20 @@ namespace WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] TransactionDto transaction)
         {
-            if (HttpContext.Items["UserId"] is not int userId)
+            if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            await _transactionService.UpdateTransaction(id, transaction, userId);
+            await _transactionService.UpdateTransaction(id, transaction, idUser);
             return Ok(transaction);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            if (HttpContext.Items["UserId"] is not int userId)
+            if (HttpContext.Items["UserId"] is not int idUser)
                 return Unauthorized();
 
-            await _transactionService.DeleteTransactionAsync(id, userId);
+            await _transactionService.DeleteTransactionAsync(id, idUser);
             return Ok();
         }
 

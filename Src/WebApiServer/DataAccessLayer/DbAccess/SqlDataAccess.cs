@@ -42,5 +42,14 @@ namespace DataAccessLayer.DbAccess
                 parameters,
                 commandType: (useStoredProcedure) ? CommandType.StoredProcedure : CommandType.Text);
         }
+
+        public async Task<T> UseConnection<T>(
+            Func<IDbConnection, Task<T>> getData,
+            string connectionStringName = "DefaultConnection")
+        {
+            using IDbConnection connection = new SqlConnection(_configuration.GetConnectionString(connectionStringName));
+
+            return await getData(connection);
+        }
     }
 }

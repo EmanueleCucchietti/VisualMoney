@@ -113,6 +113,8 @@
     <Build Include="dbo\StoredProcedures\Category\spGetCategoriesByTransaction.sql" />
     <Build Include="dbo\StoredProcedures\CounterParty\spGetCounterPartiesByTransaction.sql" />
     <Build Include="dbo\StoredProcedures\Transaction\spDeleteTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsLoadAllData.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsLoadAllDataWithFilters.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />
