@@ -19,7 +19,7 @@ export class TransactionListComponent {
         }
     }
 
-    constructor(transactionService: TransactionService) {
+    constructor(public transactionService: TransactionService) {
         if (this.transactions.length == 0) {
             transactionService
                 .getTransactionsFromServer(true)

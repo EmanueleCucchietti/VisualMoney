@@ -13,6 +13,10 @@
 	flex: 1;
 }
 
+.default-editable-list-item{
+	cursor: pointer;
+}
+
 .empty-list-container{
 	padding: 40px;
 	display: flex;

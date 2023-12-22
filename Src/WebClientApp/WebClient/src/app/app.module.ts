@@ -29,6 +29,7 @@ import { TransactionCreateComponent } from './views/transaction/transaction-crea
 import { TransactionViewComponent } from './views/transaction/transaction-view/transaction-view.component';
 import { TransactionComponent } from './views/transaction/transaction.component';
 import { DropdownWalletComponent } from './components/shared/dropdown-wallet/dropdownWallet.component';
+import { GoPageBackDirective } from './_helpers/go-page-back/go-page-back.directive';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { DropdownWalletComponent } from './components/shared/dropdown-wallet/dro
         TransactionCreateComponent,
         TransactionViewComponent,
         TransactionComponent,
-        DropdownWalletComponent
+        DropdownWalletComponent,
+        GoPageBackDirective
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [

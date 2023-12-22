@@ -11,12 +11,18 @@ import { CategoryService } from '../category/category.service';
 export class TransactionService {
 
     constructor(public httpClient: HttpClient,
-		public categoryService: CategoryService) {}
+		public categoryService: CategoryService) { }
 
 	transactions: TransactionModel[] = [];
 	selectedTransaction: TransactionModel = new TransactionModel();
 	newTransaction: TransactionModel = new TransactionModel();
 
+	selectTransaction(id: number | undefined) {
+		if(typeof id !== 'undefined')
+			this.selectedTransaction = this.transactions.find((transaction) => transaction.id == id)!;
+		else
+			this.selectedTransaction = new TransactionModel();
+	}
 
 	getTransactionsFromServer(loadAllData : boolean = false) {
 		return this.httpClient
@@ -24,6 +30,9 @@ export class TransactionService {
 				withCredentials: true
 			})
 			.pipe(
+				tap((transactions: TransactionModel[]) => {
+					this.transactions = transactions;
+				}),
 				// map((transactions: TransactionModel[]) => {
 				// 	transactions.forEach((transaction) => {
 				// 		this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
@@ -48,6 +57,9 @@ export class TransactionService {
                 }
             )
             .pipe(
+				tap((transactions: TransactionModel[]) => {
+					this.transactions = transactions;
+				}),
 				// map((transactions: TransactionModel[]) => {
 				// 	transactions.forEach((transaction) => {
 				// 		this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {

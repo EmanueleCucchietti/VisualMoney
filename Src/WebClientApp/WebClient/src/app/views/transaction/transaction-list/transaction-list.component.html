@@ -21,9 +21,11 @@
         <div
             class="default-editable-list-item"
             *ngFor="let transaction of transactions"
+			[routerLink]="['/transaction', transaction.id]"
+			(click)="this.transactionService.selectTransaction(transaction.id)"
         >
             <div class="d-flex flex-column flex-grow-1">
-                <div>{{ transaction.name }}</div>
+                <div>{{ transaction.name }} {{transaction.id}}</div>
                 <div class="date-label">{{ transaction.date | date : 'dd/MM/yyyy HH:mm' }}</div>
             </div>
 			<div>
