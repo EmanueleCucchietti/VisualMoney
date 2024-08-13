@@ -1,0 +1,57 @@
+
+.is-income-slider{
+	display: flex;
+	flex-direction: row;
+	justify-content:left;
+	align-items: center;
+	font-size: 1.3rem;
+}
+
+.is-income-slider > *{
+	padding: 0 5px;
+}
+
+.slider-input-container{
+	display: flex;
+	align-items: center;
+}
+
+.sub-button{
+	line-height: 30px;
+	align-items: center;
+}
+
+/* Input Checkbox Slider */
+
+
+.toggle-input {
+    cursor: pointer;
+    position: relative;
+    width: 50px;
+    height: 30px;
+    border-radius: 25px;
+    outline: none;
+    background-color: var(--income-color-dark-theme);
+    -webkit-appearance: none;
+    transition: background .3s;
+}
+.toggle-input::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    background-color: var(--bg-color-dark-theme);
+    transition: left .3s;
+}
+
+.toggle-input:checked {
+    background-color: var(--expense-color-dark-theme);
+}
+
+.toggle-input:checked::after {
+    left: 70%;
+}

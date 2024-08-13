@@ -1,0 +1,58 @@
+<div
+	id="datepickerWrapper"
+    ngClass="{{ showOuterDiv ? 'default-input' : '' }}"
+    class="d-flex flex-wrap datepicker-wrapper"
+>
+    <label *ngIf="showLabel" for="date" class="default-label">{{
+        labelString
+    }}</label>
+
+    <input
+        type="text"
+        [value]="
+            dateValueString
+        "
+        readonly
+        (click)="openDatePicker()"
+        class="no-style-input inner-input composed-input primary d-flex datepicker-input"
+		[ngStyle]="{ 'cursor': isReadOnly ? 'default' : 'pointer'}"
+        placeholder="Select Date"
+    />
+
+    <div
+		id="datepickerContainer"
+        class="datepicker-container"
+        ngClass="{{ showDatePicker ? 'active' : 'off' }}"
+    >
+        <div class="datepicker-navbar">
+            <span class="datapicker-arrows" (click)="prevMonth()"> < </span>
+            <span class="text-center">
+                {{ monthsNames[currentMonth] }}
+                {{ currentYear }}
+            </span>
+            <span class="datapicker-arrows" (click)="nextMonth()"> > </span>
+        </div>
+        <div class="datepicker-body">
+            <div class="datepicker-row-weekdays">
+                <div *ngFor="let day of weekDaysNames" class="datepicker-day">
+                    {{ day }}
+                </div>
+            </div>
+            <div *ngFor="let row of calendar" class="datepicker-row">
+                <div
+                    *ngFor="let day of row"
+                    class="datepicker-day"
+                    [ngClass]="{
+						'other-month': !(day.month == currentMonth),
+						'selected': dateValue.getDate() === day.value &&
+							dateValue.getMonth() === day.month &&
+							dateValue.getFullYear() === day.year,
+                    }"
+                    (click)="dayClick(day)"
+                >
+                    {{ day.value < 10 ? '&nbsp;' + day.value : day.value }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

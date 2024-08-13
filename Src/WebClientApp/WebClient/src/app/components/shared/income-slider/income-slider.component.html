@@ -1,0 +1,22 @@
+<div class="is-income-slider">
+	<div class="sub-button">
+		<span class="income-amount" (click)="setTransactionType(true)"
+			>Income</span
+		>
+	</div>
+	<div class="slider-input-container">
+		<input
+			[disabled]="readonly"
+			type="checkbox"
+			class="toggle-input"
+			name="isIncome"
+			[checked]="!isIncome"
+			(change)="setTransactionTypeByCheckbox($event)"
+		/>
+	</div>
+	<div class="sub-button">
+		<span class="expense-amount" (click)="setTransactionType(false)"
+			>Expense</span
+		>
+	</div>
+</div>
