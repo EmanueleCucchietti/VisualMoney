@@ -119,4 +119,7 @@
   <ItemGroup>
     <RefactorLog Include="MainDatabase.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="MainDatabase.publish.xml" />
+  </ItemGroup>
 </Project>
