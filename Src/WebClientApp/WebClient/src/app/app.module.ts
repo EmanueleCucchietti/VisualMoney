@@ -30,6 +30,8 @@ import { TransactionViewComponent } from './views/transaction/transaction-view/t
 import { TransactionComponent } from './views/transaction/transaction.component';
 import { DropdownWalletComponent } from './components/shared/dropdown-wallet/dropdownWallet.component';
 import { GoPageBackDirective } from './_helpers/go-page-back/go-page-back.directive';
+import { IncomeSliderComponent } from './components/shared/income-slider/income-slider.component';
+import { DatepickerComponent } from './components/shared/datepicker/datepicker.component';
 
 @NgModule({
     declarations: [
@@ -53,7 +55,9 @@ import { GoPageBackDirective } from './_helpers/go-page-back/go-page-back.direct
         TransactionViewComponent,
         TransactionComponent,
         DropdownWalletComponent,
-        GoPageBackDirective
+        GoPageBackDirective,
+        IncomeSliderComponent,
+        DatepickerComponent
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [

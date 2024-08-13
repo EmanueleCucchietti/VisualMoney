@@ -16,8 +16,12 @@
     align-items: flex-start;
 }
 
-.amount-value {
+.positive-amount{
     color: var(--income-color-dark-theme);
+}
+
+.negative-amount{
+    color: var(--expense-color-dark-theme)
 }
 
 :host {

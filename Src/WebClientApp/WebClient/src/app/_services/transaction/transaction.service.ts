@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs';
 import { TransactionModel } from 'src/app/_models/Transaction/transactionModel';
 import { environment } from 'src/app/environments/environment';
 import { CategoryService } from '../category/category.service';
+import { WalletModel } from 'src/app/_models';
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +14,10 @@ export class TransactionService {
     constructor(public httpClient: HttpClient,
 		public categoryService: CategoryService) { }
 
+	loadingTransactions : boolean = false;
 	transactions: TransactionModel[] = [];
 	selectedTransaction: TransactionModel = new TransactionModel();
+	selectedWallet: WalletModel = new WalletModel();
 	newTransaction: TransactionModel = new TransactionModel();
 
 	selectTransaction(id: number | undefined) {
@@ -31,16 +34,12 @@ export class TransactionService {
 			})
 			.pipe(
 				tap((transactions: TransactionModel[]) => {
-					this.transactions = transactions;
+					this.transactions = transactions.sort((a, b) => (a.date > b.date ? -1 : 1));
+					this.transactions.forEach((transaction) => {
+						transaction.date = new Date(transaction.date);
+					});
+
 				}),
-				// map((transactions: TransactionModel[]) => {
-				// 	transactions.forEach((transaction) => {
-				// 		this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
-				// 			transaction.categories = categories;
-				// 		});
-				// 	});
-				// 	return transactions;
-				// }),
 				catchError((error) => {
 					console.log(error);
 					return [];
@@ -59,15 +58,10 @@ export class TransactionService {
             .pipe(
 				tap((transactions: TransactionModel[]) => {
 					this.transactions = transactions;
+					this.transactions.forEach((transaction) => {
+						transaction.date = new Date(transaction.date);
+					});
 				}),
-				// map((transactions: TransactionModel[]) => {
-				// 	transactions.forEach((transaction) => {
-				// 		this.categoryService.getCategoriesByTransactionId(transaction.id!).subscribe((categories) => {
-				// 			transaction.categories = categories;
-				// 		});
-				// 	});
-				// 	return transactions;
-				// }),
                 catchError((error) => {
                     console.log(error);
                     return [];
@@ -80,6 +74,23 @@ export class TransactionService {
 			.post<TransactionModel>(
 				`${environment.serverApiUrl}/Transaction`,
 				this.newTransaction,
+				{
+					withCredentials: true
+				}
+			)
+			.pipe(
+				catchError((error) => {
+					console.log(error);
+					return [];
+				})
+			);
+	}
+
+	updateTransaction(transaction: TransactionModel) {
+		return this.httpClient
+			.put<TransactionModel>(
+				`${environment.serverApiUrl}/Transaction/${transaction.id}`,
+				transaction,
 				{
 					withCredentials: true
 				}

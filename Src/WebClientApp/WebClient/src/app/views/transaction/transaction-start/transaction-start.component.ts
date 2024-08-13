@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { timeout } from 'rxjs';
 import { TransactionService } from 'src/app/_services/transaction/transaction.service';
 import { GraphicFunctions } from 'src/app/_helpers/graphic-functions';
+import { TransactionModel } from 'src/app/_models/Transaction/transactionModel';
 
 @Component({
     selector: 'app-transaction-start',
@@ -17,8 +18,17 @@ export class TransactionStartComponent {
     buttonCreate: any;
     buttonCreateBefore: any;
 
+    transactions : TransactionModel[] = [];
+    loadingTransactions : boolean = true;
+
+
     constructor(private elRef: ElementRef,
-		public transactionService: TransactionService) {}
+		public transactionService: TransactionService) {
+            this.transactionService.getTransactionsFromServer(true).subscribe((transactions) => {
+                this.transactions = transactions;
+                this.loadingTransactions = false;
+            })
+        }
 
     ngOnInit() {
         this.buttonCreate =
@@ -53,7 +63,7 @@ export class TransactionStartComponent {
         });
     }
 
-    CreateTransaction() {
+    createTransaction() {
         this.showButtonChoseIsIncome = !this.showButtonChoseIsIncome;
         this.firstLoad = false;
     }

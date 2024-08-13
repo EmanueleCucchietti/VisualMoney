@@ -29,6 +29,19 @@
 body,
 html {
     height: 100%;
+    background-color: var(--bg-color-dark-theme);
+}
+
+br{
+    padding: 0;
+    margin: 0;
+    height: 0px;
+    /* margin: 20px 0; */
+    /* display: flex; */
+}
+
+.component-header{
+	font-size: 1.30rem;
 }
 
 .default-input {
@@ -49,7 +62,8 @@ html {
         font-size 0.2s ease-in-out;
 }
 
-.default-input:hover {
+.default-input:hover, 
+.default-input:focus {
     outline: none;
     /* border: 3px solid var(--primary-color-dark-theme); */
     box-shadow: 0 0 0 3px var(--bg-color-dark-theme),
@@ -66,12 +80,22 @@ html {
     opacity: 0.8;
 }
 
+.default-label {
+    border-right: 2px solid var(--primary-color-dark-theme);
+	padding-right: 10px;
+    margin-right: 10px;
+}
+
 .no-style-input {
     border: none;
     outline: none;
     background-color: transparent;
     color: var(--primary-color-dark-theme);
     font-size: 1em;
+}
+
+.inner-input{
+	flex: 1;
 }
 
 .default-button,
@@ -98,9 +122,14 @@ html {
 
     transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
+
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
 }
 
-.default-button:hover {
+.default-button:hover, 
+.default-button:focus  {
     outline: none;
     box-shadow: 0 0 0 3px var(--bg-color-dark-theme),
         0 0 0 6px var(--primary-color-dark-theme);
@@ -123,11 +152,13 @@ html {
         font-size 0.2s ease-in-out;
 }
 
-.default-link:hover {
+.default-link:hover,
+.default-link:focus {
     text-decoration: none;
     color: var(--primary-color-dark-theme);
     box-shadow: 0 0 0 2px var(--bg-color-dark-theme),
         0 0 0 4px var(--primary-color-dark-theme);
+    outline: none;
 }
 
 .embeded-link {
@@ -208,4 +239,55 @@ html {
 
 .expense-amount{
 	color: var(--expense-color-dark-theme);
+}
+
+.default-badge{
+	background-color: var(--primary-color-dark-theme);
+	color: var(--bg-color-dark-theme);
+	font-weight: 500;
+	font-size: 0.75rem;
+	padding: 0.25rem 0.50rem !important;
+	border-radius: 0.375rem !important;
+	margin: 0.25rem;
+	transition: all 0.2s ease-in-out;
+}
+
+::placeholder{
+	color: rgba(var(--primary-color-dark-theme-rgb), 0.65);
+}
+
+.default-badge.active{
+	background-color: var(--bg-color-dark-theme);
+	color: var(--primary-color-dark-theme);
+	border: 3px solid var(--primary-color-dark-theme);
+}
+
+.create-badge{
+	padding: 0 !important;
+}
+
+.create-badge > .sub-badge{
+	display: flex;
+}
+
+.create-category-input{
+	width: 0;
+	padding: 0;
+	transition: all 0.2s ease-in-out;
+}
+
+.create-category-input.active{
+	width: 100%;
+	padding: 0.25rem 0.50rem;
+}
+
+.create-category-icon{
+	display: flex;
+	padding: 0.25rem 0.50rem;
+	font-size: 0.90rem;
+}
+
+
+.sub-badge{
+	/* background-color: rgba(var(--bg-color-dark-theme-rgb), 0.4) !important; */
 }

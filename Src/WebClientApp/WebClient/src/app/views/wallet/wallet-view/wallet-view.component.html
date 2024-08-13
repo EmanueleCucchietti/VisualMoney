@@ -2,15 +2,23 @@
     <div>
         <i
             class="bi bi-arrow-left-circle pointer"
-            appGoPageBack
+            [routerLink]="['/wallet']"
             style="cursor: pointer"
         ></i>
         &nbsp;&nbsp;
         <span>{{ this.walletService.selectedWallet.name }}</span>
+        <i class="bi bi-pencil" 
+            style="font-size: 0.9rem;   
+                    margin-left: 10px; 
+                    cursor: pointer;
+            " (click)="editWallet()"></i>
     </div>
     <span class="header-amount">
         Balance:
-        <span class="header-amount-value"
+        <span [ngClass]="{
+            'positive-amount': this.walletService.selectedWallet.amount > 0,
+            'negative-amount': this.walletService.selectedWallet.amount < 0
+        }"
             >{{ this.walletService.selectedWallet.amount }}
             {{ this.walletService.selectedWallet.currencyCode }}</span
         ></span
@@ -23,10 +31,42 @@
     <div class="list-container">
         <app-transaction-list
             [transactions]="transactions"
+            [loading]="loadingTransactions"
         ></app-transaction-list>
     </div>
 </div>
 
-<div class="bottom-button">
-    <button class="default-button" (click)="editWallet()">Edit Wallet</button>
+<div
+    id="buttonCreate"
+    class="default-button bottom-button invert-button"
+    ngClass="{{ showButtonChoseIsIncome ? 'active' : '' }}"
+>
+    <div
+        class="button-create"
+        ngClass="{{
+            showButtonChoseIsIncome ? 'active' : !firstLoad ? 'off' : ''
+        }}"
+        (click)="createTransaction()"
+    >
+        <div class="button-create-text secondary">
+            <span *ngIf="!showButtonChoseIsIncome">Create Transaction</span>
+            <span *ngIf="showButtonChoseIsIncome"><i class="bi bi-x"></i></span>
+        </div>
+    </div>
+    <div class="income-expense-container">
+        <div
+            class="sub-button"
+            [routerLink]="['/transaction/create']"
+            (click)="setTransactionType(true)"
+        >
+            <span class="income-amount">Income</span>
+        </div>
+        <div
+            class="sub-button"
+            [routerLink]="['/transaction/create']"
+            (click)="setTransactionType(false)"
+        >
+            <span class="expense-amount">Expense</span>
+        </div>
+    </div>
 </div>

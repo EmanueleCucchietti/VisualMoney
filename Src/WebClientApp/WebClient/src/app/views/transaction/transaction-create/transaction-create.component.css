@@ -1,7 +1,10 @@
-.childMainPage{
+.mainChild{
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	border-radius: 20px;
+	padding: 20px;
 }
 
 .default-button{
@@ -28,14 +31,16 @@
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	font-size: 2rem;
+	margin-bottom: 20px;
 }
+
+
 
 .component-header > *:last-child{
 	margin-left: auto;
 }
 
-.is-income-slider{
+/* .is-income-slider{
 	display: flex;
 	flex-direction: row;
 	justify-content:left;
@@ -83,4 +88,4 @@
 
 .toggle-input:checked::after {
     left: 70%;
-}
+} */

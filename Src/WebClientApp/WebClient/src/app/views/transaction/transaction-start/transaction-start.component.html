@@ -1,6 +1,9 @@
 <div class="mainChild">
     <div class="list-container">
-        <app-transaction-list></app-transaction-list>
+        <app-transaction-list
+            [transactions]="transactionService.transactions"
+            [loading]="loadingTransactions"
+        ></app-transaction-list>
     </div>
 </div>
 
@@ -14,11 +17,11 @@
         ngClass="{{
             showButtonChoseIsIncome ? 'active' : !firstLoad ? 'off' : ''
         }}"
-        (click)="CreateTransaction()"
+        (click)="createTransaction()"
     >
         <div class="button-create-text secondary">
             <span *ngIf="!showButtonChoseIsIncome">Create Transaction</span>
-            <span *ngIf="showButtonChoseIsIncome">X</span>
+            <span *ngIf="showButtonChoseIsIncome"><i class="bi bi-x"></i></span>
         </div>
     </div>
     <div class="income-expense-container">

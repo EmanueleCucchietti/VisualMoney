@@ -23,7 +23,10 @@
                 <p style="margin: 0">{{ wallet.name }}</p>
             </div>
             <div>
-                <div class="text-end amount-value">
+                <div class="text-end" [ngClass]="{
+                    'positive-amount': wallet.amount > 0,
+                    'negative-amount': wallet.amount < 0
+                }">
                     {{ wallet.amount }}
                 </div>
                 <div class="text-end">

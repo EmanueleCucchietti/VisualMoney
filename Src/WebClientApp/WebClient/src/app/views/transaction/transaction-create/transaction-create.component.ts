@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { WalletModel } from 'src/app/_models';
+import { TransactionModel } from 'src/app/_models/Transaction/transactionModel';
 import { WalletService } from 'src/app/_services';
 import { TransactionService } from 'src/app/_services/transaction/transaction.service';
 
@@ -11,7 +13,28 @@ import { TransactionService } from 'src/app/_services/transaction/transaction.se
 })
 export class TransactionCreateComponent {
 
-    showButtonChoseIsIncome = false;
+    newWallet : WalletModel | undefined
+
+    constructor(
+        public transactionService: TransactionService,
+        public walletService: WalletService,
+		public router: Router
+    ) {
+        if (walletService.wallets.length == 0) {
+            walletService.getWalletsFromServer().subscribe(() => {
+				console.log(walletService.wallets);
+            });
+        }   
+
+        if(transactionService.newTransaction.idWallet != undefined){
+            let wallet = walletService.wallets.find(wallet => wallet.id == transactionService.newTransaction.idWallet)
+
+            if(wallet != undefined)
+                this.newWallet = wallet
+        }
+    }
+
+    selectedWallet: WalletModel = new WalletModel();
 
     addTransaction() {
 		this.transactionService.newTransaction.idWallet = this.selectedWallet.id ?? -1;
@@ -21,31 +44,18 @@ export class TransactionCreateComponent {
 			this.transactionService.newTransaction.currencyCode == ""
 			)
 		{
-			alert("Please select wallet");
+			alert("Please Insert all Fields");
 			console.log(this.transactionService.newTransaction);
 			return;
 		}
 		this.transactionService.addTransaction().subscribe((res) => {
 			console.log(res);
+			this.transactionService.newTransaction = new TransactionModel();
+			this.selectedWallet = new WalletModel();
+			this.router.navigate(['/transaction']);
 		});
     }
 
-    constructor(
-        public transactionService: TransactionService,
-        public walletService: WalletService
-    ) {
-        if (walletService.wallets.length == 0) {
-            walletService.getWalletsFromServer().subscribe(() => {
-				console.log(walletService.wallets);
-            });
-        }
-    }
-
-    selectedWallet: WalletModel = new WalletModel();
-
-    CreateTransaction() {
-        this.showButtonChoseIsIncome = !this.showButtonChoseIsIncome;
-    }
 
     setTransactionType(type: boolean) {
         this.transactionService.newTransaction.isIncome = type;
@@ -55,9 +65,7 @@ export class TransactionCreateComponent {
         this.setTransactionType(!(<HTMLInputElement>$event.target).checked);
     }
 
-    showDropdown = false;
-
-	test($event: WalletModel) {
+	selectWallet($event: WalletModel) {
         this.selectedWallet = $event;
 	}
 }

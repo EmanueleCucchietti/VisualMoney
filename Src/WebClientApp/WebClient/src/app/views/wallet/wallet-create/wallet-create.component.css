@@ -7,7 +7,6 @@
 }
 
 .component-header{
-	font-size: 2rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

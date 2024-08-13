@@ -13,7 +13,6 @@
 }
 
 .component-header {
-    font-size: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -26,15 +25,15 @@
 	margin-left: auto;
 }
 
-.header-amount-value {
+.positive-amount{
     color: var(--income-color-dark-theme);
 }
 
-.label {
-    border-right: 2px solid var(--primary-color-dark-theme);
-	padding-right: 10px;
-    margin-right: 10px;
+.negative-amount{
+    color: var(--expense-color-dark-theme)
 }
+
+
 
 .list-container {
     position: relative;
@@ -48,8 +47,4 @@
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border-radius: 20px;
 	padding: 20px;
-}
-
-.inner-input{
-	flex: 1;
 }

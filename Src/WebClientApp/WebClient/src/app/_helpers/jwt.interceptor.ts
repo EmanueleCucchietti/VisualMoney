@@ -17,7 +17,10 @@ export class JwtInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-		if (request.url.startsWith(environment.serverApiUrl) && !request.url.endsWith('RefreshToken')) {
+		if (request.url.startsWith(environment.serverApiUrl) && 
+			!request.url.endsWith('RefreshToken') && 
+			!request.url.endsWith('Register') &&
+			!request.url.endsWith('Login')) {
 
 			if (!this.authenticationService.isAccessTokenDefined()) {
 				// Use switchMap to switch to the new observable returned by refreshTokenPromise

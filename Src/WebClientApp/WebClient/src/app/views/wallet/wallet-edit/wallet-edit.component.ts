@@ -34,9 +34,14 @@ export class WalletEditComponent {
 	}
 
 	editWallet() {
-		this.walletService.editWallet().subscribe((wallet: WalletModel) => {
-			console.log(wallet);
-			this.router.navigate(['/wallet', this.currentWalletId]);
-		});
+		this.walletService.editWallet().subscribe({
+            next: (wallet: WalletModel) => {
+                console.log(wallet);
+                this.router.navigate(['/wallet', this.currentWalletId]);
+            },
+            error: (err) => {
+                alert("errore nel salvataggio delle modifiche riprovare")
+            }
+        });
 	}
 }

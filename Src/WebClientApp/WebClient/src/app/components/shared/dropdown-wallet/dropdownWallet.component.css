@@ -1,23 +1,25 @@
 
 .custom-select{
 	position: relative;
-	padding: 0;
 }
 
 
 .default-dropdown{
+	--height: 0px;
+	--top: 0px;
 	position: absolute;
 	background-color: var(--bg-color-dark-theme);
 	width: 100%;
-	top: calc(100% + 10px);
+	/* top: calc(100% + 10px); */
+	top: var(--top);
 	left: -5px;
 	padding: 10px;
 	border-radius: 10px;
 	border: 1px solid var(--primary-color-dark-theme);
 	cursor: pointer;
-	transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
 	max-height: 40vh;
 	overflow-y: auto;
+	z-index: 10;
 }
 
 .dropdown-show{
@@ -25,7 +27,7 @@
 }
 
 .dropdown-hide{
-	top: calc(100%);
+	top: var(--top);
 	opacity: 0;
 }
 
@@ -61,8 +63,6 @@
 	align-items: center;
 	cursor: pointer;
 	user-select: none;
-	padding: 5px;
-	padding-left: 10px;
 }
 
 .selected-option > span{

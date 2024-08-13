@@ -2,22 +2,137 @@
     <div>
         <i
             class="bi bi-arrow-left-circle pointer"
-			appGoPageBack
+            appGoPageBack
             style="cursor: pointer"
         ></i>
         &nbsp;&nbsp;
         <span>{{ this.transactionService.selectedTransaction.name }}</span>
     </div>
-</div>
-
-<div class="mainChild">
-	<h5>Transactions</h5>
-
-    <div class="list-container">
-		sss
+    <div class="d-flex align-items-end">
+        <app-income-slider
+            [readonly]="isReadOnly"
+            [isIncome]="this.transactionService.selectedTransaction.isIncome"
+            (setTransactionTypeEmitter)="setTransactionType($event)"
+        ></app-income-slider>
     </div>
 </div>
 
+<div class="mainChild">
+    <div class="category-container">
+        <div
+            *ngIf="!isReadOnly"
+            [ngClass]="{ active: isCreatingCategory }"
+            class="default-badge create-badge"
+            role="button"
+        >
+            <div class="sub-badge">
+                <input
+					[ngClass]="{ active: isCreatingCategory }"
+                    class="no-style-input inner-input create-category-input"
+                    type="text"
+                    placeholder="New Category"
+                />
+                <span
+                    *ngIf="isCreatingCategory"
+                    class="create-category-icon"
+                    (click)="cancelNewCategory()"
+                    ><i class="bi bi-x"></i
+                ></span>
+                <span class="create-category-icon" (click)="createNewCategory()"
+                    ><i class="bi bi-plus"></i
+                ></span>
+            </div>
+        </div>
+        <div
+            *ngFor="
+                let category of this.transactionService.selectedTransaction
+                    .categories
+            "
+            class="default-badge"
+        >
+            <div class="sub-badge">
+                <span>{{ category.name }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="default-input composed-input primary d-flex">
+        <label for="name" class="default-label">Name</label>
+        <input
+            [readonly]="isReadOnly"
+            class="no-style-input inner-input"
+            type="text"
+            id="name"
+            [(ngModel)]="transactionService.selectedTransaction.name"
+            placeholder="Transaction Name"
+        />
+    </div>
+    <div class="default-input composed-input primary d-flex">
+        <label for="name" class="default-label">Amount</label>
+        <input
+            [readonly]="isReadOnly"
+            class="no-style-input inner-input"
+            type="text"
+            id="name"
+            [(ngModel)]="transactionService.selectedTransaction.amount"
+            placeholder="Transaction Name"
+        />
+    </div>
+    <app-datepicker
+        class="m-datepicker"
+        (dateChange)="changeDate($event)"
+        [showLabel]="true"
+        [showOuterDiv]="true"
+        [isReadOnly]="isReadOnly"
+        [dateValue]="transactionService.selectedTransaction.date"
+    ></app-datepicker>
+    <div class="default-input composed-input primary d-flex">
+        <label for="name" class="default-label">Currency Code</label>
+        <input
+            [readonly]="isReadOnly"
+            class="no-style-input inner-input"
+            type="text"
+            id="name"
+            [(ngModel)]="transactionService.selectedTransaction.currencyCode"
+            placeholder="Transaction Name"
+        />
+    </div>
+
+    <app-dropdown-wallet
+        class="dropdown-wallet"
+        [readonly]="isReadOnly"
+        [selectedWallet]="selectedWallet"
+        [wallets]="walletService.wallets"
+        (selectWalletEmitter)="selectWallet($event)"
+    ></app-dropdown-wallet>
+</div>
+<!--
 <div class="bottom-button">
-    <!-- <button class="default-button" (click)="editWallet()">Edit Wallet</button> -->
+    <button class="default-button" (click)="editTransaction()">
+        Edit Wallet
+    </button>
+</div> -->
+
+<div
+    id="buttonCreate"
+    class="default-button bottom-button invert-button"
+    ngClass="{{ !isReadOnly ? 'active' : '' }}"
+>
+    <div
+        class="button-create"
+        ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}"
+        (click)="editTransaction()"
+    >
+        <div class="button-create-text secondary">
+            <span *ngIf="isReadOnly">Edit Transaction</span>
+        </div>
+    </div>
+    <div class="cancel-confirm-container">
+        <div class="sub-button" (click)="cancelEditTransaction()">
+            <span class="primary font-weight-bold">Cancel</span>
+        </div>
+        <div class="sub-button" (click)="confirmEditTransaction()">
+            <span class="primary font-weight-bold">Confirm</span>
+        </div>
+    </div>
 </div>

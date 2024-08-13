@@ -9,24 +9,24 @@ import { TransactionService } from 'src/app/_services/transaction/transaction.se
     styleUrls: ['./transaction-list.component.css']
 })
 export class TransactionListComponent {
-    @Input() transactions: TransactionModel[] = [];
-
-    loading: boolean = true;
+    @Input() transactions: TransactionModel[] | undefined = [];
+    @Input() loading: boolean = true;
 
     ngOnInit() {
-        if (this.transactions.length > 0) {
-            this.loading = false;
-        }
+        // if (this.transactions && this.transactions.length > 0) {
+        //     this.loading = false;
+        // }
     }
 
     constructor(public transactionService: TransactionService) {
-        if (this.transactions.length == 0) {
-            transactionService
-                .getTransactionsFromServer(true)
-                .subscribe((transactions) => {
-                    this.loading = false;
-                    this.transactions = transactions;
-                });
-        }
+        // if (!this.transactions) {
+        //     transactionService
+        //         .getTransactionsFromServer(true)
+        //         .subscribe((transactions) => {
+        //             this.loading = false;
+        //             this.transactions = transactions;
+		// 			this.transactions.sort((a, b) => (a.date > b.date ? -1 : 1));
+        //         });
+        // }
     }
 }

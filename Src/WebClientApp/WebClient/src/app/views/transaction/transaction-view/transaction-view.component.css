@@ -1,0 +1,134 @@
+.component-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.bottom-button {
+	margin: 40px 0;
+	position: relative;
+}
+
+.category-container{
+	display: flex;
+	flex-direction: row;
+	justify-content:flex-start;
+	flex-wrap: wrap;
+}
+
+.default-input{
+	margin: 20px 0;
+}
+
+.m-datepicker{
+	margin: 20px 0;
+}
+
+.component-header > *:last-child{
+	margin-left: auto;
+}
+
+.mainChild{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+.dropdown-wallet{
+	margin: 20px 0;
+}
+
+/* bottom button */
+
+.cancel-confirm-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 100%;
+
+    z-index: 1;
+}
+.button-create {
+    position: absolute;
+    height: 100%;
+    border-radius: 20px;
+    opacity: 1;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100vw;
+
+    border: 1px solid var(--primary-color-dark-theme);
+    background-color: var(--primary-color-dark-theme);
+    color: var(--bg-color-dark-theme);
+
+    z-index: 5;
+
+    text-wrap: nowrap;
+
+    transition-timing-function: ease-in-out;
+    transition: min-width 0.5s, max-width 0.5s, border-radius 0.5s;
+}
+
+.button-create.off {
+    animation: button-create-animation 0.5s ease-in-out;
+}
+
+@keyframes button-create-animation {
+    0% {
+        border-radius: 0;
+    }
+    5% {
+        border-radius: 20px;
+    }
+    100% {
+        aspect-ratio: 1/1;
+        border-radius: 20px;
+    }
+}
+
+.button-create.active {
+    width: auto !important;
+    min-width: 0px;
+    max-width: 2px;
+    border-radius: 0px;
+
+    animation: button-remove-animation 0.5s ease-in-out;
+}
+
+@keyframes button-remove-animation {
+    0% {
+        border-radius: 20px;
+    }
+    50% {
+        border-radius: 20px;
+    }
+    100% {
+        border-radius: 0;
+    }
+}
+
+.button-create-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+}
+
+.invert-button {
+    border: 1px solid var(--primary-color-dark-theme);
+    background-color: var(--bg-color-dark-theme);
+    color: var(--primary-color-dark-theme);
+}
+
+.sub-button {
+	flex: 1;
+	padding: 10px;
+	text-align: center;
+}

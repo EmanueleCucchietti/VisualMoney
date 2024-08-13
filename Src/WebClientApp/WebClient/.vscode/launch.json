@@ -3,6 +3,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Firefox",
+            "type": "firefox",
+            "request": "launch",
+            "url": "https://localhost:8443",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "FirefoxAngular",
+            "type": "firefox",
+            "request": "launch",
+            "preLaunchTask": "npm run start",
+            "url": "https://localhost:8443",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "name": "Launch Edge",
             "request": "launch",
             "type": "msedge",
