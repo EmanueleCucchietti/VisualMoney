@@ -29,7 +29,7 @@ export class TransactionViewComponent {
     selectedWallet?: WalletModel;
     isReadOnly: boolean = true;
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this.selectedTransactionId = parseInt(
             this.route.snapshot.paramMap.get('id') ?? '0'
         );
@@ -66,7 +66,14 @@ export class TransactionViewComponent {
 
     selectWallet($event: WalletModel) {
         if ($event.id != undefined && $event.id != null)
+        {
             this.transactionService.selectedTransaction.idWallet = $event.id;
+            let wallet = this.walletService.wallets.find(w => w.id == $event.id);
+            if(wallet){
+                this.selectedWallet = wallet
+                this.transactionService.selectedTransaction.currencyCode = wallet.currencyCode;
+            }
+        }
     }
 
     setTransactionType(type: boolean) {
@@ -78,11 +85,23 @@ export class TransactionViewComponent {
     }
 
     setWalletBySelectedTransaction() {
+        if(this.walletService.wallets.length == 0){
+            this.walletService.getWalletsFromServer().subscribe(() => {
+                this.setWalletBySelectedTransactionAssign();
+            });
+        }
+
+        this.setWalletBySelectedTransactionAssign();
+    }
+
+    private setWalletBySelectedTransactionAssign(){
         this.selectedWallet = this.walletService.wallets.find(
             (wallet) =>
-                wallet.id ==
-                this.transactionService.selectedTransaction.idWallet
+                wallet.id === this.transactionService.selectedTransaction.idWallet
         );
+
+        if(this.selectedWallet)
+            this.transactionService.selectedTransaction.currencyCode = this.selectedWallet.currencyCode;
     }
 
     changeDate($event: Date) {
@@ -95,6 +114,28 @@ export class TransactionViewComponent {
     }
 
     confirmEditTransaction() {
+        if(!this.selectedWallet)
+        {
+            alert("Inserire tutti i campi")
+            return;
+        }
+
+        this.transactionService.selectedTransaction.idWallet = this.selectedWallet.id ?? -1;
+
+        if(this.transactionService.selectedTransaction.idWallet == -1 ||
+			this.transactionService.selectedTransaction.name == "" ||
+			this.transactionService.selectedTransaction.amount == 0
+			// this.transactionService.selectedTransaction.currencyCode == ""
+			)
+		{
+			alert("Please Insert all Fields");
+			console.log(this.transactionService.selectedTransaction);
+			return;
+		}
+
+        // we get the currency code based on the wallet one
+        this.transactionService.selectedTransaction.currencyCode = this.selectedWallet.currencyCode;
+
         this.isReadOnly = true;
         this.transactionService
             .updateTransaction(this.transactionService.selectedTransaction)

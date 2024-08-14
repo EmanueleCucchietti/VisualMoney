@@ -70,11 +70,21 @@
     <div class="default-input composed-input primary d-flex">
         <label for="name" class="default-label">Amount</label>
         <input
+            style="min-width: 50px; text-decoration: none;"
             [readonly]="isReadOnly"
+            class="no-style-input inner-input"
+            type="number"
+            id="name"
+            [(ngModel)]="transactionService.selectedTransaction.amount"
+            placeholder="Transaction Name"
+        />
+        <input
+            style="text-align: right; margin-right: 15px; min-width: 50px;"
+            [readOnly]="true"
             class="no-style-input inner-input"
             type="text"
             id="name"
-            [(ngModel)]="transactionService.selectedTransaction.amount"
+            [ngModel]="transactionService.selectedTransaction.currencyCode"
             placeholder="Transaction Name"
         />
     </div>
@@ -86,7 +96,7 @@
         [isReadOnly]="isReadOnly"
         [dateValue]="transactionService.selectedTransaction.date"
     ></app-datepicker>
-    <div class="default-input composed-input primary d-flex">
+    <!-- <div class="default-input composed-input primary d-flex">
         <label for="name" class="default-label">Currency Code</label>
         <input
             [readonly]="isReadOnly"
@@ -96,7 +106,7 @@
             [(ngModel)]="transactionService.selectedTransaction.currencyCode"
             placeholder="Transaction Name"
         />
-    </div>
+    </div> -->
 
     <app-dropdown-wallet
         class="dropdown-wallet"

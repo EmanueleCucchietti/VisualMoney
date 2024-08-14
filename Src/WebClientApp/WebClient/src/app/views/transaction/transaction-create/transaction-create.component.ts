@@ -40,14 +40,18 @@ export class TransactionCreateComponent {
 		this.transactionService.newTransaction.idWallet = this.selectedWallet.id ?? -1;
 		if(this.transactionService.newTransaction.idWallet == -1 ||
 			this.transactionService.newTransaction.name == "" ||
-			this.transactionService.newTransaction.amount == 0 ||
-			this.transactionService.newTransaction.currencyCode == ""
+			this.transactionService.newTransaction.amount == 0
+			// this.transactionService.newTransaction.currencyCode == ""
 			)
 		{
 			alert("Please Insert all Fields");
 			console.log(this.transactionService.newTransaction);
 			return;
 		}
+
+        // we get the currency code based on the wallet one
+        this.transactionService.newTransaction.currencyCode = this.selectedWallet.currencyCode;
+
 		this.transactionService.addTransaction().subscribe((res) => {
 			console.log(res);
 			this.transactionService.newTransaction = new TransactionModel();
