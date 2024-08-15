@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { WalletModel } from 'src/app/_models';
 import { TransactionService, WalletService } from 'src/app/_services';
+import { DropdownWalletComponent } from 'src/app/components/shared/dropdown-wallet/dropdownWallet.component';
 
 @Component({
     selector: 'app-transaction-view',
@@ -28,6 +29,8 @@ export class TransactionViewComponent {
     selectedTransactionId: number | undefined;
     selectedWallet?: WalletModel;
     isReadOnly: boolean = true;
+
+    @ViewChild(DropdownWalletComponent) dropDownWallet! : DropdownWalletComponent;
 
     ngAfterViewInit(): void {
         this.selectedTransactionId = parseInt(
@@ -114,6 +117,7 @@ export class TransactionViewComponent {
     }
 
     confirmEditTransaction() {
+        this.dropDownWallet.closeDropdown();
         if(!this.selectedWallet)
         {
             alert("Inserire tutti i campi")
@@ -142,6 +146,7 @@ export class TransactionViewComponent {
             .subscribe();
     }
     cancelEditTransaction() {
+        this.dropDownWallet.closeDropdown();
         this.isReadOnly = true;
         this.transactionService
             .getTransactionsFromServer(true)

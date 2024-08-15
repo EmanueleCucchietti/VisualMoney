@@ -112,4 +112,9 @@ export class DropdownWalletComponent {
             }, 300);
         }
     }
+
+    public closeDropdown(){
+        if(this.showDropdown)
+            this.selectShowDropdown()
+    }
 }
