@@ -8,10 +8,13 @@
 	flex: 1;
 }
 
-.container{
+.page_wrapper{
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+
+	padding-top: 30px;
+	padding-right: 30px;
 }
 
 .mainPage{
