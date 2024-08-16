@@ -1,22 +1,21 @@
-<div class="header d-flex flex-column h-100">
-    <div class="logo_row">
-        <img src="assets/img/logo.svg" alt="logo" class="logo" width="100"/>
-    </div>
 
-    <div class="header_row" routerLink="/">
+<div class="top_header">
+    <div class="logo_row">
+        <!-- <img src="assets/img/logo_bg.svg" alt="logo" class="logo" width="50"/> -->
+        <!-- <img src="assets/img/logo_primary.svg" alt="logo" class="logo" height="50"/> -->
+        <span>VisualMoney</span>
+        <!-- <i class="bi bi-list hamburger d-none"></i> -->
+        <i class="bi bi-caret-left left_arrow"></i>
+    </div>
+</div>
+
+<div class="header d-flex flex-column h-100">
+    <div class="header_row first" routerLink="/">
         <p>
             <span>
                 <i class="bi bi-graph-up-arrow" style="margin: 5px;"></i>
             </span>
             <span>Home</span>
-        </p>
-    </div>
-    <div class="header_row" routerLink="/wallet">
-        <p>
-            <span>
-                <i class="bi bi-wallet2" style="margin: 5px;"></i>
-            </span>
-            <span>Wallet</span>
         </p>
     </div>
     <div class="header_row" routerLink="/transaction">
@@ -27,6 +26,15 @@
             <span>Transactions</span>
         </p>
     </div>
+    <div class="header_row" routerLink="/wallet">
+        <p>
+            <span>
+                <i class="bi bi-wallet2" style="margin: 5px;"></i>
+            </span>
+            <span>Wallets</span>
+        </p>
+    </div>
+    
 </div>
 <div class="overlay">
     

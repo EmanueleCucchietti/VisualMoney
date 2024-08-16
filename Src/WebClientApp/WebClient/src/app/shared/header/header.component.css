@@ -1,11 +1,13 @@
 :host{
-    /* position: absolute; */
-    z-index: 100;
-    /* height: 100%; */
-    /* width: 100%; */
-
     display: flex;
+    flex-direction: column;
     margin: 30px;
+
+    z-index: 100;
+}
+
+:host > div{
+    margin: 10px 0;
 }
 
 * {
@@ -13,24 +15,28 @@
 }
 
 .header{
+    padding: 20px;
+    border-radius: 20px;
 
     background-color: var(--bg-color-dark-theme);
-
-    padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 20px;
 }
 
 .logo_row{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+
     padding: 15px;
+
+    font-size: 1.3rem;
+
+    border: 1px solid var(--primary-color-dark-theme);
+    border-radius: 20px;
 }
 
-
 .header_row{
-    /* margin: 10px; */
-    padding: 20px;
+    padding: 5px;
 
     border-bottom: 1px solid var(--primary-color-dark-theme);
 
@@ -42,7 +48,8 @@
 }
 
 .header_row p{
-    margin: 10px 20px;
+    margin: 10px 15px;
+    padding: 5px;
 }
 
 .header_row span{
