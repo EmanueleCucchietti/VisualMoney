@@ -3,52 +3,61 @@
         <div class="logo_row">
             <!-- <img src="assets/img/logo_bg.svg" alt="logo" class="logo" width="50"/> -->
             <!-- <img src="assets/img/logo_primary.svg" alt="logo" class="logo" height="50"/> -->
-            <span>VisualMoney</span>
-            <!-- <i class="bi bi-list hamburger d-none"></i> -->
-            <i class="bi bi-caret-left left_arrow"></i>
+            <div class="full_sidebar" [ngClass]="{'opened': fullSidebar}">
+                <span>VisualMoney</span>
+                <i class="bi bi-caret-left left_arrow" (click)="closeFullSidebar()" style="cursor: pointer;"></i>
+            </div>
+            <div class="small_sidebar" [ngClass]="{'opened': smallSidebar}">
+                <i class="bi bi-list hamburger" (click)="openFullSidebar()" style="cursor: pointer;"></i>
+            </div>
         </div>
     </div>
-    
-    <div class="body_header d-flex flex-column h-100">
-        <div class="header_row first" routerLink="/">
+
+    <div class="body_header d-flex flex-column h-100"
+        [ngClass]="{'small_sidebar': smallSidebar}">
+        <div class="header_row first"
+            routerLink="/">
             <p>
                 <span>
                     <i class="bi bi-graph-up-arrow" style="margin: 5px;"></i>
                 </span>
-                <span>Home</span>
+                <span *ngIf="fullSidebar">Home</span>
             </p>
         </div>
-        <div class="header_row" routerLink="/transaction">
+        <div class="header_row"
+            routerLink="/transaction">
             <p>
                 <span>
                     <img src="assets/icons/up-down-arrow.svg" class="up_down_arrow_icon">
                 </span>
-                <span>Transactions</span>
+                <span *ngIf="fullSidebar">Transactions</span>
             </p>
         </div>
-        <div class="header_row" routerLink="/wallet">
+        <div class="header_row"
+            routerLink="/wallet">
             <p>
                 <span>
                     <i class="bi bi-wallet2" style="margin: 5px;"></i>
                 </span>
-                <span>Wallets</span>
+                <span *ngIf="fullSidebar">Wallets</span>
             </p>
         </div>
-        
+
     </div>
 
-    <div class="bottom_header">
+    <div class="bottom_header" 
+        [ngClass]="{'small_sidebar': smallSidebar}">
         <div class="bottom_row">
             <!-- <img src="assets/img/logo_bg.svg" alt="logo" class="logo" width="50"/> -->
             <!-- <img src="assets/img/logo_primary.svg" alt="logo" class="logo" height="50"/> -->
-            <span>User</span>
+            <span *ngIf="fullSidebar">User</span>
             <!-- <i class="bi bi-list hamburger d-none"></i> -->
-            <i class="bi bi-person-circle"></i>
+            <i class="bi bi-person-circle user_icon"></i>
         </div>
     </div>
-    
+
 </div>
 
 <div class="overlay">
-    
+
 </div>

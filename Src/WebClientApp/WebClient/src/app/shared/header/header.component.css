@@ -93,3 +93,41 @@
     width: 26px;
     filter: invert(50%) sepia(41%) saturate(4466%) hue-rotate(292deg) brightness(89%) contrast(94%);
 }
+
+/* Full/Small Sidebar */
+
+.logo_row > .full_sidebar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+.logo_row > .small_sidebar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.logo_row > div:not(.opened){
+    display: none;
+}
+
+.body_header.small_sidebar{
+    padding: 10px;
+}
+
+.body_header.small_sidebar > .header_row{
+    padding: 0;
+    margin: 5px;
+}
+
+.body_header.small_sidebar > .header_row > p{
+    margin: 0;
+    padding: 15px 0;
+}
+
+.bottom_header.small_sidebar .bottom_row{
+    justify-content: center;
+}
