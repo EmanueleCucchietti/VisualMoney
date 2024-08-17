@@ -24,6 +24,8 @@ export class TransactionViewComponent {
     ) {
         if (walletService.wallets.length == 0)
             walletService.getWalletsFromServer().subscribe();
+
+        this.getSelectedTransactionData();
     }
 
     selectedTransactionId: number | undefined;
@@ -33,6 +35,9 @@ export class TransactionViewComponent {
     @ViewChild(DropdownWalletComponent) dropDownWallet! : DropdownWalletComponent;
 
     ngAfterViewInit(): void {
+    }
+
+    getSelectedTransactionData(){
         this.selectedTransactionId = parseInt(
             this.route.snapshot.paramMap.get('id') ?? '0'
         );
@@ -143,7 +148,10 @@ export class TransactionViewComponent {
         this.isReadOnly = true;
         this.transactionService
             .updateTransaction(this.transactionService.selectedTransaction)
-            .subscribe();
+            .subscribe(() =>{
+                // reload wallets
+                this.walletService.getWalletsFromServer().subscribe();
+            });
     }
     cancelEditTransaction() {
         this.dropDownWallet.closeDropdown();

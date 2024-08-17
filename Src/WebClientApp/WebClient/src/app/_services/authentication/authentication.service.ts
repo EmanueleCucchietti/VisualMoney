@@ -7,6 +7,7 @@ import {
     LoginResponseDto,
     SignupRequestDto
 } from 'src/app/_models';
+import { User } from 'src/app/_models/user';
 import { environment } from 'src/app/environments/environment';
 
 @Injectable({

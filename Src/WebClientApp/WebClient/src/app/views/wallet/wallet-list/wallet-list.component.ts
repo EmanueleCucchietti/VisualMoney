@@ -16,5 +16,11 @@ export class WalletListComponent {
         }
     }
 
+    ngAfterContentInit(){
+        this.walletService.getWalletsFromServer().subscribe(() => {
+            this.loading = false;
+        });
+    }
+
 	loading : boolean = true;
 }

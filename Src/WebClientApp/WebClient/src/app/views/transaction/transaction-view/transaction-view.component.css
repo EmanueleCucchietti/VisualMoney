@@ -1,13 +1,26 @@
+:host{
+	margin-bottom: 30px;
+}
+
+:host > *{
+	margin: 10px 0;
+}
+
 .component-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 	flex-wrap: wrap;
-	margin-bottom: 20px;
+    
+	font-size: 1.5rem;
+    
+    margin: 0;
+    padding: 15px;
 }
 
 .bottom-button {
-	margin: 40px 0;
+	/* margin: 40px 0; */
+    padding: 30px;
 	position: relative;
 }
 
@@ -37,6 +50,7 @@
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border-radius: 20px;
 	padding: 20px;
+	margin-top: 15px !important;
 }
 
 .dropdown-wallet{

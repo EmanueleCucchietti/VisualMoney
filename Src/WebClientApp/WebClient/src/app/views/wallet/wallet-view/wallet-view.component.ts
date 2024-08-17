@@ -27,7 +27,7 @@ export class WalletViewComponent {
     loadingTransactions: boolean = true;
     private currentWalletId: number | null = null;
 
-    ngAfterViewInit(): void {
+    ngAfterContentInit(): void {
         this.transactions = [];
         // Access the id parameter from the route snapshot
         this.currentWalletId = parseInt(
@@ -38,7 +38,10 @@ export class WalletViewComponent {
             this.walletService.getWalletsFromServer().subscribe(() => {
                 this.walletService.selectWallet(this.currentWalletId ?? 0);
             });
+        } else {
+            this.walletService.selectWallet(this.currentWalletId ?? 0);
         }
+
 
         this.transactionService
             .getTransactionsByWalletId(this.currentWalletId ?? 0, true)

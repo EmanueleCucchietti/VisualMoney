@@ -1,6 +1,15 @@
+:host{
+	margin-bottom: 30px;
+}
+
+:host > *{
+	margin: 10px 0;
+}
+
 .bottom-button {
-    margin: 40px 0;
+    /* margin: 40px 0; */
     position: relative;
+	padding: 30px;
 }
 
 .mainChild {
@@ -10,6 +19,8 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 20px;
     padding: 20px;
+    
+	margin-top: 0 !important;
 }
 
 .list-container {
@@ -66,7 +77,7 @@
     aspect-ratio: 1/1;
     width: auto !important;
     min-width: 0px;
-    max-width: 50px;
+    max-width: 60px;
     border-radius: 100%;
 
     animation: button-remove-animation 0.5s ease-in-out;
