@@ -1,3 +1,11 @@
+:host{
+	margin-bottom: 30px;
+}
+
+:host > *{
+	margin: 10px 0;
+}
+
 .mainChild{
 	display: flex;
 	flex-direction: column;
@@ -5,10 +13,11 @@
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border-radius: 20px;
 	padding: 20px;
+	margin-top: 15px !important;
 }
 
-.default-button{
-	margin: 40px 0;
+.bottom-button {
+    padding: 30px;
 }
 
 .composed-select {
@@ -31,61 +40,18 @@
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
-	margin-bottom: 20px;
+
+    
+	font-size: 1.5rem;
+    
+    margin: 0;
+    padding: 15px;
 }
-
-
 
 .component-header > *:last-child{
 	margin-left: auto;
 }
 
-/* .is-income-slider{
-	display: flex;
-	flex-direction: row;
-	justify-content:left;
-	align-items: center;
-	font-size: 1rem;
+.wallet_select{
+    margin: 20px 0;
 }
-
-.is-income-slider > *{
-	padding: 0 5px;
-}
-
-.slider-input-container{
-	display: flex;
-	align-items: center;
-}
-
-
-.toggle-input {
-    cursor: pointer;
-    position: relative;
-    width: 50px;
-    height: 30px;
-    border-radius: 25px;
-    outline: none;
-    background-color: var(--income-color-dark-theme);
-    -webkit-appearance: none;
-    transition: background .3s;
-}
-.toggle-input::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    height: 1.25rem;
-    width: 1.25rem;
-    background-color: var(--bg-color-dark-theme);
-    transition: left .3s;
-}
-
-.toggle-input:checked {
-    background-color: var(--expense-color-dark-theme);
-}
-
-.toggle-input:checked::after {
-    left: 70%;
-} */

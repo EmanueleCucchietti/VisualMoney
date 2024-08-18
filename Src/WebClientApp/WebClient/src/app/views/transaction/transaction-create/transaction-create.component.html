@@ -16,9 +16,7 @@
     </div>
 </div>
 
-<br />
-
-<div class="childMainPage">
+<div class="mainChild">
     <div>
         <input
             class="default-input primary"
@@ -43,8 +41,9 @@
             placeholder="Transaction Currency Code"
         />
     </div> -->
-	<br>
-    <div>
+	<!-- <br> -->
+    <div
+        class="wallet_select">
         <app-dropdown-wallet
             [selectedWallet]="this.newWallet"
             [wallets]="walletService.wallets"
@@ -53,8 +52,6 @@
     </div>
 </div>
 
-<div class="bottom-button">
-    <button class="default-button" (click)="addTransaction()">
-        Create Wallet
-    </button>
-</div>
+<button class="default-button bottom-button" (click)="addTransaction()">
+    Create Wallet
+</button>
