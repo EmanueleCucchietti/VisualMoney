@@ -10,7 +10,6 @@ import { WalletModel } from 'src/app/_models';
     providedIn: 'root'
 })
 export class TransactionService {
-
     constructor(public httpClient: HttpClient,
 		public categoryService: CategoryService) { }
 
@@ -102,4 +101,12 @@ export class TransactionService {
 				})
 			);
 	}
+
+    deleteTransaction(selectedTransactionId: number) {
+		return this.httpClient.delete<boolean>(
+			`${environment.serverApiUrl}/Transaction/${selectedTransactionId}`,
+			{
+				withCredentials: true
+			})
+    }
 }

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WalletModel } from 'src/app/_models';
 import { TransactionService, WalletService } from 'src/app/_services';
 import { DropdownWalletComponent } from 'src/app/components/shared/dropdown-wallet/dropdownWallet.component';
@@ -20,7 +20,8 @@ export class TransactionViewComponent {
         public location: Location,
         public transactionService: TransactionService,
         public walletService: WalletService,
-        public route: ActivatedRoute
+        public route: ActivatedRoute,
+        private router: Router
     ) {
         if (walletService.wallets.length == 0)
             walletService.getWalletsFromServer().subscribe();
@@ -32,12 +33,12 @@ export class TransactionViewComponent {
     selectedWallet?: WalletModel;
     isReadOnly: boolean = true;
 
-    @ViewChild(DropdownWalletComponent) dropDownWallet! : DropdownWalletComponent;
+    @ViewChild(DropdownWalletComponent) dropDownWallet!: DropdownWalletComponent;
 
     ngAfterViewInit(): void {
     }
 
-    getSelectedTransactionData(){
+    getSelectedTransactionData() {
         this.selectedTransactionId = parseInt(
             this.route.snapshot.paramMap.get('id') ?? '0'
         );
@@ -73,11 +74,10 @@ export class TransactionViewComponent {
     }
 
     selectWallet($event: WalletModel) {
-        if ($event.id != undefined && $event.id != null)
-        {
+        if ($event.id != undefined && $event.id != null) {
             this.transactionService.selectedTransaction.idWallet = $event.id;
             let wallet = this.walletService.wallets.find(w => w.id == $event.id);
-            if(wallet){
+            if (wallet) {
                 this.selectedWallet = wallet
                 this.transactionService.selectedTransaction.currencyCode = wallet.currencyCode;
             }
@@ -93,7 +93,7 @@ export class TransactionViewComponent {
     }
 
     setWalletBySelectedTransaction() {
-        if(this.walletService.wallets.length == 0){
+        if (this.walletService.wallets.length == 0) {
             this.walletService.getWalletsFromServer().subscribe(() => {
                 this.setWalletBySelectedTransactionAssign();
             });
@@ -102,13 +102,13 @@ export class TransactionViewComponent {
         this.setWalletBySelectedTransactionAssign();
     }
 
-    private setWalletBySelectedTransactionAssign(){
+    private setWalletBySelectedTransactionAssign() {
         this.selectedWallet = this.walletService.wallets.find(
             (wallet) =>
                 wallet.id === this.transactionService.selectedTransaction.idWallet
         );
 
-        if(this.selectedWallet)
+        if (this.selectedWallet)
             this.transactionService.selectedTransaction.currencyCode = this.selectedWallet.currencyCode;
     }
 
@@ -123,24 +123,22 @@ export class TransactionViewComponent {
 
     confirmEditTransaction() {
         this.dropDownWallet.closeDropdown();
-        if(!this.selectedWallet)
-        {
+        if (!this.selectedWallet) {
             alert("Inserire tutti i campi")
             return;
         }
 
         this.transactionService.selectedTransaction.idWallet = this.selectedWallet.id ?? -1;
 
-        if(this.transactionService.selectedTransaction.idWallet == -1 ||
-			this.transactionService.selectedTransaction.name == "" ||
-			this.transactionService.selectedTransaction.amount == 0
-			// this.transactionService.selectedTransaction.currencyCode == ""
-			)
-		{
-			alert("Please Insert all Fields");
-			console.log(this.transactionService.selectedTransaction);
-			return;
-		}
+        if (this.transactionService.selectedTransaction.idWallet == -1 ||
+            this.transactionService.selectedTransaction.name == "" ||
+            this.transactionService.selectedTransaction.amount == 0
+            // this.transactionService.selectedTransaction.currencyCode == ""
+        ) {
+            alert("Please Insert all Fields");
+            console.log(this.transactionService.selectedTransaction);
+            return;
+        }
 
         // we get the currency code based on the wallet one
         this.transactionService.selectedTransaction.currencyCode = this.selectedWallet.currencyCode;
@@ -148,7 +146,7 @@ export class TransactionViewComponent {
         this.isReadOnly = true;
         this.transactionService
             .updateTransaction(this.transactionService.selectedTransaction)
-            .subscribe(() =>{
+            .subscribe(() => {
                 // reload wallets
                 this.walletService.getWalletsFromServer().subscribe();
             });
@@ -168,12 +166,30 @@ export class TransactionViewComponent {
 
 
     createNewCategory() {
-		if(this.isCreatingCategory)
-	        this.isCreatingCategory = false;
-		else
-			this.isCreatingCategory = true;
+        if (this.isCreatingCategory)
+            this.isCreatingCategory = false;
+        else
+            this.isCreatingCategory = true;
     }
     cancelNewCategory() {
         this.isCreatingCategory = false;
+    }
+
+    deleteTransaction() {
+        if (!this.selectedTransactionId) {
+            alert("Errore nella cancellazione, riprovare.");
+            window.location.reload();
+            return;
+        }
+        this.transactionService.deleteTransaction(this.selectedTransactionId).subscribe({
+            next: () => {
+                this.router.navigate(["/transaction"]);
+            }
+            ,
+            error: () => {
+                alert("Errore nella cancellazione. Riprovare.");
+                window.location.reload()
+            }
+        });
     }
 }

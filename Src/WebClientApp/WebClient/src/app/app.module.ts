@@ -32,6 +32,7 @@ import { DropdownWalletComponent } from './components/shared/dropdown-wallet/dro
 import { GoPageBackDirective } from './_helpers/go-page-back/go-page-back.directive';
 import { IncomeSliderComponent } from './components/shared/income-slider/income-slider.component';
 import { DatepickerComponent } from './components/shared/datepicker/datepicker.component';
+import { DeleteChoiceSubButtonComponent } from './shared/delete-choice-sub-button/delete-choice-sub-button/delete-choice-sub-button.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import { DatepickerComponent } from './components/shared/datepicker/datepicker.c
         DropdownWalletComponent,
         GoPageBackDirective,
         IncomeSliderComponent,
-        DatepickerComponent
+        DatepickerComponent,
+        DeleteChoiceSubButtonComponent
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [

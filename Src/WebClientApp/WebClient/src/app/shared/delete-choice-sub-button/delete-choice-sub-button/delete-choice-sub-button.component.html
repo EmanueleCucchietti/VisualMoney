@@ -1,0 +1,19 @@
+<div class="delete_button" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}">
+    <div class="default-button bottom-button invert-button"
+        ngClass="{{ !isReadOnly ? 'active' : '' }}">
+        <div class="button-create" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}"
+            (click)="tryDelete()">
+            <div class="button-create-text secondary">
+                <span *ngIf="isReadOnly"><i _ngcontent-ng-c3584920150="" class="bi bi-trash"></i></span>
+            </div>
+        </div>
+        <div class="cancel-confirm-container">
+            <div class="sub-button" (click)="cancel()">
+                <span class="primary font-weight-bold"><i class="bi bi-x"></i></span>
+            </div>
+            <div class="sub-button" (click)="confirm()">
+                <span class="primary font-weight-bold"><i class="bi bi-trash"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
