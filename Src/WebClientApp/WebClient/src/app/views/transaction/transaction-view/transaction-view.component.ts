@@ -33,6 +33,9 @@ export class TransactionViewComponent {
     selectedWallet?: WalletModel;
     isReadOnly: boolean = true;
 
+    showEditButtons = true;
+    showDeleteButtons = true;
+
     @ViewChild(DropdownWalletComponent) dropDownWallet!: DropdownWalletComponent;
 
     ngAfterViewInit(): void {
@@ -119,9 +122,12 @@ export class TransactionViewComponent {
     editTransaction() {
         this.isReadOnly = false;
         this.firstLoad = false;
+
+        this.showDeleteButtons = false;
     }
 
     confirmEditTransaction() {
+        this.showDeleteButtons = true;
         this.dropDownWallet.closeDropdown();
         if (!this.selectedWallet) {
             alert("Inserire tutti i campi")
@@ -152,6 +158,7 @@ export class TransactionViewComponent {
             });
     }
     cancelEditTransaction() {
+        this.showDeleteButtons = true;
         this.dropDownWallet.closeDropdown();
         this.isReadOnly = true;
         this.transactionService
@@ -171,11 +178,21 @@ export class TransactionViewComponent {
         else
             this.isCreatingCategory = true;
     }
+
     cancelNewCategory() {
         this.isCreatingCategory = false;
     }
 
+    tryDeleteEventHandler(){
+        this.showEditButtons = false;
+    }
+
+    cancelEventHandler(){
+        this.showEditButtons = true;
+    }
+
     deleteTransaction() {
+        this.showEditButtons = true;
         if (!this.selectedTransactionId) {
             alert("Errore nella cancellazione, riprovare.");
             window.location.reload();
@@ -192,4 +209,5 @@ export class TransactionViewComponent {
             }
         });
     }
+    
 }

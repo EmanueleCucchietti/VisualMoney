@@ -68,7 +68,10 @@
 
     <div class="page_buttons">
 
-        <div class="edit_button" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}">
+        <div 
+            *ngIf="showEditButtons"
+            class="edit_button" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}"
+        >
             <div id="buttonCreate" class="default-button bottom-button invert-button"
                 ngClass="{{ !isReadOnly ? 'active' : '' }}">
                 <div class="button-create" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}"
@@ -89,7 +92,12 @@
         </div>
 
         <app-delete-choice-sub-button
-            (deleteEventHandler)="deleteTransaction()">
+            *ngIf="showDeleteButtons"
+            (deleteEventHandler)="deleteTransaction()"
+            (tryDeleteEventHandler)="tryDeleteEventHandler()"
+            (cancelEventHandler)="cancelEventHandler()"
+            >
+            
             
         </app-delete-choice-sub-button>
 
