@@ -4,6 +4,7 @@ namespace WebApi.Services.Transaction
 {
     public interface ITransactionService
     {
+        Task<bool> AddCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser);
         Task<bool> AddCategoryToTransactionAsync(int transactionId, int categoryId, int userId);
         Task<bool> AddCounterPartyToTransactionAsync(int idTransaction, int idCounterParty, int userId);
         Task<bool> AddTransactionAsync(int userId, TransactionDto transaction);
