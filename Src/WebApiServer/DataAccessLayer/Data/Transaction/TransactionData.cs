@@ -3,6 +3,7 @@ using Dapper.Contrib.Extensions;
 using DataAccessLayer.DbAccess;
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.Models.Filters;
+using System.Data;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using System.Transactions;
@@ -143,6 +144,29 @@ namespace DataAccessLayer.Data.Transaction
                 {
                     idTransaction,
                     idCategory,
+                    idUser
+                },
+                useStoredProcedure: true);
+        }
+
+        public Task<int> AddCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser)
+        {
+            string sql = "spAddCategoriesToTransaction";
+
+            var categoryIdsTable = new DataTable();
+            categoryIdsTable.Columns.Add("IdCategory", typeof(int));
+            foreach (var id in idCategories)
+            {
+                categoryIdsTable.Rows.Add(id);
+            }
+
+
+            return _sqlDataAccess.SaveData(
+                sql,
+                new
+                {
+                    idTransaction,
+                    CategoryIds = categoryIdsTable.AsTableValuedParameter("dbo.CategoryIdTableType"),
                     idUser
                 },
                 useStoredProcedure: true);
