@@ -13,15 +13,31 @@
 <div class="mainChild">
     <div class="inner_page">
         <div class="category-container">
-            <div *ngIf="!isReadOnly" [ngClass]="{ active: isCreatingCategory }" class="default-badge create-badge"
-                role="button">
+            <div *ngIf="!isReadOnly" [ngClass]="{ active: isCreatingCategory }"
+                class="add_category default-badge create-badge" role="button">
                 <div class="sub-badge">
                     <input [ngClass]="{ active: isCreatingCategory }"
-                        class="no-style-input inner-input create-category-input" type="text"
-                        placeholder="New Category" />
+                        class="no-style-input inner-input create-category-input" type="text" placeholder="New Category"
+                        [(ngModel)]="newCategoryName" />
                     <span *ngIf="isCreatingCategory" class="create-category-icon" (click)="cancelNewCategory()"><i
                             class="bi bi-x"></i></span>
                     <span class="create-category-icon" (click)="createNewCategory()"><i class="bi bi-plus"></i></span>
+                </div>
+                <div *ngIf="!isReadOnly && notPresentCategories.length != 0" class="categories_selector"
+                    [ngClass]="{ active: isCreatingCategory }">
+                    <div class="categories_selector_header">
+                        Existent Categories:
+                    </div>
+                    <div class="categories_selector_body">
+                        <div *ngFor="let category of notPresentCategories" 
+                            class="categories_selector_element"
+                            (click)="addCategoryToTransaction(category)">
+
+                            <div><span>{{ category.name }}</span></div>
+
+                            <div><i class="bi bi-plus"></i></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div *ngFor="
@@ -68,10 +84,8 @@
 
     <div class="page_buttons">
 
-        <div 
-            *ngIf="showEditButtons"
-            class="edit_button" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}"
-        >
+        <div *ngIf="showEditButtons" class="edit_button"
+            ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}">
             <div id="buttonCreate" class="default-button bottom-button invert-button"
                 ngClass="{{ !isReadOnly ? 'active' : '' }}">
                 <div class="button-create" ngClass="{{ !isReadOnly ? 'active' : !firstLoad ? 'off' : '' }}"
@@ -91,18 +105,14 @@
             </div>
         </div>
 
-        <app-delete-choice-sub-button
-            *ngIf="showDeleteButtons"
-            (deleteEventHandler)="deleteTransaction()"
-            (tryDeleteEventHandler)="tryDeleteEventHandler()"
-            (cancelEventHandler)="cancelEventHandler()"
-            >
-            
-            
+        <app-delete-choice-sub-button *ngIf="showDeleteButtons" (deleteEventHandler)="deleteTransaction()"
+            (tryDeleteEventHandler)="tryDeleteEventHandler()" (cancelEventHandler)="cancelEventHandler()">
+
+
         </app-delete-choice-sub-button>
 
-        
-        
+
+
     </div>
 </div>
 <!--

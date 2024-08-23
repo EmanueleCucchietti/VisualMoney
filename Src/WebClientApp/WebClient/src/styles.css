@@ -256,13 +256,20 @@ br{
 }
 
 .default-badge{
-	background-color: var(--primary-color-dark-theme);
-	color: var(--bg-color-dark-theme);
-	font-weight: 500;
-	font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 	padding: 0.25rem 0.50rem !important;
 	border-radius: 0.375rem !important;
 	margin: 0.25rem;
+
+	background-color: var(--primary-color-dark-theme);
+	color: var(--bg-color-dark-theme);
+
+	font-weight: 500;
+	font-size: 0.85rem;
+
 	transition: all 0.2s ease-in-out;
 }
 
@@ -278,6 +285,13 @@ br{
 
 .create-badge{
 	padding: 0 !important;
+    max-width: 30px;
+	transition: all 0.5s ease-in-out;
+}
+
+.create-badge.active{
+    /* width: 300px; */
+    max-width: 200px;
 }
 
 .create-badge > .sub-badge{
@@ -285,13 +299,15 @@ br{
 }
 
 .create-category-input{
-	width: 0;
+	/* width: 0; */
+    width: 100%;
 	padding: 0;
-	transition: all 0.2s ease-in-out;
+	/* transition: all 0.2s ease-in-out; */
 }
 
 .create-category-input.active{
-	width: 100%;
+	/* width: 100%; */
+    width: 100%;
 	padding: 0.25rem 0.50rem;
 }
 

@@ -38,6 +38,7 @@ export class TransactionService {
 						transaction.date = new Date(transaction.date);
 					});
 
+
 				}),
 				catchError((error) => {
 					console.log(error);

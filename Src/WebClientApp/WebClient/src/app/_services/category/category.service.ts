@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { CategoryModel } from 'src/app/_models/Category/CategoryModel';
 import { environment } from 'src/app/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class CategoryService {
 
-    constructor(public httpClient: HttpClient) {}
+	constructor(public httpClient: HttpClient) { }
 
 	categories: CategoryModel[] = [];
 
@@ -25,6 +25,37 @@ export class CategoryService {
 				catchError((error) => {
 					console.log(error);
 					return [];
+				})
+			);
+	}
+
+	getCategories() {
+		return this.httpClient
+			.get<CategoryModel[]>(
+				`${environment.serverApiUrl}/Category`,
+				{
+					withCredentials: true
+				}
+			)
+			.pipe(
+				tap((categories: CategoryModel[]) => {
+					this.categories = categories.sort((a, b) => a.name > b.name ? -1 : 1)
+				})
+			);
+	}
+
+	addCategory(category: CategoryModel) {
+		return this.httpClient
+			.post<CategoryModel>(
+				`${environment.serverApiUrl}/Category`,
+				category,
+				{
+					withCredentials: true
+				}
+			)
+			.pipe(
+				tap((category) => {
+					this.categories.push(category)
 				})
 			);
 	}
