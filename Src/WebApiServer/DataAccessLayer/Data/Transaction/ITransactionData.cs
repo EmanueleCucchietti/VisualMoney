@@ -4,7 +4,7 @@ namespace DataAccessLayer.Data.Transaction
 {
     public interface ITransactionData
     {
-        Task<int> AddCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser);
+        Task<int> ModifyCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser);
         Task<int> AddCategoryToTransactionAsync(int transactionId, int categoryId, int userId);
         Task<int> AddCounterPartyToTransactionAsync(int idTransaction, int idCounterParty, int userId);
         Task<int> AddTransactionAsync(TransactionModel transactionModel);

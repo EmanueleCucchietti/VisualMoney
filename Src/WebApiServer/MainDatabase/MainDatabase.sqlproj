@@ -115,7 +115,7 @@
     <Build Include="dbo\StoredProcedures\Transaction\spDeleteTransaction.sql" />
     <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsLoadAllData.sql" />
     <Build Include="dbo\StoredProcedures\Transaction\spGetTransactionsLoadAllDataWithFilters.sql" />
-    <Build Include="dbo\StoredProcedures\Transaction\spAddCategoriesToTransaction.sql" />
+    <Build Include="dbo\StoredProcedures\Transaction\spModifyCategoriesToTransaction.sql" />
     <Build Include="dbo\Tables\CategoryIdTableType.sql" />
   </ItemGroup>
   <ItemGroup>

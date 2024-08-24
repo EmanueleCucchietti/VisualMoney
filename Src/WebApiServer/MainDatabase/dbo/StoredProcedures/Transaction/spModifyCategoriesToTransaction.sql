@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spAddCategoriesToTransaction]
+﻿CREATE PROCEDURE [dbo].[spModifyCategoriesToTransaction]
     @IdTransaction INT,
     @IdUser INT,
     @CategoryIds [dbo].[CategoryIdTableType] readonly
@@ -11,6 +11,10 @@ BEGIN
         -- Check if the transaction exists for the given user
         IF EXISTS (SELECT 1 FROM [dbo].[Transaction] WHERE [Id] = @IdTransaction AND [IdUser] = @IdUser)
         BEGIN
+            -- Remove existing categories
+            DELETE FROM [dbo].[CategoryTransaction]
+            WHERE IdTransaction = @IdTransaction
+
             -- Insert the categories into the CategoryTransaction table where the category belongs to the user
             INSERT INTO [dbo].[CategoryTransaction] ([IdCategory], [IdTransaction])
             SELECT c.IdCategory, @IdTransaction

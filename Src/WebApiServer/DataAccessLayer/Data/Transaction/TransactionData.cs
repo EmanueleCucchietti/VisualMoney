@@ -149,9 +149,9 @@ namespace DataAccessLayer.Data.Transaction
                 useStoredProcedure: true);
         }
 
-        public Task<int> AddCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser)
+        public Task<int> ModifyCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser)
         {
-            string sql = "spAddCategoriesToTransaction";
+            string sql = "spModifyCategoriesToTransaction";
 
             var categoryIdsTable = new DataTable();
             categoryIdsTable.Columns.Add("IdCategory", typeof(int));
