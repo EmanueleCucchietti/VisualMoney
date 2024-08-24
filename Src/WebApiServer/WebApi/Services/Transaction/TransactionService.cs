@@ -80,9 +80,9 @@ namespace WebApi.Services.Transaction
         {
             return await _transactionData.AddCategoryToTransactionAsync(idTransaction, idCategory, idUser) == 1;
         }
-        public async Task<bool> AddCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser)
+        public async Task<bool> ModifyCategoriesToTransactionAsync(int idTransaction, int[] idCategories, int idUser)
         {
-            return await _transactionData.AddCategoriesToTransactionAsync(idTransaction, idCategories, idUser) != -1;
+            return await _transactionData.ModifyCategoriesToTransactionAsync(idTransaction, idCategories, idUser) != -1;
         }
 
         public async Task<bool> AddCounterPartyToTransactionAsync(int idTransaction, int idCounterParty, int idUser)

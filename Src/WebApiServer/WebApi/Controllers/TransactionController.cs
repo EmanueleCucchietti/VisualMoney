@@ -99,14 +99,14 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        [HttpPost("{idTransaction}/Category/")]
-        public async Task<IActionResult> AddCategories(int idTransaction, int[] idCategories)
+        [HttpPut("{idTransaction}/Category/")]
+        public async Task<IActionResult> ModifyCategories(int idTransaction, int[] idCategories)
         {
             if (HttpContext.Items["UserId"]
                 is not int userId)
                 return Unauthorized();
 
-            if (!await _transactionService.AddCategoriesToTransactionAsync(idTransaction, idCategories, userId))
+            if (!await _transactionService.ModifyCategoriesToTransactionAsync(idTransaction, idCategories, userId))
                 return StatusCode(500, new GenericErrorDto<object>());
 
             return Ok();
