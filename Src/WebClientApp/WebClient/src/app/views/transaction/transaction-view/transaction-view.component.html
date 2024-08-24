@@ -44,8 +44,11 @@
                     let category of this.transactionService.selectedTransaction
                         .categories
                 " class="default-badge">
-                <div class="sub-badge">
-                    <span>{{ category.name }}</span>
+                <div class="sub-badge" 
+                    [style.cursor]="!isReadOnly ? 'pointer' : 'default'"
+                    (click)="removeCategoryFromTransaction(category)">
+                    <div><span>{{ category.name }}</span></div>
+                    <div *ngIf="!isReadOnly" class="sub_badge_remove_button"><i class="bi bi-dash"></i></div>
                 </div>
             </div>
         </div>

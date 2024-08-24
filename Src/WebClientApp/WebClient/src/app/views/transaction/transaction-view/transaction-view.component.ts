@@ -56,13 +56,18 @@ export class TransactionViewComponent {
     }
 
     async prepareData() {
-        if (this.walletService.wallets.length === 0)
-            await this.walletService.getWalletsFromServer();
+        try {
+            if (this.walletService.wallets.length === 0)
+                await lastValueFrom(this.walletService.getWalletsFromServer());
 
-        if (this.categoryService.categories.length === 0)
-            await this.categoryService.getCategories()
+            if (this.categoryService.categories.length === 0)
+                await lastValueFrom(this.categoryService.getCategories())
 
-        await this.getSelectedTransactionData();
+            await this.getSelectedTransactionData();
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
     selectedTransactionId: number | undefined;
@@ -90,12 +95,17 @@ export class TransactionViewComponent {
             this.selectedTransactionId
         );
 
+        console.log(this.transactionService.selectedTransaction)
+
         this.oldCategories = [...this.transactionService.selectedTransaction.categories];
 
         this.notPresentCategories = GenericFunctions.DifferenceCategoryLists(
             this.categoryService.categories,
             this.transactionService.selectedTransaction.categories
         )
+
+        console.log(this.categoryService.categories)
+        console.log(this.notPresentCategories)
 
         this.setWalletBySelectedTransaction();
     }
@@ -187,13 +197,29 @@ export class TransactionViewComponent {
         this.transactionService.selectedTransaction.currencyCode = this.selectedWallet.currencyCode;
 
         this.isReadOnly = true;
-        
-        this.transactionService
-            .updateTransaction(this.transactionService.selectedTransaction)
-            .subscribe(() => {
-                // reload wallets
-                this.walletService.getWalletsFromServer().subscribe();
-            });
+
+        forkJoin({
+            transaction: this.transactionService
+                .updateTransaction(this.transactionService.selectedTransaction),
+            categories: this.transactionService.updateCategoriesOnTransaction(
+                this.transactionService.selectedTransaction.id!,
+                this.transactionService.selectedTransaction.categories.map(category => category.id!)
+            )
+        }).subscribe(_ => {
+            this.walletService.getWalletsFromServer().subscribe();
+        })
+
+        // this.transactionService.updateCategoriesOnTransaction(
+        //     this.transactionService.selectedTransaction.id!, 
+        //     this.transactionService.selectedTransaction.categories
+        // )
+
+        // this.transactionService
+        //     .updateTransaction(this.transactionService.selectedTransaction)
+        //     .subscribe(() => {
+        //         // reload wallets
+        //         this.walletService.getWalletsFromServer().subscribe();
+        //     });
     }
 
     cancelEditTransaction() {
@@ -262,6 +288,12 @@ export class TransactionViewComponent {
     addCategoryToTransaction(category: CategoryModel) {
         this.transactionService.selectedTransaction.categories.push(category)
         this.notPresentCategories.splice(this.notPresentCategories.findIndex(item => item == category), 1)
+    }
+
+    removeCategoryFromTransaction(category: CategoryModel) {
+        this.transactionService.selectedTransaction.categories.splice(
+            this.transactionService.selectedTransaction.categories.findIndex(item => item == category), 1);
+        this.notPresentCategories.push(category);
     }
 
     cancelNewCategory() {

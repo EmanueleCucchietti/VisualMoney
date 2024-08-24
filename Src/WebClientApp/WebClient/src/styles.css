@@ -70,7 +70,7 @@ br{
     background-color: transparent;
     color: rgba(var(--primary-color-dark-theme-rgb), 1);
 
-    font-size: 16px;
+    font-size: 1rem;
 
     transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
@@ -105,7 +105,7 @@ br{
     outline: none;
     background-color: transparent;
     color: var(--primary-color-dark-theme);
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 .inner-input{
@@ -132,7 +132,7 @@ br{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     cursor: pointer;
-    font-size: 1.75em;
+    font-size: 1.75rem;
 
     transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         font-size 0.2s ease-in-out;
@@ -148,11 +148,11 @@ br{
     box-shadow: 0 0 0 3px var(--bg-color-dark-theme),
         0 0 0 6px var(--primary-color-dark-theme);
 
-    font-size: 1.8em;
+    font-size: 1.8rem;
 }
 
 .default-button:active {
-    font-size: 1.75em;
+    font-size: 1.75rem;
 }
 
 .default-link {
@@ -178,7 +178,7 @@ br{
 .embeded-link {
 	text-decoration: none;
 	color: var(--primary-color-dark-theme);
-	font-size: 1em;
+	font-size: 1rem;
 	box-shadow: 0 0 0 2px var(--bg-color-dark-theme),
 		0 3px 0 0 var(--primary-color-dark-theme);
 
@@ -187,7 +187,7 @@ br{
 }
 
 .embeded-link:hover {
-	font-size: 1.1em;
+	font-size: 1.1rem;
 }
 
 .error {
@@ -255,6 +255,10 @@ br{
 	color: var(--expense-color-dark-theme);
 }
 
+.amount-value{
+    font-size: 1rem;
+}
+
 .default-badge{
     display: flex;
     justify-content: center;
@@ -268,7 +272,7 @@ br{
 	color: var(--bg-color-dark-theme);
 
 	font-weight: 500;
-	font-size: 0.85rem;
+	font-size: 0.95rem;
 
 	transition: all 0.2s ease-in-out;
 }
@@ -320,4 +324,16 @@ br{
 
 .sub-badge{
 	/* background-color: rgba(var(--bg-color-dark-theme-rgb), 0.4) !important; */
+    display: flex;
+}
+
+.sub_badge_remove_button{
+    max-width: 0;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+}
+
+.sub-badge:hover .sub_badge_remove_button{
+    max-width: 60px;
+    opacity: 1;
 }

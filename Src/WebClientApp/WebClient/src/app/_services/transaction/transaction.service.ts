@@ -103,6 +103,17 @@ export class TransactionService {
 			);
 	}
 
+	updateCategoriesOnTransaction(idTransaction : number, idCategories : number[]){
+		return this.httpClient
+			.put(
+				`${environment.serverApiUrl}/Transaction/${idTransaction}/Category`,
+				idCategories,
+				{
+					withCredentials: true
+				}
+			)
+	}
+
     deleteTransaction(selectedTransactionId: number) {
 		return this.httpClient.delete<boolean>(
 			`${environment.serverApiUrl}/Transaction/${selectedTransactionId}`,
