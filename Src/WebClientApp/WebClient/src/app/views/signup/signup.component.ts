@@ -25,7 +25,7 @@ export class SignupComponent {
     constructor(
         private authService: AuthenticationService,
         private router: Router
-    ) {}
+    ) { }
 
     step = 0;
 
@@ -43,7 +43,7 @@ export class SignupComponent {
             .subscribe({
                 next: (response) => {
                     console.log(response);
-					alert('Successfully signed up');
+                    alert('Successfully signed up');
                     this.router.navigate(['/login']);
                 },
                 error: (err) => {
@@ -54,6 +54,8 @@ export class SignupComponent {
     }
 
     next() {
+        this.checkStepsAndFillErrors();
+
         if (!this.validateStep()) {
             alert('Please fill in all the fields correctly');
             return;
@@ -65,6 +67,20 @@ export class SignupComponent {
         }
 
         this.step++;
+    }
+
+    checkStepsAndFillErrors() {
+        if (this.step == 0) {
+            this.checkEmail(null)
+            this.checkUsername(null)
+        }
+        else if (this.step == 1) {
+            this.checkName(null)
+            this.checkSurname(null)
+        }
+        else if (this.step == 2) {
+            this.checkPassword(null)
+        }
     }
 
     back() {
@@ -103,7 +119,7 @@ export class SignupComponent {
 
     checkEmail($event: any) {
         const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(this.email)) {
+        if (!emailRegex.test(this.email) || this.email == "") {
             this.isLevel0error = true;
             this.level0errorMessage = 'Invalid email';
             return;

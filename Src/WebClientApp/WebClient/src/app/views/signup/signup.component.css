@@ -1,3 +1,7 @@
+:host{
+    flex: 1;
+}
+
 .logo {
     width: 200px;
     height: 200px;
@@ -5,6 +9,10 @@
 
 .container {
     height: 100%;
+}
+
+.mainPage{
+    justify-content: space-around;
 }
 
 @media (min-width: 500px) {
@@ -46,10 +54,13 @@ input::-ms-input-placeholder {
 }
 
 .availabilityError{
-	margin-top: 10px;
-	margin-bottom: -15px;
+	margin: 10px;
 }
 
 .default-input{
 	padding: 15px;
+}
+
+.input_container{
+    width: 100%;
 }

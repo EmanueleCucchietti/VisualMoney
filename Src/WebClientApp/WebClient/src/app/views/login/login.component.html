@@ -16,6 +16,7 @@
             type="password"
             [(ngModel)]="loginRequestData.password"
             placeholder="Password"
+            (keyup.enter)="login()"
         />
         
         <button class="default-button" (click)="login()">Login</button>

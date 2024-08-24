@@ -1,78 +1,48 @@
 <div class="container d-flex flex-column align-items-center">
     <!-- logo svg -->
     <div class="d-flex flex-column align-items-center h-100 mainPage">
-        <br /><br />
+        <!-- <br /><br /> -->
         <img src="assets/img/logo.svg" alt="logo" class="logo" />
-        <br /><br />
-        <input
-            *ngIf="step == 0"
-            class="default-input"
-            type="text"
-            [(ngModel)]="email"
-            (ngModelChange)="checkEmail($event)"
-            placeholder="Email"
-        />
-        <input
-            *ngIf="step == 1"
-            class="default-input"
-            type="text"
-            [(ngModel)]="name"
-            (ngModelChange)="checkName($event)"
-            placeholder="Name"
-        />
-        <!-- error for email not available -->
-        <label *ngIf="isLevel0error" class="error availabilityError">{{
-            level0errorMessage
-        }}</label>
-        <br /><br />
-        <input
-            *ngIf="step == 0"
-            class="default-input"
-            type="text"
-            [(ngModel)]="username"
-            (ngModelChange)="checkUsername($event)"
-            placeholder="Username"
-        />
-        <input
-            *ngIf="step == 1"
-            class="default-input"
-            type="text"
-            [(ngModel)]="surname"
-            (ngModelChange)="checkSurname($event)"
-            placeholder="Surname"
-        />
-        <input
-            *ngIf="step == 2"
-            class="default-input"
-            type="password"
-            [(ngModel)]="password"
-            (ngModelChange)="checkPassword($event)"
-            placeholder="password"
-        />
-        <!-- error for username not available -->
-        <label *ngIf="isLevel1error" class="error availabilityError">{{
-            level1errorMessage
-        }}</label>
-        <br /><br />
+        <!-- <br /><br /> -->
+        <div class="input_container">
+            <input *ngIf="step == 0" class="default-input" type="text" [(ngModel)]="username"
+                (ngModelChange)="checkUsername($event)" placeholder="Username" />
+
+            <input *ngIf="step == 1" class="default-input" type="text" [(ngModel)]="name"
+                (ngModelChange)="checkName($event)" placeholder="Name" />
+
+            <!-- error for email not available -->
+            <label *ngIf="isLevel0error" class="error availabilityError">{{
+                level0errorMessage
+                }}</label>
+        </div>
+
+        <div class="input_container">
+            <input *ngIf="step == 0" class="default-input" type="text" [(ngModel)]="email"
+                (ngModelChange)="checkEmail($event)" placeholder="Email" (keyup.enter)="next()"/>
+
+            <input *ngIf="step == 1" class="default-input" type="text" [(ngModel)]="surname"
+                (ngModelChange)="checkSurname($event)" placeholder="Surname" (keyup.enter)="next()"/>
+
+            <input *ngIf="step == 2" class="default-input" type="password" [(ngModel)]="password"
+                (ngModelChange)="checkPassword($event)" placeholder="password" (keyup.enter)="next()"/>
+            <!-- error for username not available -->
+            <label *ngIf="isLevel1error" class="error availabilityError">{{
+                level1errorMessage
+                }}</label>
+        </div>
+
+
+        <!-- <br /><br /> -->
         <div class="row justify-content-between w-100">
-            <button
-                *ngIf="step != 0"
-                class="default-button short-button invert-button"
-                (click)="back()"
-            >
+            <button *ngIf="step != 0" class="default-button short-button invert-button" (click)="back()">
                 Back
             </button>
-            <button
-                class="default-button"
-                [ngClass]="{ 'short-button': step != 0 }"
-                (click)="next()"
-            >
+            <button class="default-button" [ngClass]="{ 'short-button': step != 0 }" (click)="next()">
                 {{ step == 0 ? 'Sign Up' : 'Next' }}
             </button>
         </div>
         <br /><br /><br /><br />
-        <a *ngIf="step == 0" class="default-link" routerLink="/login"
-            >Already a User? Login</a
-        >
+        <a *ngIf="step == 0" class="default-link" routerLink="/login">Already a User? Login</a>
     </div>
 </div>
