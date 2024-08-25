@@ -80,7 +80,7 @@ export class TransactionViewComponent {
     @ViewChild(DropdownWalletComponent) dropDownWallet!: DropdownWalletComponent;
 
     ngAfterViewInit(): void {
-        this.editTransaction();
+
     }
 
     async getSelectedTransactionData() {
@@ -277,6 +277,7 @@ export class TransactionViewComponent {
         this.categoryService.addCategory(category).subscribe({
             next: (category) => {
                 this.transactionService.selectedTransaction.categories.push(category)
+                this.newCategoryName = ""
             },
             error: (err) => {
                 alert("errore nella creazione della categoria. riprovare");
@@ -288,6 +289,7 @@ export class TransactionViewComponent {
     addCategoryToTransaction(category: CategoryModel) {
         this.transactionService.selectedTransaction.categories.push(category)
         this.notPresentCategories.splice(this.notPresentCategories.findIndex(item => item == category), 1)
+        this.newCategoryName = ""
     }
 
     removeCategoryFromTransaction(category: CategoryModel) {
