@@ -46,7 +46,7 @@
                 " class="default-badge">
                 <div class="sub-badge" 
                     [style.cursor]="!isReadOnly ? 'pointer' : 'default'"
-                    (click)="removeCategoryFromTransaction(category)">
+                    (click)="!isReadOnly ? removeCategoryFromTransaction(category) : null">
                     <div><span>{{ category.name }}</span></div>
                     <div *ngIf="!isReadOnly" class="sub_badge_remove_button"><i class="bi bi-dash"></i></div>
                 </div>
