@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using WebApi.Models.Dto;
 using WebApi.Models.Dto.Category;
 using WebApi.Services.Category;
@@ -19,13 +20,21 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(bool loadAllData = false)
         {
             if (!HttpContext.Items.ContainsKey("UserId")
                 || HttpContext.Items["UserId"] is not int userId)
                 return Unauthorized();
 
-            var categories = await _categoryService.GetCategories(userId);
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            var categories = await _categoryService.GetCategories(userId, loadAllData);
+            stopwatch.Stop();
+
+            // Log the elapsed time or include it in the response
+            var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
+            Debug.WriteLine(elapsedMilliseconds);
+
 
             return Ok(categories);
         }

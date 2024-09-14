@@ -6,7 +6,7 @@ namespace WebApi.Services.Category
     public interface ICategoryService
     {
         Task<bool> CreateCategory(int idUser, CategoryDto categoryDto);
-        Task<IEnumerable<CategoryResponseDto>> GetCategories(int idUser);
+        Task<IEnumerable<CategoryResponseDto>> GetCategories(int idUser, bool loadAllData);
         Task<IEnumerable<CategoryResponseDto>> GetCategoriesBySuperCategory(int idSuperCategory, int idUser);
         Task<CategoryResponseDto?> GetCategory(int id, int idUser);
         Task<IEnumerable<CategoryResponseDto>> GetCategoriesByTransaction(int idTransaction, int idUser);

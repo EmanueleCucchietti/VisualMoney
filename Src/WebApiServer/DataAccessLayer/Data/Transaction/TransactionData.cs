@@ -36,7 +36,7 @@ namespace DataAccessLayer.Data.Transaction
         {
             string sql = @"spGetTransactionsLoadAllDataWithFilters";
             var transactions = await _sqlDataAccess.UseConnection(async (conn) =>
-            {
+            {   
                 return await conn.QueryAsync<TransactionModel, CategoryModel, CounterPartyModel, TransactionModel>(sql,
                     (transaction, category, counterpary) =>
                     {
