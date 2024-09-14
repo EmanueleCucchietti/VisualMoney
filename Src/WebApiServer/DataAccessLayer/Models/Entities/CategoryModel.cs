@@ -14,5 +14,6 @@ namespace DataAccessLayer.Models.Entities
         public SuperCategoryModel? SuperCategory { get; set; }
         public int IdUser { get; set; }
         public UserModel? User { get; set; }
+        public List<TransactionModel> Transactions { get; set; } = new List<TransactionModel>();
     }
 }

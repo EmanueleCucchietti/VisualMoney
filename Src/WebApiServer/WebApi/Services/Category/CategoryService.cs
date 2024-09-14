@@ -25,9 +25,9 @@ namespace WebApi.Services.Category
             return await _categoryData.CreateCategory(categoryModel) == 1;
         }
         
-        public async Task<IEnumerable<CategoryResponseDto>> GetCategories(int userId)
+        public async Task<IEnumerable<CategoryResponseDto>> GetCategories(int userId, bool loadAllData)
         {
-            var categories = await _categoryData.GetCategories(userId);
+            var categories = await _categoryData.GetCategories(userId, loadAllData);
 
             return _mapper.Map<IEnumerable<CategoryResponseDto>>(categories);
         }
