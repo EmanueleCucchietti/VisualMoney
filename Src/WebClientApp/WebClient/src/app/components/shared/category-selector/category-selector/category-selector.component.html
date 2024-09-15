@@ -1,0 +1,77 @@
+<div class="category-container">
+    <div *ngIf="!isReadOnly" [ngClass]="{ active: isCreatingCategory }"
+        class="add_category default-badge create-badge" role="button">
+        <div class="sub-badge">
+            <input [ngClass]="{ active: isCreatingCategory }"
+                class="no-style-input inner-input create-category-input" type="text" placeholder="New Category"
+                [(ngModel)]="newCategoryName" />
+            <span *ngIf="isCreatingCategory" class="create-category-icon" (click)="cancelNewCategory()"><i
+                    class="bi bi-x"></i></span>
+            <span class="create-category-icon" (click)="createNewCategory()"><i class="bi bi-plus"></i></span>
+        </div>
+        <div *ngIf="!isReadOnly && notPresentCategories.length != 0" class="categories_selector"
+            [ngClass]="{ active: isCreatingCategory }">
+            <div class="categories_selector_header">
+                <span style="margin: 10px;">Existent Categories:</span>
+                <div class="categories_selector_header_icons">
+                    <div class="categories_selector_header_positive_transaction_counter categories_selector_header_transaction_counter"
+                        (click)="filterPositive()"
+                        >
+                        <span class="categories_selector_header_span"> {{ notPresentCategoriesPositive.length }} </span>
+                        <i class="bi bi-arrow-up-right"></i>
+                    </div>
+
+                    <div class="categories_selector_header_negative_transaction_counter categories_selector_header_transaction_counter"
+                        (click)="filterNegative()"
+                        >
+                        <span class="categories_selector_header_span">{{ notPresentCategoriesNegative.length }}</span>
+                        <i class="bi bi-arrow-down-left"></i>
+                    </div>
+
+                    <div class="categories_selector_header_mixed_transaction_counter active categories_selector_header_transaction_counter"
+                        (click)="filterMixed()"
+                        >
+                        <span class="categories_selector_header_span">{{ (notPresentCategories.length) }}</span>
+                        <img src="assets/icons/arrow-mixed-colored.svg" height="15px">
+                    </div>
+                </div>
+            </div>
+            <div class="categories_selector_body">
+                <div *ngFor="let category of notPresentCategoriesFiltered" class="categories_selector_element"
+                    (click)="addCategoryToTransaction(category)">
+
+                    <div><span>{{ category.name }}</span></div>
+
+                    <div class="categories_selector_body_icons">
+                        <div class="categories_selector_body_transaction_container" style="display: flex;">
+                            <div class="categories_selector_body_positive_transaction_counter"
+                                *ngIf="category.hasIncome">
+                                <!-- <span> {{countCategoryPositiveTransaction(category) }} </span> -->
+                                <i class="bi bi-arrow-up-right"></i>
+                            </div>
+
+                            <div class="categories_selector_body_negative_transaction_counter"
+                                *ngIf="category.hasExpense">
+                                <!-- <span>{{ countCategoryNegativeTransaction(category) }}</span> -->
+                                <i class="bi bi-arrow-down-left"></i>
+                            </div>
+
+                        </div>
+
+                        <div><i class="bi bi-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="
+            let category of this.transactionService.selectedTransaction
+                .categories
+        " class="default-badge">
+        <div class="sub-badge" [style.cursor]="!isReadOnly ? 'pointer' : 'default'"
+            (click)="!isReadOnly ? removeCategoryFromTransaction(category) : null">
+            <div><span>{{ category.name }}</span></div>
+            <div *ngIf="!isReadOnly" class="sub_badge_remove_button"><i class="bi bi-dash"></i></div>
+        </div>
+    </div>
+</div>

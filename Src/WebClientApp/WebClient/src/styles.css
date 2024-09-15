@@ -2,6 +2,7 @@
 
 :root {
     --bg-color-dark-theme: #181f2b;
+    --bg-color-dark-theme-darker: #151b25;
     --bg-color-dark-theme-rgb: 24, 31, 43;
     /* --primary-color-dark-theme: #BD47DE; */
     --primary-color-dark-theme: #de47ac;

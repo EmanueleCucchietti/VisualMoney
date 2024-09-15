@@ -1,0 +1,143 @@
+:host{
+    display: flex;
+}
+
+/* category */
+
+.category-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.add_category {
+    position: relative;
+}
+
+.categories_selector {
+    position: absolute;
+    z-index: 100;
+    
+
+    top: calc(100% + 10px);
+    left: -3px;
+    width: calc(100% + 6px);
+    padding: 5px;
+    border-radius: 0.375rem;
+
+    background-color: var(--bg-color-dark-theme);
+    border: 3px solid var(--primary-color-dark-theme);
+
+    max-height: 0;
+    opacity: 0;
+}
+
+.categories_selector_body{
+    overflow-y: auto;
+    max-height: calc(200px - 50px);
+}
+
+.categories_selector.active{
+    animation: openCategoriesSelector 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes openCategoriesSelector {
+    0%{
+        max-height: 0;
+        opacity: 0;
+    }
+    50%{
+        max-height: 50px;
+        opacity: 0;
+    }
+    70%{
+        opacity: 0;
+    }
+    100%{
+        
+        opacity: 1;
+        max-height: 250px;
+    }
+}
+
+.categories_selector_header{
+    padding: 5px;
+    text-align: center;
+}
+
+.categories_selector_element {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 5px;
+
+    border-bottom: 1px solid var(--primary-color-dark-theme);
+}
+
+.categories_selector_element:last-child{
+    border: none !important;
+}
+
+.categories_selector_body_icons{
+    display: flex;
+    justify-content: flex-end;
+    /* padding: 0 10px; */
+}
+
+.categories_selector_body_transaction_container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.categories_selector_body_transaction_container > *{
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+}
+
+.categories_selector_header_transaction_counter{
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+}
+
+.categories_selector_header_positive_transaction_counter{
+    color: var(--income-color-dark-theme);
+}
+
+.categories_selector_header_negative_transaction_counter{
+    color: var(--expense-color-dark-theme);
+}
+
+.categories_selector_header_span{
+    padding: 0 3px;
+}
+
+.categories_selector_body_positive_transaction_counter{
+    font-size: 0.60rem;
+    color: var(--income-color-dark-theme);
+}
+
+.categories_selector_body_negative_transaction_counter{
+    font-size: 0.60rem;
+    color: var(--expense-color-dark-theme);
+}
+
+
+.categories_selector_header_icons{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.categories_selector_header_icons > *{
+    border-radius: 3px;
+    padding: 3px 6px;
+    margin: 0 10px;
+}
+
+.categories_selector_header_icons > *.active{
+    border: 1px solid var(--primary-color-dark-theme);
+}

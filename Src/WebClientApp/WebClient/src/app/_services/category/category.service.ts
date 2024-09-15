@@ -32,14 +32,19 @@ export class CategoryService {
 	getCategories() {
 		return this.httpClient
 			.get<CategoryModel[]>(
-				`${environment.serverApiUrl}/Category`,
+				`${environment.serverApiUrl}/Category?loadAllData=true`,
 				{
 					withCredentials: true
 				}
 			)
 			.pipe(
 				tap((categories: CategoryModel[]) => {
-					this.categories = categories.sort((a, b) => a.name > b.name ? -1 : 1)
+					this.categories = categories.sort((a, b) => a.name > b.name ? -1 : 1);
+					this.categories.forEach(c => {
+						c.hasIncome = c.transactions.some(t => t.isIncome);
+						c.hasExpense = c.transactions.some(t => !t.isIncome);
+					});
+
 				})
 			);
 	}
